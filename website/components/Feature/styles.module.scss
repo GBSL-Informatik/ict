@@ -1,0 +1,47 @@
+.feature {
+    height: 100%;
+    border-radius: var(--ifm-global-radius);
+    position: relative;
+
+    &:hover {
+        box-shadow: var(--ifm-global-shadow-lw);
+        .pages {
+            opacity: 1;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+    &.extern {
+        color: #fca400;
+    }
+    .pages {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        opacity: 0;
+        transition: all 1s ease-in-out;
+    }
+
+    .pages {
+        .number {
+            margin-left: 0.2rem;
+        }
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+    .description {
+        margin: 0.5em 1em;
+    }
+}
+
+@media (max-width: 719px) {
+    .feature {
+        h2 {
+            font-size: 1rem;
+        }
+    }
+    .description {
+        display: none;
+    }
+}

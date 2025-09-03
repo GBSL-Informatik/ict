@@ -5,6 +5,11 @@ trackedElements:
       dst: docusaurus.config.ts
     - src: src/
       dst: src
+      ignore:
+          - pages/index.tsx
+          - pages/__index.tsx
+          - pages/.gitignore
+          - theme/**
     - src: updateSync/
       dst: updateSync
     - src: tsconfig.json
@@ -15,8 +20,6 @@ trackedElements:
       dst: .prettierignore
     - src: vitest.config.ts
       dst: vitest.config.ts
-    - src: static/bry-libs/
-      dst: static/bry-libs
 watchedElements:
     - .babel.config.js
     - package.json

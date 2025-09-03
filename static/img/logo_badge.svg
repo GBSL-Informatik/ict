@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="500" height="500" viewBox="0 0 500 500" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="200" height="200" viewBox="0 0 500 500" xml:space="preserve">
 <desc>Created with Fabric.js 4.6.0 by B. Hofer</desc>
 <defs>
 </defs>
 <g transform="matrix(21.17 0 0 21.17 250.35 250.35)" id="cs7TSoZYvtnEzManOtSXu"  >
-<path style="stroke: rgb(5,143,205); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M 0 -11.57407 C 6.38889 -11.57407 11.57407 -6.38888 11.57407 0 C 11.57407 6.38889 6.38888 11.57407 0 11.57407 C -6.38889 11.57407 -11.57407 6.38888 -11.57407 0 C -11.57407 -6.38889 -6.38888 -11.57407 0 -11.57407 z" stroke-linecap="round" />
+<path style="stroke: rgb(5,143,205); stroke-width: 0.5; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M 0 -11.57407 C 6.38889 -11.57407 11.57407 -6.38888 11.57407 0 C 11.57407 6.38889 6.38888 11.57407 0 11.57407 C -6.38889 11.57407 -11.57407 6.38888 -11.57407 0 C -11.57407 -6.38889 -6.38888 -11.57407 0 -11.57407 z" stroke-linecap="round" />
 </g>
 <g transform="matrix(-2.49 0 0 2.49 249.91 266.1)" id="MFDEdWjw4jaJpcStR5YCs"  >
 <path style="stroke: rgb(5,143,205); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,143,205); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M -64.67699 -32.43182 L 53.43346 8.41066 L 66.56953 29.92265 L 42.01918 32.43182 L -66.56953999999999 -27.161809999999996 z" stroke-linecap="round" />
