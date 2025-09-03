@@ -1,7 +1,9 @@
 // This file is never changed by teaching-dev.
 // Use it to override or extend your app configuration.
 
-import { SiteConfigProvider } from '@tdev/siteConfig/siteConfig';
+import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
+import { SiteConfigProvider } from './src/siteConfig/siteConfig';
+const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
 
 const getSiteConfig: SiteConfigProvider = () => {
     return {
@@ -11,7 +13,18 @@ const getSiteConfig: SiteConfigProvider = () => {
         baseUrl: '/',
         favicon: 'img/favicon.ico',
         organizationName: 'GBSL-Informatik',
-        projectName: 'ict-v2'
+        projectName: 'ict-v2',
+        blog: false,
+        navbarItems: [taskStateOverview, devModeAccessLocalFS],
+        footer: {
+            style: 'dark',
+            links: [],
+            copyright: `Copyright © ${new Date().getFullYear()} Begleitgruppe DigiTrans - GBSL. <br />
+      <a class="badge badge--primary" href="https://github.com/GBSL-Informatik/ict-v2/commits/${GIT_COMMIT_SHA}">
+            ᚶ ${GIT_COMMIT_SHA.substring(0, 7)}
+      </a>
+      `
+        }
     };
 };
 
