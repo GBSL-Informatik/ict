@@ -174,6 +174,10 @@ const config: Config = applyTransformers({
             delete result.frontMatter.sidebar_custom_props;
           }
         }
+        result.frontMatter.sidebar_custom_props = {
+          icon: 'mdi-file-document-outline',
+          ...(result.frontMatter.sidebar_custom_props ?? {})
+        }
         if (!('page_id' in result.frontMatter)) {
           result.frontMatter.page_id = uuidv4();
           needsRewrite = true;
