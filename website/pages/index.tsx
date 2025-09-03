@@ -27,62 +27,14 @@ const QuickLinks: React.ComponentProps<typeof Feature>[] = [
 const IndexPages: React.ComponentProps<typeof Feature>[] = [
     {
         name: translate({
-            message: 'Geräte einrichten',
-            id: 'main.link.byod.text'
+            message: 'Galerie',
+            id: 'main.link.gallerie.text'
         }),
-        icon: 'mdi-cog',
-        route: '/byod',
-        description: translate({
-            message: 'Geräte einrichten, Ersteinrichtung',
-            id: 'main.link.byod.description'
-        })
-    },
-    {
-        name: translate({
-            message: 'Schulkonto',
-            id: 'main.link.schulkonto.text'
-        }),
-        icon: 'mdi-microsoft-windows',
-        route: '/schulkonto',
-        description: translate({
-            message: 'Neu am GBSL, Schulkonto, Austritt',
-            id: 'main.link.schulkonto.description'
-        })
-    },
-    {
-        name: translate({
-            message: 'Software & Medien',
-            id: 'main.link.anderesoftware.text'
-        }),
-        icon: 'mdi-cellphone-link',
-        route: '/anderesoftware',
-        description: translate({
-            message: 'Office365, Adobe, exam.net',
-            id: 'main.link.anderesoftware.description'
-        })
-    },
-    {
-        name: translate({
-            message: 'Schulinfrastruktur',
-            id: 'main.link.infra.text'
-        }),
-        icon: 'mdi-home-circle',
-        route: '/infra',
-        description: translate({
-            message: 'Unterrichtszimmer, Drucker',
-            id: 'main.link.infra.description'
-        })
-    },
-    {
-        name: translate({
-            message: 'Nützliches und Regeln',
-            id: 'main.link.tipps.text'
-        }),
-        icon: 'mdi-lightbulb-on-outline',
-        route: '/tipps/',
+        icon: 'mdi-view-gallery-outline',
+        route: '/docs/gallery/',
         description: translate({
             message: 'Update, Tools, Netiquette',
-            id: 'main.link.tipps.description'
+            id: 'main.link.gallerie.description'
         })
     }
 ];
