@@ -12,21 +12,6 @@ import { translate } from '@docusaurus/Translate';
 const QuickLinks: React.ComponentProps<typeof Feature>[] = [
     {
         name: translate({
-            message: 'Support',
-            id: 'main.link.support.text'
-        }),
-        icon: 'mdi-account-supervisor',
-        route: '/support',
-        description: translate({
-            message: 'Supportadressen, Hilfe zur Selbsthilfe',
-            id: 'main.link.support.description'
-        })
-    }
-];
-
-const IndexPages: React.ComponentProps<typeof Feature>[] = [
-    {
-        name: translate({
             message: 'Galerie',
             id: 'main.link.gallerie.text'
         }),
@@ -38,6 +23,8 @@ const IndexPages: React.ComponentProps<typeof Feature>[] = [
         })
     }
 ];
+
+const IndexPages: React.ComponentProps<typeof Feature>[] = [];
 
 function HomepageHeader() {
     const { siteConfig } = useDocusaurusContext();
