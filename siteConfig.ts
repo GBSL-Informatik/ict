@@ -15,6 +15,9 @@ const getSiteConfig: SiteConfigProvider = () => {
         organizationName: 'GBSL-Informatik',
         projectName: 'ict-v2',
         blog: false,
+        docs: {
+            routeBasePath: '/'
+        },
         navbarItems: [taskStateOverview, devModeAccessLocalFS],
         footer: {
             style: 'dark',
