@@ -13,7 +13,7 @@ const getSiteConfig: SiteConfigProvider = () => {
         baseUrl: '/',
         favicon: 'img/favicon.ico',
         organizationName: 'GBSL-Informatik',
-        projectName: 'ict-v2',
+        projectName: 'ict',
         blog: false,
         docs: {
             routeBasePath: '/'
