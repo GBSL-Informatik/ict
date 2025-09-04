@@ -11,6 +11,8 @@ import Answer from '@tdev-components/Answer';
 import Solution from '@tdev-components/documents/Solution';
 import MdxComment from '@tdev-components/documents/MdxComment';
 import MdxPage from '@tdev-components/MdxPage';
+import Feature from '@tdev-components/Feature';
+import FeatureList from '@tdev-components/Feature/List';
 
 export default {
     // Re-use the default mapping
@@ -24,5 +26,7 @@ export default {
     Answer: Answer,
     Solution: Solution,
     MdxPage: MdxPage,
-    MdxComment: MdxComment
+    MdxComment: MdxComment,
+    Feature: Feature,
+    FeatureList: FeatureList
 };
