@@ -5,6 +5,7 @@ import Link from '@docusaurus/Link';
 import Icon from '@mdi/react';
 import * as MdiIcons from '@mdi/js';
 import { camelCased } from '@site/src/plugins/helpers';
+import Card from '@tdev-components/shared/Card';
 
 export interface FeatureProps {
     name: string;
@@ -22,7 +23,7 @@ const Feature = (props: FeatureProps) => {
     const { name, icon, route, pages, extern, description } = props;
     return (
         <Link to={route}>
-            <div className={clsx(styles.feature, extern && styles.extern)}>
+            <Card classNames={{ card: clsx(styles.feature, extern && styles.extern) }}>
                 {pages === 1 && (
                     <span className={clsx(styles.pages)}>
                         <Icon path={MdiIcons.mdiFile} className={clsx(styles.file)} size={SIZE_INDICATOR} />
@@ -54,7 +55,7 @@ const Feature = (props: FeatureProps) => {
                 />
                 <h2>{name}</h2>
                 {description && <p className={clsx(styles.description)}>{description}</p>}
-            </div>
+            </Card>
         </Link>
     );
 };

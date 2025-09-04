@@ -24,7 +24,68 @@ const QuickLinks: React.ComponentProps<typeof Feature>[] = [
     }
 ];
 
-const IndexPages: React.ComponentProps<typeof Feature>[] = [];
+const IndexPages: React.ComponentProps<typeof Feature>[] = [
+    {
+        name: translate({
+            message: 'Onboarding',
+            id: 'main.link.onboarding.name'
+        }),
+        icon: 'mdi-hand-wave-outline',
+        route: '/onboarding',
+        description: translate({
+            message: 'Willkommen an der Schule',
+            id: 'main.link.onboarding.description'
+        })
+    },
+    {
+        name: translate({
+            message: 'Schulinfrastruktur',
+            id: 'main.link.infrastructure.name'
+        }),
+        icon: 'mdi-home-circle',
+        route: '/infrastructure',
+        description: translate({
+            message: 'Unterrichtszimmer, Drucker, Infrastruktur',
+            id: 'main.link.infrastructure.description'
+        })
+    },
+    {
+        name: translate({
+            message: 'Software & Kommunikation',
+            id: 'main.link.software-communication.name'
+        }),
+        icon: 'mdi-cellphone-link',
+        route: '/software-communication',
+        description: translate({
+            message: 'Office365, Adobe, exam.net',
+            id: 'main.link.software-communication.description'
+        })
+    },
+    {
+        name: translate({
+            message: 'Schulkonto',
+            id: 'main.link.schulkonto.text'
+        }),
+        icon: 'mdi-account-circle-outline',
+        route: '/accounts',
+        description: translate({
+            message: 'Neu am GBSL, Schulkonto, Austritt',
+            id: 'main.link.schulkonto.description'
+        })
+    },
+    {
+        name: translate({
+            message: 'Tipps & Tricks',
+            id: 'main.link.tips.name'
+        }),
+        icon: 'mdi-lightbulb-on-outline',
+        route: '/tips',
+        description: translate({
+            message: 'Verschiedene Tipps und Tricks',
+            id: 'main.link.tips.description'
+        })
+    }
+];
 
 function HomepageHeader() {
     const { siteConfig } = useDocusaurusContext();

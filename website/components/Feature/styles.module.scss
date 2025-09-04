@@ -1,10 +1,10 @@
 .feature {
     height: 100%;
-    border-radius: var(--ifm-global-radius);
     position: relative;
 
     &:hover {
-        box-shadow: var(--ifm-global-shadow-lw);
+        box-shadow: var(--ifm-global-shadow-tl);
+
         .pages {
             opacity: 1;
             transition: all 0.3s ease-in-out;
