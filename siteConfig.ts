@@ -4,6 +4,12 @@
 import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
 import { SiteConfigProvider } from './src/siteConfig/siteConfig';
 const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
+const ADMONITION_CONFIG = {
+    admonitions: {
+        keywords: ['aufgabe', 'finding'],
+        extendDefaults: true
+    }
+};
 
 const getSiteConfig: SiteConfigProvider = () => {
     return {
@@ -16,6 +22,7 @@ const getSiteConfig: SiteConfigProvider = () => {
         projectName: 'ict',
         blog: false,
         docs: {
+            ...ADMONITION_CONFIG,
             routeBasePath: '/',
             lastVersion: 'current',
             versions: {

@@ -14,6 +14,7 @@ import MdxPage from '@tdev-components/MdxPage';
 import Feature from '@tdev-components/Feature';
 import FeatureList from '@tdev-components/Feature/List';
 import BrowserWindow from '@tdev-components/BrowserWindow';
+import TaskState from '@tdev-components/documents/TaskState';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -34,5 +35,6 @@ export default {
     FeatureList: FeatureList,
     BrowserWindow: BrowserWindow,
     Tabs: Tabs,
-    TabItem: TabItem
+    TabItem: TabItem,
+    TaskState: TaskState
 };
