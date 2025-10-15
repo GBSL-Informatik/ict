@@ -7,8 +7,9 @@ import { exec as execCallback, execSync } from 'child_process';
 
 const rootPath = process.cwd();
 
-type Config = {
+export type Config = {
     src: string;
+    dst?: string;
     ignore?: string[];
 };
 
@@ -20,12 +21,18 @@ const config = yaml.load(
 ) as Config[];
 const exec = promisify(execCallback);
 
-function createRsyncCommand({ src, ignore }: Config): string {
+function createRsyncCommand({ src, dst, ignore }: Config): string {
+    let srcPath = path.join(DOCS_DIR, src);
+    if (fs.lstatSync(srcPath).isDirectory()) {
+        if (!srcPath.endsWith('/')) {
+            srcPath += '/';
+        }
+    }
     const excludePatterns = ignore ? ignore.map((pattern) => `--exclude='${pattern}'`).join(' ') : '';
 
     return `rsync -av --delete ${excludePatterns} \
-                ${path.join(DOCS_DIR, src)} \
-                ${ONBOARDING_DIR} \
+                ${srcPath} \
+                ${path.join(ONBOARDING_DIR, dst ?? src)} \
                 --delete-after \
                 --prune-empty-dirs`;
 }

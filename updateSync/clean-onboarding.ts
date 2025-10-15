@@ -3,13 +3,9 @@ import * as yaml from 'js-yaml';
 import path from 'path';
 import { promisify } from 'util';
 import { exec as execCallback } from 'child_process';
+import { Config } from './sync-onboarding';
 
 const rootPath = process.cwd();
-
-type Config = {
-    src: string;
-    ignore?: string[];
-};
 
 const ONBOARDING_DIR = path.resolve(path.join(rootPath, 'versioned_docs', 'version-onboarding'));
 
@@ -18,8 +14,8 @@ const config = yaml.load(
 ) as Config[];
 const exec = promisify(execCallback);
 
-function createRmCommand({ src }: Config): string {
-    return `rm -rf ${path.join(ONBOARDING_DIR, src)}`;
+function createRmCommand({ src, dst }: Config): string {
+    return `rm -rf ${path.join(ONBOARDING_DIR, dst ?? src)}`;
 }
 
 async function syncTrackedFiles() {
