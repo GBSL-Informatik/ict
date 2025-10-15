@@ -3,73 +3,64 @@ sidebar_custom_props:
   icon: mdi-file-document-outline
 page_id: ed2b298f-838d-4c3b-b7a5-18a003d98c93
 sidebar_position: 0
+
 ---
 
+import ProgressState from '@tdev-components/documents/ProgressState';
+
 # Onboarding
-:::info
-**Hier finden Sie Anleitungen, um Ihren Laptop und Ihr Smartphone für den Gebrauch an unserer Schule einzurichten.**
+Herzlich willkommen auf der ICT-Webseite unserer Schule! Hier finden Sie Antworten und Lösungen bei technischen Fragen und Problemen. Speichern Sie diese Seite deshalb am besten gleich in Ihren Favoriten / Lesezeichen ab oder notieren Sie sich die Adresse [ict.gbsl.website](ict.gbsl.website) für später.
 
-Sie können die Einrichtung von daheim aus vornehmen und in der Schule. Von daheim aus können Sie nicht alles einrichten. Richten Sie nach Möglichkeit aber alles ein, was Sie von daheim einrichten können.
+Arbeiten Sie den aktuellen Artikel durch, um Ihren Laptop und Ihr Smartphone für den Gebrauch an unserer Schule einzurichten. **Die meisten Einrichtungsschritte können Sie bereits jetzt zu Hause erledigen, damit Sie für den ersten Schultag bereit sind**.
 
- **Achtung: Die Aufgaben 1 bis 4 (s. weiter unten) möglichst rasch erledigen.**
+Falls Sie beim Einrichten Hilfe benötigen, können Sie sich beim IT-Support für Schüler:innen melden: [it-help-for-students@bernedu.ch](mailto:it-help-for-students@bernedu.ch). Am besten schreiben Sie sich diese E-Mail-Adresse ebenfalls irgendwo auf, wo Sie sie jederzeit wiederfinden.
+
+:::danger[Altes Office-Konto entfernen]
+Falls Sie von ihrer alten Schule ein Office365-Konto haben, müssen Sie dieses zuerst entfernen, bevor Sie das neue GBSL-Konto einrichten können. Befolgen Sie dazu [diese Anleitung](TODO).
 :::
 
-Haben Sie von der alten Schule her eine Office365 Lizenz, so beachten Sie unbedingt [👉 das](../../anderesoftware/office365/README.md).
+## Einrichtung vor dem ersten Schultag
+Den Grossteil der Geräteeinrichtung können Sie bereits jetzt zu Hause erledigen. Es wird erwartet, dass Sie die Schritte in diesem Abschnitt **bis am 15. Juni vollständig erledigt haben**. 
 
-Sie befinden sich übrigens auf der ict-Seite der Schule, auf der Sie für alle möglichen technischen Probleme und Fragen Antworten finden können. Sie können die Adresse dieser Seite im Browser als Favorit speichern oder sogar als App auf Ihrem Laptop oder Smartphone einrichten. Eine Anleitung finden Sie unter [Tipps](../../tipps/01-webseite-als-app/README.md).
+Melden Sie sich bei Problemen rechtzeitig beim [IT-Support für Schüler:innen](mailto:it-help-for-students@bernedu.ch). Weitere Unterstützung erhalten Sie auch in der [Anleitung von EDUBERN](https://erzbe.sharepoint.com/sites/EDUBERN-Infohub-Hilfsmittel/Lists/Hilfsmittel/Attachments/157/Anleitung%20–%20Onboarding%20EDUBERN%20BYOD%20FED_RESET_D.pdf) (dem Informatikdienstleister unserer Schule), sowie von deren [Chatbot](https://qr.edubern.ch/assistent).
 
-Haben Sie beim Einrichten Probleme, können Sie sich beim Support für Schüler:innen melden:
-
-QR-Codes finden Sie im Schulhaus. Mailadresse für den Support: [it-help-for-students@bernedu.ch](mailto:it-help-for-students@bernedu.ch). Wichtig: die grünen QR-Codes in den Schulzimmern sind nur für die Lehrpersonen gedacht.
-
-<Tabs>
-<TabItem value="home" label="1. Vorgängig" default>
-
-:::danger[Vorgängig]
-Eigenständige Einrichtung zu Hause. Es wird erwartet, dass diese Schritte bis am 15. Juni erledigt werden.
-
-Edubern, der Informatikbetreiber der Schule, bietet eine ausführliche Anleitung an: [Anleitung edubern](https://erzbe.sharepoint.com/sites/EDUBERN-Infohub-Hilfsmittel/Lists/Hilfsmittel/Attachments/157/Anleitung%20–%20Onboarding%20EDUBERN%20BYOD%20FED_RESET_D.pdf) und einen Chatbot, der bei Problemen Lösungen vorschlägt: [Chatbot Onboarding](https://qr.edubern.ch/assistent)
-
-**Achtung**: Die Anleitung von edubern deckt nicht alles ab, was Sie für Ihr Arbeiten am GBSL benötigen. Deshalb führen Sie sorgfältig die weiteren Punkte unserer Anleitung durch.
-
-Wenn Sie mit dem Einrichten grosse Probleme haben und keine Hilfe erhalten, können Sie vor oder in den Ferien vorbeikommen, und wir helfen Ihnen beim Einrichten. Unter Punkt 8 können Sie das Formular ausfüllen und sich für einen Termin anmelden.
-:::
-
-:::aufgabe[Schritte zu Hause, erledigt bis 15. Juni]
-
-1. Ersteinrichtung Ihres Schulkontos [👉 Ersteinrichtung Schulkonto](./01-accounts/01-schulkonto/index.mdx)
-
-TODO: Links anpassen
-2. Mehrfachauthentifikation einrichten [👉 MFA](../../schulkonto/mfa/README.md)
-3. Mail einrichten [Mail einrichten](../mail/outlook-web/README.md)
-4. Foto für den Schüler:innenausweis [👉 Foto für den Ausweis](../../schulkonto/foto-ausweis/README.md)
-5. Updates installieren [👉Updates](/docs/tipps/updates/README.md)
-6. Office-Programme installieren: [👉 Office365](http://portal.office.com/)
+:::aufgabe[Einrichtung zu Hause (zu erledigen bis 15. Juni)]
+<ProgressState id="e383ca48-5a47-41ba-bb6c-8d241dcabdc5" labels={[
+  'Schritt 1: Ersteinrichtung Schulkonto',
+  'Schritt 2: Multi-Faktor-Authentifizierung',
+  'Schritt 3: Mail einrichten',
+  'Schritt 4: Foto für den Schüler:innenausweis',
+  'Schritt 5: Updates',
+  'Schritt 6: Office365',
+  'Schritt 7: Weitere Programme',
+  'Schritt 8: Abschluss',
+]}>
+1. Damit Sie Ihr Schulkonto verwenden können, müssen Sie es zuerst einrichten. Die Anleitung dazu finden Sie [hier](./01-accounts/01-schulkonto/index.mdx).
+2. Aus Sicherheitsgründen müssen Sie Ihr Schulkonto mit Multi-Faktor-Authentifizierung schützen. Die Anleitung dazu finden Sie [👉 hier](TODO).
+3. Richtigen Sie mithilfe [dieser Anleitung](TODO) den E-Mail-Zugang für Ihr Schulkonto ein.
+4. Laden Sie für Ihren Schüler:innenausweis ein passendens Foto hoch. Die Anleitung dazu finden Sie [hier](../../schulkonto/foto-ausweis/README.md).
+5. Installieren Sie mithilfe [dieser Anleitung](/docs/tipps/updates/README.md) die neuesten Updates auf Ihrem Gerät.
+6. Installieren Sie mithilfe [dieser Anleitung](http://portal.office.com/) die folgenden Office365-Programme auf Ihrem Laptop:
    - Office365 (Word, Excel, Powerpoint)
    - Teams
    - OneDrive
    - OneNote
-7. Weitere Programme
-   - Mailprogramm einrichten [👉 Mailprogramm](../mail/mail-programme)
-   - WebUntis: Stundenplan-App auf dem Smartphone [👉 Stundenplan](../stundenplan)
-   - Adobe-Programme [👉 Adobe](../../anderesoftware/adobe)
-   - Programm für elektronische Prüfungen [👉 E-Prüfen](../../anderesoftware/digitales%20prüfen/)
-8. Abschluss: 
-   - Hier können Sie Ihre Installationen testen: Teilen Sie mit gbsl.onboarding@bernedu.ch eine Word-Datei. Anleitung: [Word-Datei teilen](../onedrive/Dateienteilen)
-   - Füllen Sie dieses Formular aus [👉](https://forms.office.com/e/8rwV7ixe5G)
-
+7. Installieren Sie die folgenden zusätzlichen Programme auf Ihrem Laptop:
+   - [Mailprogramm](TODO) (TODO: Ist das nicht mit der Mail-Einrichtung schon erledigt?)
+   - [WebUntis: Stundenplan-App auf dem Smartphone](TODO)
+   - [Adobe-Programme](TODO) (TODO: Welche? Braucht es das?)
+   - [Umgebung für elektronische Prüfungen](TODO)
+8. Um Ihre Installationen zu testen und abzuschliessen, gehen Sie wie folgt vor:
+   1. Teilen Sie ein Word-Dokument mit [gbsl.onboarding@bernedu.ch](mailto:gbsl.onboarding@bernedu.ch). Die Anleitung dazu finden Sie [hier](TODO)
+   2. Füllen Sie [dieses Formular aus](https://forms.office.com/e/8rwV7ixe5G).
+</ProgressState>
 :::
 
-</TabItem>
-<TabItem value="school" label="2. Am ersten Schultag">
+## Restliche Einrichtung am ersten Schultag
+Ihre Geräteeinrichtung ist damit fast abgeschlossen. In diesem Abschnitt finden Sie die letzten verbleibenden Aufgaben, die Sie am ersten Schultag in der Schule erledigen müssen.
 
-:::warning[An der Schule]
-Am ersten Schultag die Geräte an der Schule in Betrieb nehmen.
+:::aufgabe[WLAN-Zugang einrichten]
+<TaskState id="454a9892-ca97-48dd-879b-fff295860c73" />
+Verbinden Sie Ihren Laptop und Ihr Smartphone mit dem [Schul-WLAN](TODO).
 :::
 
-:::aufgabe[Schritte an der Schule]
-[👉 Wlan-Zugang einrichten](../wlan/README.md)
-:::
-
-</TabItem>
-</Tabs>
