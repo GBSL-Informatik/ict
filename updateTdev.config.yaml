@@ -27,6 +27,8 @@ trackedElements:
       dst: .prettierignore
     - src: vitest.config.ts
       dst: vitest.config.ts
+    - src: docs/tdev/
+      dst: docs/tdev
 watchedElements:
     - .babel.config.js
     - package.json
