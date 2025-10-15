@@ -9,6 +9,7 @@
     "scripts": {
         "docusaurus": "docusaurus",
         "start": "docusaurus start",
+        "prebuild": "ts-node updateSync/sync-onboarding.ts",
         "build": "docusaurus build",
         "swizzle": "docusaurus swizzle",
         "deploy": "docusaurus deploy",
