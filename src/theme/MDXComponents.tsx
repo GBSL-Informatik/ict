@@ -13,6 +13,9 @@ import MdxComment from '@tdev-components/documents/MdxComment';
 import MdxPage from '@tdev-components/MdxPage';
 import Feature from '@tdev-components/Feature';
 import FeatureList from '@tdev-components/Feature/List';
+import BrowserWindow from '@tdev-components/BrowserWindow';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 export default {
     // Re-use the default mapping
@@ -28,5 +31,8 @@ export default {
     MdxPage: MdxPage,
     MdxComment: MdxComment,
     Feature: Feature,
-    FeatureList: FeatureList
+    FeatureList: FeatureList,
+    BrowserWindow: BrowserWindow,
+    Tabs: Tabs,
+    TabItem: TabItem
 };
