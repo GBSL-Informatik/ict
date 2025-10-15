@@ -16,7 +16,20 @@ const getSiteConfig: SiteConfigProvider = () => {
         projectName: 'ict',
         blog: false,
         docs: {
-            routeBasePath: '/'
+            routeBasePath: '/',
+            lastVersion: 'current',
+            versions: {
+                current: {
+                    label: 'ICT',
+                    banner: 'none',
+                    badge: false
+                },
+                onboarding: {
+                    label: 'Onboarding',
+                    banner: 'none',
+                    badge: false
+                }
+            }
         },
         navbarItems: [taskStateOverview, devModeAccessLocalFS],
         footer: {

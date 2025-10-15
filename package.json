@@ -17,6 +17,8 @@
         "write-translations": "docusaurus write-translations",
         "write-heading-ids": "docusaurus write-heading-ids",
         "typecheck": "tsc",
+        "clean-onboarding": "ts-node updateSync/clean-onboarding.ts",
+        "sync-onboarding": "ts-node updateSync/sync-onboarding.ts",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "test": "vitest --coverage",
