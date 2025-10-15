@@ -10,6 +10,10 @@ trackedElements:
           - pages/__index.tsx
           - pages/.gitignore
           - theme/**
+    - src: src/theme/Root.tsx
+      dst: src/theme/Root.tsx
+    - src: packages/tdev/
+      dst: packages/tdev
     - src: updateSync/
       dst: updateSync
     - src: tsconfig.json
@@ -24,3 +28,4 @@ watchedElements:
     - .babel.config.js
     - package.json
     - .env.example
+    - src/theme/
