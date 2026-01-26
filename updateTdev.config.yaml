@@ -3,6 +3,10 @@ expectedTdevBranch: main
 trackedElements:
     - src: docusaurus.config.ts
       dst: docusaurus.config.ts
+    - src: .devcontainer/devcontainer.json
+      dst: .devcontainer/devcontainer.json
+    - src: .github/workflows/prettier-check.yml
+      dst: .github/workflows/prettier-check.yml
     - src: src/
       dst: src
       ignore:
@@ -12,14 +16,18 @@ trackedElements:
           - theme/**
     - src: src/theme/Root.tsx
       dst: src/theme/Root.tsx
-    - src: packages/tdev/
-      dst: packages/tdev
+    - src: packages/tdev/excalidoc/
+      dst: packages/tdev/excalidoc
+    - src: packages/tdev/remark-pdf/
+      dst: packages/tdev/remark-pdf
+    - src: packages/tdev/remark-graphviz/
+      dst: packages/tdev/remark-graphviz
     - src: updateSync/
       dst: updateSync
       ignore:
           - sync-onboarding.ts
           - clean-onboarding.ts
-    - src: tsconfig.json
+    - src: tsconfig.tdev.json
       dst: tsconfig.json
     - src: .prettierrc
       dst: .prettierrc
@@ -27,8 +35,6 @@ trackedElements:
       dst: .prettierignore
     - src: vitest.config.ts
       dst: vitest.config.ts
-    - src: docs/tdev/
-      dst: docs/tdev
 watchedElements:
     - .babel.config.js
     - package.json

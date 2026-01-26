@@ -8,23 +8,32 @@ import {
     mdiAccountCancel,
     mdiAccountKey,
     mdiAccountKeyOutline,
+    mdiAccountRemoveOutline,
     mdiCircleEditOutline,
     mdiClose,
     mdiCloseBox,
     mdiCloseCircleOutline,
     mdiContentSave,
+    mdiDownloadLockOutline,
     mdiFileExcelOutline,
+    mdiFormTextboxPassword,
+    mdiLanguageHtml5,
     mdiTrashCanOutline
 } from '@mdi/js';
 import { useStore } from '@tdev-hooks/useStore';
 import DefinitionList from '../DefinitionList';
 import Details from '@theme/Details';
-import { exportAsExcelSpreadsheet } from '@tdev-components/StudentGroup/excelExport';
+import { exportAsExcelSpreadsheet } from '@tdev-components/StudentGroup/services/excelExport';
 import { SIZE_S } from '@tdev-components/shared/iconSizes';
 import { Confirm } from '@tdev-components/shared/Button/Confirm';
 import Undo from './Undo';
 import AddUserPopup from './AddMembersPopup';
 import LiveStatusIndicator from '@tdev-components/LiveStatusIndicator';
+import { exportNameCards } from './services/exportNameCards';
+import AssignCredentials from './AssignCredentials';
+import Card from '@tdev-components/shared/Card';
+import Popup from 'reactjs-popup';
+import { exportNewPasswordList } from './services/excelNewPwExport';
 
 interface Props {
     studentGroup: StudentGroupModel;
@@ -38,6 +47,8 @@ const StudentGroup = observer((props: Props) => {
         ids: string[];
         fromGroups: StudentGroupModel[] | undefined;
     }>();
+    const [spinState, setSpinState] = React.useState<'unlinking' | null>(null);
+    const adminStore = useStore('adminStore');
     const userStore = useStore('userStore');
     const groupStore = useStore('studentGroupStore');
     const group = props.studentGroup;
@@ -73,11 +84,6 @@ const StudentGroup = observer((props: Props) => {
                 </h3>
                 {isAdmin && (
                     <div className={styles.buttons}>
-                        <Button
-                            icon={mdiFileExcelOutline}
-                            onClick={() => exportAsExcelSpreadsheet(group)}
-                            color={'green'}
-                        />
                         <div>
                             {group.isEditing ? (
                                 <>
@@ -141,6 +147,91 @@ const StudentGroup = observer((props: Props) => {
                             group.description || '-'
                         )}
                     </dd>
+                    {isAdmin && (
+                        <>
+                            <dt>Export</dt>
+                            <dd>
+                                <div className={clsx(styles.exportButtons)}>
+                                    <Button
+                                        icon={mdiFileExcelOutline}
+                                        onClick={() => exportAsExcelSpreadsheet(group)}
+                                        color="green"
+                                        text="Excel"
+                                        size={SIZE_S}
+                                        iconSide="left"
+                                    />
+                                    <Button
+                                        color="primary"
+                                        icon={mdiLanguageHtml5}
+                                        iconSide="left"
+                                        text="Namenskarten"
+                                        size={SIZE_S}
+                                        title="Namenskarten für A4 (4x gefaltet) herunterladen"
+                                        onClick={() => {
+                                            exportNameCards(group.students);
+                                        }}
+                                    />
+                                </div>
+                            </dd>
+                            <dt>Aktionen</dt>
+                            <dd>
+                                <Button
+                                    icon={mdiDownloadLockOutline}
+                                    onClick={() =>
+                                        exportNewPasswordList(group, { pwLength: 8, prefixLength: 4 })
+                                    }
+                                    text="Passwortliste generieren"
+                                    title="Generiert eine Liste mit neuen Passwörtern für alle Schüler:innen und lädt diese als Excel-Datei herunter."
+                                    size={SIZE_S}
+                                    iconSide="left"
+                                />
+                            </dd>
+                            <dd>
+                                <Popup
+                                    trigger={
+                                        <div>
+                                            <Button
+                                                icon={mdiFormTextboxPassword}
+                                                size={SIZE_S}
+                                                text="Passwörter zuweisen"
+                                                iconSide="left"
+                                            />
+                                        </div>
+                                    }
+                                    modal
+                                    on="click"
+                                    overlayStyle={{ background: 'rgba(0,0,0,0.5)' }}
+                                >
+                                    <Card>
+                                        <AssignCredentials studentGroup={group} />
+                                    </Card>
+                                </Popup>
+                            </dd>
+                            {group.studentsWithOptionalPWAuth.length > 0 && (
+                                <dd>
+                                    <Confirm
+                                        text={`${group.studentsWithOptionalPWAuth.length} Passwort-Logins entfernen`}
+                                        color="red"
+                                        icon={mdiAccountRemoveOutline}
+                                        iconSide="left"
+                                        onConfirm={() => {
+                                            Promise.all(
+                                                group.studentsWithOptionalPWAuth.map((user) => {
+                                                    adminStore.revokeUserPassword(user.id);
+                                                })
+                                            ).finally(() => {
+                                                userStore.load();
+                                                setSpinState(null);
+                                            });
+                                        }}
+                                        disabled={!!spinState}
+                                        size={SIZE_S}
+                                        confirmText="Wirklich entfernen?"
+                                    />
+                                </dd>
+                            )}
+                        </>
+                    )}
 
                     <dt>Erstellt Am</dt>
                     <dd>{group.fCreatedAt}</dd>

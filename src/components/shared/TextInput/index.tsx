@@ -8,13 +8,15 @@ interface Props {
     defaultValue?: string;
     placeholder?: string;
     onChange: (text: string) => void;
-    onEnter?: () => void;
-    onEscape?: () => void;
+    onEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    onEscape?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    onSave?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     validator?: (text: string) => string | null;
     className?: string;
     labelClassName?: string;
     value?: string;
     type?: HTMLInputTypeAttribute;
+    title?: string;
     label?: React.ReactNode;
     noSpellCheck?: boolean;
     noAutoFocus?: boolean;
@@ -43,6 +45,7 @@ const TextInput = observer((props: Props) => {
                         props.isDirty && styles.dirty
                     )}
                     htmlFor={id}
+                    title={props.title}
                 >
                     {props.label}
                 </label>
@@ -64,14 +67,16 @@ const TextInput = observer((props: Props) => {
                 }}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                        props.onEnter?.();
+                        props.onEnter?.(e);
                     }
                     if (e.key === 'Escape') {
-                        props.onEscape?.();
+                        props.onEscape?.(e);
+                    }
+                    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                        props.onSave?.(e);
                     }
                 }}
                 onInput={(e) => {
-                    const validity = e.currentTarget.validity;
                     const error = validator(e.currentTarget.value);
                     if (error === null) {
                         e.currentTarget.setCustomValidity('');
@@ -79,14 +84,12 @@ const TextInput = observer((props: Props) => {
                         e.currentTarget.setCustomValidity(error);
                     }
                     e.currentTarget.classList.add(styles.touched);
-                    if ((props.required || e.currentTarget.value.length > 0) && !validity.valid) {
-                        e.currentTarget.reportValidity();
-                    }
+                    e.currentTarget.reportValidity();
                 }}
                 autoFocus={!props.noAutoFocus}
                 autoComplete="off"
                 autoCorrect="off"
-                step={props.step}
+                step={props.step ?? 'any'}
                 min={props.min}
                 max={props.max}
             />
