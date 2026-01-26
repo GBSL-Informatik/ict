@@ -16,7 +16,7 @@ const QuickLinks: React.ComponentProps<typeof Feature>[] = [
             id: 'main.link.gallerie.text'
         }),
         icon: 'mdi-view-gallery-outline',
-        route: '/tdev/gallery/',
+        route: '/support',
         description: translate({
             message: 'Update, Tools, Netiquette',
             id: 'main.link.gallerie.description'

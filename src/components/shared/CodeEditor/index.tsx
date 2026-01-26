@@ -11,6 +11,8 @@ import 'ace-builds/src-noconflict/theme-dracula';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/esm-resolver';
+import useCodeTheme from '@tdev-hooks/useCodeTheme';
+import { observer } from 'mobx-react-lite';
 
 const ALIAS_LANG_MAP_ACE = {
     mpy: 'python',
@@ -33,17 +35,28 @@ interface Props {
     name?: string;
     placeholder?: string;
     hideLineNumbers?: boolean;
+    onInit?: (editor: AceEditor) => ReturnType<React.EffectCallback>;
 }
 
-const CodeEditor = (props: Props) => {
+const CodeEditor = observer((props: Props) => {
     const ref = React.useRef<AceEditor>(null);
+    const { aceTheme } = useCodeTheme();
     React.useEffect(() => {
         if (props.value !== undefined && ref.current) {
-            if (props.value !== ref.current.editor.getValue()) {
+            const val = ref.current.editor.getValue();
+            if (props.value !== val) {
                 ref.current.editor.setValue(props.value);
+            }
+            if (!ref.current.editor.getSelection().isEmpty()) {
+                ref.current.editor.clearSelection();
             }
         }
     }, [ref, props.value]);
+    React.useEffect(() => {
+        if (ref && ref.current) {
+            return props.onInit?.(ref.current);
+        }
+    }, [ref]);
     return (
         <div className={clsx(styles.editor, props.className)}>
             <AceEditor
@@ -63,7 +76,7 @@ const CodeEditor = (props: Props) => {
                     ALIAS_LANG_MAP_ACE[props.lang as keyof typeof ALIAS_LANG_MAP_ACE] ??
                     (props.lang || 'plain_text')
                 }
-                theme="dracula"
+                theme={aceTheme}
                 onChange={(value: string, e: { action: 'insert' | 'remove' }) => {
                     props.onChange?.(value);
                 }}
@@ -87,5 +100,5 @@ const CodeEditor = (props: Props) => {
             />
         </div>
     );
-};
+});
 export default CodeEditor;
