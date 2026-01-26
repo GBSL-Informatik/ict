@@ -21,6 +21,7 @@ const getSiteConfig: SiteConfigProvider = () => {
         organizationName: 'GBSL-Informatik',
         projectName: 'ict',
         blog: false,
+        onBrokenLinks: 'warn',
         docs: {
             ...ADMONITION_CONFIG,
             routeBasePath: '/',
