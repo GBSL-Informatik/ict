@@ -45,6 +45,10 @@ trackedElements:
       dst: .prettierignore
     - src: vitest.config.ts
       dst: vitest.config.ts
+    - src: static/tdev-artifacts/
+      dst: static/tdev-artifacts/
+      ignore:
+          - '*/**'
 watchedElements:
     - .babel.config.js
     - package.json
