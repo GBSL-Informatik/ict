@@ -48,6 +48,11 @@ const getSiteConfig: SiteConfigProvider = () => {
             ᚶ ${GIT_COMMIT_SHA.substring(0, 7)}
       </a>
       `
+        },
+        tdevConfig: {
+            excalidraw: {
+                excalidoc: true
+            }
         }
     };
 };

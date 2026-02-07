@@ -16,12 +16,22 @@ trackedElements:
           - theme/**
     - src: src/theme/Root.tsx
       dst: src/theme/Root.tsx
+    - src: src/theme/Root.helpers.ts
+      dst: src/theme/Root.helpers.ts
+    - src: src/theme/Admonition/
+      dst: src/theme/Admonition/
+    - src: src/theme/DocSidebarItem/
+      dst: src/theme/DocSidebarItem/
+    - src: src/theme/NavbarItem/
+      dst: src/theme/NavbarItem/
     - src: packages/tdev/excalidoc/
       dst: packages/tdev/excalidoc
     - src: packages/tdev/remark-pdf/
       dst: packages/tdev/remark-pdf
     - src: packages/tdev/remark-graphviz/
       dst: packages/tdev/remark-graphviz
+    - src: packages/tdev/page-index/
+      dst: packages/tdev/page-index
     - src: updateSync/
       dst: updateSync
       ignore:
