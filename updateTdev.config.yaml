@@ -32,6 +32,8 @@ trackedElements:
       dst: packages/tdev/remark-graphviz
     - src: packages/tdev/page-index/
       dst: packages/tdev/page-index
+    - src: packages/tdev/page-read-check/
+      dst: packages/tdev/page-read-check
     - src: updateSync/
       dst: updateSync
       ignore:

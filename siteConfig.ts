@@ -53,7 +53,8 @@ const getSiteConfig: SiteConfigProvider = () => {
             excalidraw: {
                 excalidoc: true
             }
-        }
+        },
+        apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')]
     };
 };
 
