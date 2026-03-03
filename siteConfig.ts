@@ -1,13 +1,33 @@
 // This file is never changed by teaching-dev.
 // Use it to override or extend your app configuration.
 
+import {
+    detailsPluginConfig,
+    recommendedBeforeDefaultRemarkPlugins
+} from './src/siteConfig/markdownPluginConfigs';
 import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
 import { SiteConfigProvider } from './src/siteConfig/siteConfig';
+import detailsPlugin from './src/plugins/remark-details/plugin';
+import { PluginConfig, PluginModule, PluginOptions } from '@docusaurus/types';
 const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
 const ADMONITION_CONFIG = {
     admonitions: {
         keywords: ['aufgabe', 'finding'],
         extendDefaults: true
+    }
+};
+function getLocale(): 'de' | 'fr' {
+    return process.env.DOCUSAURUS_CURRENT_LOCALE && process.env.DOCUSAURUS_CURRENT_LOCALE !== 'undefined'
+        ? process.env.DOCUSAURUS_CURRENT_LOCALE === 'fr'
+            ? 'fr'
+            : 'de'
+        : 'de';
+}
+const LOCALE: 'de' | 'fr' = getLocale();
+const STATIC_TRANSLATIONS = {
+    solution: {
+        de: 'Lösung',
+        fr: 'Solution'
     }
 };
 
@@ -39,6 +59,7 @@ const getSiteConfig: SiteConfigProvider = () => {
                 }
             }
         },
+        siteStyles: ['website/css/custom.scss'],
         navbarItems: [taskStateOverview, devModeAccessLocalFS],
         footer: {
             style: 'dark',
@@ -54,6 +75,22 @@ const getSiteConfig: SiteConfigProvider = () => {
                 excalidoc: true
             }
         },
+        beforeDefaultRemarkPlugins: [
+            ...recommendedBeforeDefaultRemarkPlugins.filter((p) => p !== detailsPluginConfig),
+            [
+                detailsPlugin,
+                {
+                    directiveNames: ['details', 'solution'],
+                    classNames: {
+                        details: 'details',
+                        solution: 'solution'
+                    },
+                    defaultLabel: {
+                        solution: STATIC_TRANSLATIONS.solution[LOCALE]
+                    }
+                }
+            ]
+        ] as unknown as PluginOptions[],
         apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')]
     };
 };

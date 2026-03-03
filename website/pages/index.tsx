@@ -12,14 +12,14 @@ import { translate } from '@docusaurus/Translate';
 const QuickLinks: React.ComponentProps<typeof Feature>[] = [
     {
         name: translate({
-            message: 'Galerie',
-            id: 'main.link.gallerie.text'
+            message: 'Support',
+            id: 'main.link.support.text'
         }),
-        icon: 'mdi-view-gallery-outline',
+        icon: 'mdiAccountSupervisor',
         route: '/support',
         description: translate({
-            message: 'Update, Tools, Netiquette',
-            id: 'main.link.gallerie.description'
+            message: 'Supportadressen, Anleitungen, Kontakt',
+            id: 'main.link.support.description'
         })
     }
 ];

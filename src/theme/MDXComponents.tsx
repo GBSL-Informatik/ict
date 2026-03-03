@@ -17,6 +17,7 @@ import BrowserWindow from '@tdev-components/BrowserWindow';
 import TaskState from '@tdev-components/documents/TaskState';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Steps from '@tdev-components/Steps';
 
 export default {
     // Re-use the default mapping
@@ -36,5 +37,6 @@ export default {
     BrowserWindow: BrowserWindow,
     Tabs: Tabs,
     TabItem: TabItem,
-    TaskState: TaskState
+    TaskState: TaskState,
+    Steps: Steps
 };
