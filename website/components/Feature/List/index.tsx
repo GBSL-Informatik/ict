@@ -59,7 +59,6 @@ const FeatureList = (): React.ReactElement => {
     const docsSidebar = useDocsSidebar();
     const { pathname } = useLocation();
     const current = getCurrent(docsSidebar?.items, pathname);
-    console.log('current', current, docsSidebar, pathname);
     if (!current || current.type !== 'category') {
         return (
             <div className={styles.features}>
