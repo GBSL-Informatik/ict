@@ -1,0 +1,6 @@
+{
+    "mfa-sms-sender-number": {
+        "message": "079 807 10 11",
+        "description": "The phone number from which the 2FA confirmation SMS is sent."
+    }
+}

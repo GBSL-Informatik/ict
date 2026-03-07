@@ -5,13 +5,32 @@
     <Solution>
         Das kann 2 mögliche Ursachen haben:
         - Ein SMS-Filter verhindert den Empfang.
-        - Eine SIM-Einstellung verhindert den Empfang von Nachrichten.
+        - Eine Netzwerk-Einstellung verhindert den Empfang von Nachrichten.
 
         <Solution title="SMS-Filter überprüfen">
-            ![](./images/onboarding-no-sms-ios.webp)
+            <Tabs groupId="os" queryString>
+                <TabItem value="android" label="Android">
+                   Die Bestätigungs-SMS wird von der Nummer __<T id="mfa-sms-sender-number" />__ gesendet - stellen Sie sicher, dass diese Nummer **nicht blockiert** ist.
+                    ![](./images/onboarding-no-sms-android.webp)
+                </TabItem>
+                <TabItem value="ios" label="iOS">
+                    Die Bestätigungs-SMS wird von der Nummer __<T id="mfa-sms-sender-number" />__ gesendet. Wahlweise können Sie:
+                    - den SMS-Filter **vorübergehend deaktivieren**, um die SMS zu empfangen, oder
+                    - diese Nummer zu den __Bekannten Absendern__ in Ihrem SMS-Filter hinzufügen.
+
+                    ![](./images/onboarding-no-sms-ios.webp)
+                </TabItem>
+            </Tabs>
         </Solution>
-        <Solution title="SIM-Karten-Einstellung überprüfen">
-            Bitte wenden Sie sich an Ihren Mobilfunkanbieter, um sicherzustellen, dass Ihre SIM-Karte für den Empfang von SMS-Nachrichten konfiguriert ist. Es könnte sein, dass bestimmte Einstellungen oder Einschränkungen den Empfang von SMS blockieren.
+        <Solution title="Netzwerk-Einstellungen zurücksetzen">
+            <Tabs groupId="os" queryString>
+                <TabItem value="android" label="Android">
+                    Navigieren Sie zu __Einstellungen > System > Erweitert > Optionen zurücksetzen > WLAN, Mobilfunk & Bluetooth zurücksetzen__ und bestätigen Sie die Aktion. Anschliessend können Sie die Erstanmeldung erneut versuchen.
+                </TabItem>
+                <TabItem value="ios" label="iOS">
+                    Navigieren Sie zu __Einstellungen > Allgemein > iPhone übertragen/zurücksetzen > Netzwerkeinstellungen__ und bestätigen Sie die Aktion. Anschliessend können Sie die Erstanmeldung erneut versuchen.
+                </TabItem>
+            </Tabs>
         </Solution>
         </Solution>
 </Alert>

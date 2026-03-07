@@ -19,6 +19,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Steps from '@tdev-components/Steps';
 import Alert from '@tdev-components/shared/Alert';
+import Translate from '@docusaurus/Translate';
 
 export default {
     // Re-use the default mapping
@@ -40,5 +41,6 @@ export default {
     Tabs: Tabs,
     TabItem: TabItem,
     TaskState: TaskState,
-    Steps: Steps
+    Steps: Steps,
+    T: Translate
 };

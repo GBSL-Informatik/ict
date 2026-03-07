@@ -42,6 +42,7 @@ const getSiteConfig: SiteConfigProvider = () => {
         projectName: 'ict',
         blog: false,
         onBrokenLinks: 'warn',
+        locales: ['de', 'fr'],
         docs: {
             ...ADMONITION_CONFIG,
             routeBasePath: '/',
