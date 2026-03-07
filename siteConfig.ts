@@ -8,7 +8,7 @@ import {
 import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
 import { SiteConfigProvider } from './src/siteConfig/siteConfig';
 import detailsPlugin from './src/plugins/remark-details/plugin';
-import { PluginConfig, PluginModule, PluginOptions } from '@docusaurus/types';
+import { PluginOptions } from '@docusaurus/types';
 const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
 const ADMONITION_CONFIG = {
     admonitions: {

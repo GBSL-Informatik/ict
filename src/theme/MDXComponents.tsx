@@ -18,8 +18,8 @@ import TaskState from '@tdev-components/documents/TaskState';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Steps from '@tdev-components/Steps';
-import Alert from '@tdev-components/shared/Alert';
 import Translate from '@docusaurus/Translate';
+import Faq from '@tdev-components/Faq';
 
 export default {
     // Re-use the default mapping
@@ -30,7 +30,6 @@ export default {
     DefContent: DefContent,
     Figure: Figure,
     SourceRef: SourceRef,
-    Alert: Alert,
     Answer: Answer,
     Solution: Solution,
     MdxPage: MdxPage,
@@ -41,6 +40,7 @@ export default {
     Tabs: Tabs,
     TabItem: TabItem,
     TaskState: TaskState,
+    Faq: Faq,
     Steps: Steps,
     T: Translate
 };
