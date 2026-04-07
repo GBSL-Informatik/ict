@@ -1,3 +1,4 @@
 - src: 04-accounts
   dst: 01-accounts
-  ignore: []
+  ignore:
+      - 02-mfa/01-wechsel-smartphone
