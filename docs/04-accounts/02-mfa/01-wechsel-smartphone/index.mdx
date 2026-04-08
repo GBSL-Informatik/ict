@@ -2,37 +2,30 @@
 page_id: f4de3277-fe53-4cbe-af0b-868fa4b7a54b
 ---
 
+import MfaAuthenticatorEinrichten from '@site/docs/03-support/01-faq/questions/\_mfa-authenticator-einrichten.mdx';
+import OfficeAccountAuthAppGehtNicht from '@site/docs/03-support/01-faq/questions/\_office-account-authenticator-geht-nicht.mdx';
 
 # Wechsel des Smartphones
-Falls Sie die Authenticator App verwenden, und Ihr Smartphone defekt ist, verloren gegangen ist oder Sie ein neues Smartphone haben, ist eine Aktion erforderlich.
+Wenn Sie die Microsoft Authenticator App verwenden, dann ist eine Aktion erforderlich, falls Ihr Smartphone defekt ist, verloren gegangen ist oder Sie ein neues Smartphone haben.
 
-Dabei kommt es darauf an, ob Sie noch Zugriff auf die Authenticator App auf Ihrem alten Smartphone haben oder nicht. Wählen Sie hier die Option, die auf Ihre Situation zutrifft:
+Dabei kommt es darauf an, ob Sie sich noch in Ihrem Office 365 Schulkonto anmelden können oder nicht. Falls Sie die Authenticator App auf Ihrem alten Smartphone nicht mehr verwenden können, prüfen Sie, ob es mit einer anderen Methode möglich ist:
+
+<OfficeAccountAuthAppGehtNicht />
+
+Wählen Sie anschliessend hier die passende Anleitung für Ihren Fall aus:
 
 <Tabs groupId="mfa-smartphone-wechsel" queryString>
-    <TabItem value="access-possible" label="Authenticator noch zugänglich">
-        :::info[Sie haben noch Zugriff auf die alte Authenticator App?]
-        Sie haben noch Zugriff auf Ihr altes Smartphone und die Authenticator App funktioniert noch. Dann finden Sie hier eine Anleitung, wie Sie vorgehen können.
+    <TabItem value="access-possible" label="Anmeldung möglich">
+        :::info[Sie können sich noch in Ihrem Office 365 Schulkonto anmelden?]
+        Sie können sich noch in Ihrem Office 365 Schulkonto anmelden? In diesem Fall können Sie dort die Authenticator App für Ihr neues Smartphone einrichten. 
         :::
 
-        <Steps>
-            1. Öffnen Sie auf dem Laptop folgenden Link: [https://myaccount.microsoft.com/?ref=MeControl](https://myaccount.microsoft.com/?ref=MeControl).
-            2. Melden Sie sich wie gewohnt mit Ihrem Schulkonto an.
-            3. Gehen Sie in Ihrem Konto auf __Sicherheitsinformationen__ und anschliessend auf __Methode hinzufügen__.
-               ![](images/ms-account-neue-anmeldemethode.png)
-            4. Wählen Sie die Methode __Microsoft Authenticator__.
-               ![--width=350px](images/ms-account-neue-anmeldemethode-authenticator.png)
-            5. Folgen Sie den Anweisungen.
-               ![--width=400px](images/mskontosicherheitauthapp2.png)
-            6. Fügen Sie Ihr GBSL-Konto hinzu.
-               ![--width=400px](images/mskontosicherheitauthapp3.png)
-            7. Zum Schluss erhalten Sie einen QR-Code und folgen dann den weiteren Anweisungen.
-               ![--width=400px](images/mskontosicherheitauthapp4.png)
-        </Steps>
+        <MfaAuthenticatorEinrichten />
 
     </TabItem>
-    <TabItem value="access-not-possible" label="Authenticator nicht mehr zugänglich">
-        :::info[Sie haben keinen Zugriff mehr auf die alte Authenticator App?]
-        Sie haben keinen Zugriff mehr auf Ihr altes Smartphone oder die Authenticator App funktioniert nicht mehr? Dann finden Sie hier eine Anleitung, wie Sie vorgehen können.
+    <TabItem value="access-not-possible" label="Anmeldung nicht mehr möglich">
+        :::info[Sie können sich nicht mehr in Ihrem Office 365 Schulkonto anmelden?]
+        Sie können sich nicht mehr in Ihrem Office 365 Schulkonto anmelden? Dann finden Sie hier eine Anleitung, wie Sie vorgehen können.
         :::
 
         <Steps>
@@ -41,8 +34,3 @@ Dabei kommt es darauf an, ob Sie noch Zugriff auf die Authenticator App auf Ihre
         </Steps>
     </TabItem>
 </Tabs>
-
-
-
-
-
