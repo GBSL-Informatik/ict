@@ -2,5 +2,17 @@
     "mfa-sms-sender-number": {
         "message": "079 807 10 11",
         "description": "The phone number from which the 2FA confirmation SMS is sent."
+    },
+    "edubern-it-support-email": {
+        "message": "soarhe.jahany@bernedu.ch",
+        "description": "The email address of the IT support."
+    },
+    "edubern-it-support-lastname": {
+        "message": "Jahany",
+        "description": "The last name of the IT support."
+    },
+    "edubern-it-support-firstname": {
+        "message": "Soarhe",
+        "description": "The first name of the IT support."
     }
 }

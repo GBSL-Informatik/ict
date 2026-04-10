@@ -10,6 +10,7 @@ html[data-theme='dark'] {
     position: relative;
     --current-alert-padding-vertical: var(--ifm-alert-padding-vertical);
     --current-alert-padding-horizontal: var(--ifm-alert-padding-horizontal);
+    --wrapper-border-left-width: var(--ifm-alert-border-left-width);
     &:not(.standalone) {
         :global(.alert) {
             border-top-left-radius: 0;
@@ -21,11 +22,11 @@ html[data-theme='dark'] {
                 -1 * calc(var(--current-alert-padding-vertical) + var(--ifm-alert-border-left-width))
             );
             border-width: 0;
-            border-left-width: var(--ifm-alert-border-left-width) !important;
+            border-left-width: var(--wrapper-border-left-width) !important;
             .wrapper {
                 :global(.alert) {
                     margin-left: 0;
-                    border-left-width: 0 !important;
+                    --wrapper-border-left-width: 0;
                     margin-bottom: 0.25rem;
                     border-top-left-radius: var(--ifm-alert-border-radius);
                     border-bottom-left-radius: var(--ifm-alert-border-radius);
