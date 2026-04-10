@@ -14,6 +14,20 @@ import _ from 'es-toolkit/compat';
         <MailTemplate
             subject="Account Schüler:in zurücksetzen"
             to={translate({id: 'edubern-it-support-email' })}
+            validate={(page) => {
+                const email = page.dynamicValues.get('email');
+                const phone = page.dynamicValues.get('phone');
+                if (!email || !email.includes('@')) {
+                    return () => ({ valid: false, message: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' });
+                }
+                if (!/@(edu\.)?gbsl\.ch$/i.test(email)) {
+                    return () => ({ valid: false, message: 'Bitte verwenden Sie Ihre Schul-E-Mail-Adresse (@edu.gbsl.ch oder @gbsl.ch).' });
+                }
+                if (!phone || !/^\d{3}\s*\d{3}\s*\d{2}\s*\d{2}$/.test(phone)) {
+                    return () => ({ valid: false, message: 'Bitte geben Sie eine gültige Telefonnummer im Format "079 123 45 66" ein.' });
+                }
+                return () => ({ valid: true });
+            }}
             body={(page) => {
                 const email = page.dynamicValues.get('email');
                 const student = email.split('@')[0].split('.').map(p => _.capitalize(p)).join(' ');

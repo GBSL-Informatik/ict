@@ -1,0 +1,8 @@
+.mailTemplate {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .alert {
+        flex-grow: 1;
+    }
+}
