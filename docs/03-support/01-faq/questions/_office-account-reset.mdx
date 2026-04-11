@@ -1,45 +1,13 @@
 import { translate } from '@docusaurus/Translate';
 import { Val, TemplateCode, DynamicInput } from '@tdev-components/DynamicValues';
 import MailTemplate, { alignLeft } from '@tdev-components/MailTemplate';
-import { validateEmail, validatePhoneNumber } from '@tdev-components/MailTemplate/validations';
-import _ from 'es-toolkit/compat';
+import ResetOfficeAccount from '@tdev-components/MailTemplate/templates/ResetOfficeAccount';
 
 <Faq>
     #### Wie kann ich mein Office 365 Schulkonto zurücksetzen lassen?
     <Solution>
-        Melden Sie sich beim Edubern-Support (<T id="edubern-it-support-email" />), dass Ihr Konto zurückgesetzt werden muss:
+        Melden Sie sich beim Edubern-Support (<T id="support.edubern.email" />), dass Ihr Konto zurückgesetzt werden muss:
         
-        <DynamicInput name="email" label="E-Mail" placeholder="vorname.nachname@edu.gbsl.ch" />
-        <DynamicInput name="phone" label="Telefon" placeholder='079 123 45 66' />
-
-        <MailTemplate
-            subject="Office 365 Account zurücksetzen"
-            to={translate({id: 'edubern-it-support-email' })}
-            validate={(page) => {
-                const email = page.dynamicValues.get('email');
-                const emailValidation = validateEmail(email);
-                if (!emailValidation.valid) {
-                    return () => emailValidation;
-                }
-                const phone = page.dynamicValues.get('phone');
-                return () => validatePhoneNumber(phone);
-            }}
-            body={(page) => {
-                const email = page.dynamicValues.get('email');
-                const student = email.split('@')[0].split('.').map(p => _.capitalize(p)).join(' ');
-                const phone = page.dynamicValues.get('phone');
-                const name = translate({id: 'edubern-it-support-lastname' });
-                return alignLeft(`Guten Tag Herr ${name}
-                
-                    Bitte setzen Sie meinen Account zurück:
-                    
-                    Mail: ${email}
-                    Telefon: ${phone}
-                    
-                    Besten Dank und freundliche Grüsse
-                    
-                    ${student}`);
-            }}
-        />
+        <ResetOfficeAccount />
     </Solution>
 </Faq>

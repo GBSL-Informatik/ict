@@ -4,8 +4,10 @@ sidebar_custom_props:
     icon: mdiCardAccountDetailsOutline
 ---
 
+import { translate } from '@docusaurus/Translate';
 import ProgressState from '@tdev-components/documents/ProgressState';
 import PageReadCheck from '@tdev/page-read-check/PageReadCheck';
+import FrageSchuelerausweis from '@tdev-components/MailTemplate/templates/FrageSchuelerausweis';
 
 # Ausweisfoto
 Sie erhalten zu Beginn Ihrer Schulzeit am GBSL einen persönlichen Schüler:innenausweis. Damit können Sie:
@@ -69,9 +71,11 @@ Falls Sie ein Foto verwenden möchten, das nicht im `.jpg`-Format vorliegt, kön
 ## Support
 Bei Fragen oder Problemen, melden Sie sich bitte beim Sekretariat:
 
-📞 **032 327 07 07**
-
-✉️ **[sekretariat@gbsl.ch](mailto:sekretariat@gbsl.ch?subject=Frage%20zum%20Schülerausweis&body=Guten%20Tag%2C%0A%0AIch%20habe%20eine%20kurze%20Frage%20zum%20Schülerausweis:%0A%0AMit%20freundlichen%20Gr%C3%BCssen%0A%5BIhr%20Name%5D)**
+:mdi[phone]{.blue}
+: <TLink id="sekretariat.phone" />
+:mdi[email]{.blue}
+: <T id="sekretariat.email" />
+: <FrageSchuelerausweis />
 
 ---
 
