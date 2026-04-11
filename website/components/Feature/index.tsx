@@ -6,6 +6,7 @@ import Icon from '@mdi/react';
 import * as MdiIcons from '@mdi/js';
 import { camelCased } from '@site/src/plugins/helpers';
 import Card from '@tdev-components/shared/Card';
+import { getIcon } from './icons.helper';
 
 export interface FeatureProps {
     name: string;
@@ -48,11 +49,7 @@ const Feature = (props: FeatureProps) => {
                         />
                     </span>
                 )}
-                <Icon
-                    path={MdiIcons[camelCased(icon || 'mdi-file-document-outline') as MdiIconType]}
-                    className={clsx(styles.icon)}
-                    size={'4rem'}
-                />
+                <Icon path={getIcon(icon)} className={clsx(styles.icon)} size={'4rem'} />
                 <h2>{name}</h2>
                 {description && <p className={clsx(styles.description)}>{description}</p>}
             </Card>
