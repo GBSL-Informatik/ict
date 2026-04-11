@@ -1,6 +1,7 @@
 import { translate } from '@docusaurus/Translate';
 import { Val, TemplateCode, DynamicInput } from '@tdev-components/DynamicValues';
 import MailTemplate, { alignLeft } from '@tdev-components/MailTemplate';
+import { validateEmail, validatePhoneNumber } from '@tdev-components/MailTemplate/validations';
 import _ from 'es-toolkit/compat';
 
 <Faq>
@@ -12,21 +13,16 @@ import _ from 'es-toolkit/compat';
         <DynamicInput name="phone" label="Telefon" placeholder='079 123 45 66' />
 
         <MailTemplate
-            subject="Account Schüler:in zurücksetzen"
+            subject="Office 365 Account zurücksetzen"
             to={translate({id: 'edubern-it-support-email' })}
             validate={(page) => {
                 const email = page.dynamicValues.get('email');
+                const emailValidation = validateEmail(email);
+                if (!emailValidation.valid) {
+                    return () => emailValidation;
+                }
                 const phone = page.dynamicValues.get('phone');
-                if (!email || !email.includes('@')) {
-                    return () => ({ valid: false, message: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' });
-                }
-                if (!/@(edu\.)?gbsl\.ch$/i.test(email)) {
-                    return () => ({ valid: false, message: 'Bitte verwenden Sie Ihre Schul-E-Mail-Adresse (@edu.gbsl.ch oder @gbsl.ch).' });
-                }
-                if (!phone || !/^\d{3}\s*\d{3}\s*\d{2}\s*\d{2}$/.test(phone)) {
-                    return () => ({ valid: false, message: 'Bitte geben Sie eine gültige Telefonnummer im Format "079 123 45 66" ein.' });
-                }
-                return () => ({ valid: true });
+                return () => validatePhoneNumber(phone);
             }}
             body={(page) => {
                 const email = page.dynamicValues.get('email');

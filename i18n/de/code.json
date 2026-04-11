@@ -14,5 +14,20 @@
     "edubern-it-support-firstname": {
         "message": "Soarhe",
         "description": "The first name of the IT support."
+    },
+    "validation.email.domain": {
+        "message": "gbsl.ch",
+        "description": "The domain that is used for email validation."
+    },
+    "validation.email.domain.error": {
+        "message": "Die E-Mail-Adresse muss auf @edu.gbsl.ch oder @gbsl.ch enden.",
+        "description": "The error message that is shown when the email address does not end with @gbsl.ch."
+    },
+    "validation.phone.error": {
+        "message": "Die Telefonnummer muss im Format 079 123 45 67 eingegeben werden.",
+        "description": "The error message that is shown when the phone number is not in the correct format."
+    },
+    "validation.missing-field": {
+        "message": "Das Feld '{field}' darf nicht leer sein."
     }
 }

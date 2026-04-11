@@ -9,6 +9,10 @@ import { mdiSend } from '@mdi/js';
 import Alert from '@tdev-components/shared/Alert';
 import SolutionStyles from '@tdev-components/documents/Solution/styles.module.scss';
 
+export interface ValidationResult {
+    valid: boolean;
+    message?: string;
+}
 interface Props {
     to: string;
     subject?: string | ((page: Page) => string);
@@ -16,7 +20,7 @@ interface Props {
     icon?: string;
     color?: string;
     body: string | ((page: Page) => string);
-    validate?: (page: Page) => () => { valid: true } | { valid: false; message: string };
+    validate?: (page: Page) => () => ValidationResult;
 }
 
 export const alignLeft = (text: string) =>
@@ -28,11 +32,11 @@ export const alignLeft = (text: string) =>
 const MailTemplate = observer((props: Props) => {
     const pageStore = useStore('pageStore');
     const { current } = pageStore;
-    const validate = props.validate ? props.validate(current!) : () => ({ valid: true });
-    const validation = validate() as { valid: boolean; message?: string };
     if (!current) {
         return null;
     }
+    const validate = props.validate ? props.validate(current) : () => ({ valid: true });
+    const validation = validate() as { valid: boolean; message?: string };
 
     return (
         <div className={clsx(styles.mailTemplate, SolutionStyles.wrapper, SolutionStyles.standalone)}>
