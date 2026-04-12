@@ -27,7 +27,7 @@
                 clip-path: polygon(83% 12%, 90% 21%, 90% 42%, 100% 50%, 90% 58%, 90% 79%, 83% 88%);
                 transform: rotate(90deg);
                 transition: transform 0.3s ease;
-                transition-delay: 0.15s;
+                transition-delay: 0.2s;
             }
             &:global(.menu__list-item--collapsed) {
                 &::after {
@@ -35,7 +35,7 @@
                 }
             }
             button:global(.clean-btn.menu__caret) {
-                display: none;
+                opacity: 0;
             }
         }
     }
