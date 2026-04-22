@@ -1,3 +1,8 @@
 - src: 04-accounts
   dst: 01-accounts
-  ignore: []
+  ignore:
+      - 02-mfa/01-wechsel-smartphone
+- src: 05-tips/01-updates
+  dst: 02-updates
+- src: 02-software-communication
+  dst: 03-software-communication

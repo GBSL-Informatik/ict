@@ -1,0 +1,83 @@
+---
+page_id: d9142050-2f17-4490-916e-cca5204ea818
+sidebar_custom_props:
+    icon: mdiCardAccountDetailsOutline
+---
+
+import { translate } from '@docusaurus/Translate';
+import ProgressState from '@tdev-components/documents/ProgressState';
+import PageReadCheck from '@tdev/page-read-check/PageReadCheck';
+import FrageSchuelerausweis from '@tdev-components/MailTemplate/templates/FrageSchuelerausweis';
+
+# Ausweisfoto
+Sie erhalten zu Beginn Ihrer Schulzeit am GBSL einen persönlichen Schüler:innenausweis. Damit können Sie:
+
+- Bücher aus der Bibliothek ausleihen
+- in der Bibliothek kopieren und drucken, indem sie ein Guthaben auf die Karte laden
+- Türen öffnen (gemäss persönlicher Berechtigung, z.B. Musik-Übungsräume, Lift usw.)
+
+**Damit Ihr Ausweis erstellt werden kann, müssen Sie ein aktuelles Passfoto einreichen.** Das Foto wird in der internen Datenbank gespeichert und ist für die Lehrpersonen sichtbar.
+
+## Foto erstellen und hochladen
+Das Erstellen und Hochladen des Fotos kann entweder am Smartphone oder am Computer erledigt werden.
+
+<ProgressState id="4cbc6a15-d54b-46f3-9c9f-413f90bf4206" keepPreviousStepsOpen confirm float="right">
+    1. Nehmen Sie (z.B. mit Ihrem Smartphone) ein Passfoto auf, das folgenden Anforderungen entspricht:
+       - Passender Bildausschnitt: vollständiges Gesicht, mittig,
+       - Blick geradeaus, Augen offen
+       - keine Accessoires (z.B. Mützen, Sonnenbrillen)
+       - Schärfe: das Gesicht sollte klar erkennbar sein, ohne Unschärfen oder Verzerrungen
+       - Neutrale Belichtung: nicht zu dunkel, nicht zu hell
+       - Hintergrund: hell, einfarbig
+       <details>
+            <summary>Beispiele</summary>
+            <div>
+                ![](images/foto-muster-1.jpg)
+                ![](images/foto-muster-2.jpg)
+                ![](images/foto-muster-3.jpg)
+            </div>
+        </details>
+    2. ![--width=600px](images/schulabrechnung.png)
+       Gehen Sie auf [https://schulabrechnung.ch](https://schulabrechnung.ch) und melden Sie sich mit Ihrem **Schulkonto** an. Gehen Sie dann wie folgt vor:
+       1
+       : Klicken Sie auf __Foto hochladen__.
+       2
+       : Wählen Sie Ihr Geburtsdatum aus.
+       3
+       : Klicken Sie auf __Datei auswählen__.
+       4
+       : Kontrollieren Sie, ob der Dateiname auf `.jpg` (oder `.jpeg`) endet. Sollte dies nicht der Fall sein, schauen Sie [hier](#bild-konvertieren) nach, wie Sie die Datei konvertieren können. 
+       5
+       : Klicken Sie auf __Bild hochladen bzw. ersetzen__.<br/><br/>
+       Prüfen Sie zum Schluss, ob das ausgewählte Bild angezeigt wird und keine Fehlermeldung erscheint:
+       ![--width=600px](images/schulabrechnung-upload-ok.png)
+</ProgressState>
+    
+
+### Bild konvertieren
+Falls Sie ein Foto verwenden möchten, das nicht im `.jpg`-Format vorliegt, können Sie es mit den folgenden Anleitungen in das richtige Format konvertieren.
+
+<Tabs groupId="os">
+  <TabItem value="win" label="Windows">
+    1. Öffnen Sie das Foto mit der App __Fotos__.
+    2. Klicken Sie oben rechts auf die drei Punkte __...__ und wählen Sie __Speichern unter__.
+    3. Wählen Sie unter __Dateityp__ das Format `.jpg`.
+  </TabItem>
+  <TabItem value="macos" label="macOS">    
+    1. Öffnen Sie die Fotodatei mit der App __Vorschau__.
+    2. Wählen Sie unter __Ablage__ > __Exportieren im Feld __Format__ den Dateityp `JPEG` aus.
+  </TabItem>
+</Tabs>
+
+## Support
+Bei Fragen oder Problemen, melden Sie sich bitte beim Sekretariat:
+
+:mdi[phone]{.blue}
+: <TLink id="sekretariat.phone" />
+:mdi[email]{.blue}
+: <T id="sekretariat.email" />
+: <FrageSchuelerausweis />
+
+---
+
+<PageReadCheck id="e4980ba1-1902-4968-85c0-e47fcccac673" />

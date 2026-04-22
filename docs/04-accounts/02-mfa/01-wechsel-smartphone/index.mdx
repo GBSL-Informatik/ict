@@ -1,0 +1,38 @@
+---
+page_id: f4de3277-fe53-4cbe-af0b-868fa4b7a54b
+---
+
+import MfaAuthenticatorEinrichten from '@site/docs/03-support/01-faq/questions/\_mfa-authenticator-einrichten.mdx';
+import OfficeAccountAuthAppGehtNicht from '@site/docs/03-support/01-faq/questions/\_office-account-authenticator-geht-nicht.mdx';
+import ResetOfficeAccount from '@tdev-components/MailTemplate/templates/ResetOfficeAccount';
+
+# Wechsel des Smartphones
+Wenn Sie die Microsoft Authenticator App verwenden, dann ist eine Aktion erforderlich, falls Ihr Smartphone defekt ist, verloren gegangen ist oder Sie ein neues Smartphone haben.
+
+Dabei kommt es darauf an, ob Sie sich noch in Ihrem Office 365 Schulkonto anmelden können oder nicht. Falls Sie die Authenticator App auf Ihrem alten Smartphone nicht mehr verwenden können, prüfen Sie, ob es mit einer anderen Methode möglich ist:
+
+<OfficeAccountAuthAppGehtNicht />
+
+Wählen Sie anschliessend hier die passende Anleitung für Ihren Fall aus:
+
+<Tabs groupId="mfa-smartphone-wechsel" queryString>
+    <TabItem value="access-possible" label="Anmeldung möglich">
+        :::info[Sie können sich noch in Ihrem Office 365 Schulkonto anmelden?]
+        Sie können sich noch in Ihrem Office 365 Schulkonto anmelden? In diesem Fall können Sie dort die Authenticator App für Ihr neues Smartphone einrichten. 
+        :::
+
+        <MfaAuthenticatorEinrichten />
+
+    </TabItem>
+    <TabItem value="access-not-possible" label="Anmeldung nicht mehr möglich">
+        :::info[Keine Anmeldung möglich?]
+        Sie können sich nicht mehr in Ihrem Office 365 Schulkonto anmelden? Dann finden Sie hier eine Anleitung, wie Sie vorgehen können.
+        :::
+
+        <Steps>
+          1. Melden Sie, dass Ihr Konto zurückgesetzt werden muss:
+                <ResetOfficeAccount />
+          2. Sobald Sie die Meldung erhalten haben, dass Ihr Konto zurückgesetzt worden ist, können Sie den Authenticator auf Ihren neuen Smartphone einrichten oder es bei der Authentifikation via SMS belassen ([vgl.: MFA einrichten](../index.mdx)).
+        </Steps>
+    </TabItem>
+</Tabs>

@@ -1,6 +1,51 @@
 {
-    "mfa-sms-sender-number": {
+    "support.servicedesk.email": {
+        "message": "servicedesk@edubern.ch"
+    },
+    "support.edubern.email": {
+        "message": "Soarhe.Jahany@bernedu.ch"
+    },
+    "support.edubern.phone": {
+        "message": "079 807 10 11"
+    },
+    "support.edubern.name": {
+        "message": "Jahany"
+    },
+    "support.edubern.anrede": {
+        "message": "Herr"
+    },
+    "support.students.email": {
+        "message": "it-help-for-students@bernedu.ch"
+    },
+    "sekretariat.email": {
+        "message": "sekretariat@gbsl.ch"
+    },
+    "sekretariat.phone": {
+        "message": "032 327 07 07"
+    },
+    "hausdienst.phone": {
+        "message": "032 327 06 69"
+    },
+    "mfa.sms-sender.phone": {
         "message": "079 807 10 11",
         "description": "The phone number from which the 2FA confirmation SMS is sent."
+    },
+    "validation.email.domain": {
+        "message": "gbsl.ch",
+        "description": "The domain that is used for email validation."
+    },
+    "validation.email.domain.error": {
+        "message": "Die E-Mail-Adresse muss auf @edu.gbsl.ch oder @gbsl.ch enden.",
+        "description": "The error message that is shown when the email address does not end with @gbsl.ch."
+    },
+    "validation.phone.error": {
+        "message": "Die Telefonnummer muss im Format 079 123 45 67 eingegeben werden.",
+        "description": "The error message that is shown when the phone number is not in the correct format."
+    },
+    "validation.missing-field": {
+        "message": "Das Feld '{field}' darf nicht leer sein."
+    },
+    "placeholder.gym1": {
+        "message": "30Ga"
     }
 }

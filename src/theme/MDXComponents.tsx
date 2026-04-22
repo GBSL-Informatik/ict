@@ -20,6 +20,7 @@ import TabItem from '@theme/TabItem';
 import Steps from '@tdev-components/Steps';
 import Translate from '@docusaurus/Translate';
 import Faq from '@tdev-components/Faq';
+import TLink from '@tdev-components/TLink';
 
 export default {
     // Re-use the default mapping
@@ -42,5 +43,6 @@ export default {
     TaskState: TaskState,
     Faq: Faq,
     Steps: Steps,
-    T: Translate
+    T: Translate,
+    TLink: TLink
 };
