@@ -16,33 +16,19 @@ const ADMONITION_CONFIG = {
         extendDefaults: true
     }
 };
-function getLocale(): 'de' | 'fr' {
-    return process.env.DOCUSAURUS_CURRENT_LOCALE && process.env.DOCUSAURUS_CURRENT_LOCALE !== 'undefined'
-        ? process.env.DOCUSAURUS_CURRENT_LOCALE === 'fr'
-            ? 'fr'
-            : 'de'
-        : 'de';
-}
-const LOCALE: 'de' | 'fr' = getLocale();
-const STATIC_TRANSLATIONS = {
-    solution: {
-        de: 'Lösung',
-        fr: 'Solution'
-    }
-};
 
 const getSiteConfig: SiteConfigProvider = () => {
     return {
         title: 'ICT am Gymnasium Biel-Seeland',
         tagline: 'Anleitungen, Tipps und Tricks',
-        url: 'https://ict-gbsl.netlify.app',
+        url: 'https://ict.gbsl.website',
         baseUrl: '/',
         favicon: 'img/favicon.ico',
         organizationName: 'GBSL-Informatik',
         projectName: 'ict',
         blog: false,
         onBrokenLinks: 'warn',
-        locales: ['de', 'fr'],
+        locales: ['de'],
         docs: {
             ...ADMONITION_CONFIG,
             routeBasePath: '/',
@@ -121,7 +107,7 @@ const getSiteConfig: SiteConfigProvider = () => {
                         solution: 'solution'
                     },
                     defaultLabel: {
-                        solution: STATIC_TRANSLATIONS.solution[LOCALE]
+                        solution: 'Lösung'
                     }
                 }
             ]
