@@ -28,3 +28,4 @@ yarn-error.log*
 # Versioned docs: onboarding
 versioned_docs/version-onboarding/*
 !versioned_docs/version-onboarding/index.mdx
+!versioned_docs/version-onboarding/images
