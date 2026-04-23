@@ -101,6 +101,15 @@ const getSiteConfig: SiteConfigProvider = () => {
                 excalidoc: true
             }
         },
+        scripts: [
+            {
+                src: 'https://umami.gbsl.website/tell-me.js',
+                ['data-website-id']: process.env.UMAMI_ID,
+                ['data-domains']: 'ict.gbsl.website',
+                async: true,
+                defer: true
+            }
+        ],
         beforeDefaultRemarkPlugins: [
             ...recommendedBeforeDefaultRemarkPlugins.filter((p) => p !== detailsPluginConfig),
             [
