@@ -3,3 +3,8 @@ details.solution {
     --ifm-alert-foreground-color: var(--ifm-color-success-contrast-foreground);
     --ifm-alert-border-color: var(--ifm-color-success-dark);
 }
+
+// TODO: Remove this class as soon as we internalized legacy content
+.hidden-item {
+    display: none;
+}
