@@ -69,7 +69,7 @@ const getSiteConfig: SiteConfigProvider = () => {
                     items: [
                         {
                             label: 'ICT-Website V1 (Legacy)',
-                            href: 'https://ict.v1.gbsl.website'
+                            href: 'https://ict-v1.gbsl.website'
                         }
                     ]
                 },
