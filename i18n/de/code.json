@@ -49,7 +49,7 @@
         "message": "30Ga"
     },
     "ict.legacy.domain": {
-        "message": "ict.gbsl.website",
+        "message": "ict.v1.gbsl.website",
         "description": "The domain of the legacy ICT website, for parts of the manual that have not yet been migrated."
     }
 }
