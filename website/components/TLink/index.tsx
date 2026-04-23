@@ -8,6 +8,8 @@ interface Props {
     id: string;
     children?: React.ReactNode;
     protocol?: 'mailto' | 'tel';
+    suffix?: string;
+    newTab?: boolean;
 }
 
 const TLink = (props: Props) => {
@@ -31,8 +33,12 @@ const TLink = (props: Props) => {
             sanitized = '+41' + sanitized.replace(/^0/, '');
         }
     }
-    const href = `${protocol}:${sanitized}`;
-    return <a href={href}>{props.children || value}</a>;
+    const href = `${protocol}:${sanitized}${props.suffix || ''}`;
+    return (
+        <a href={href} target={props.newTab ? '_blank' : '_self'}>
+            {props.children || value}
+        </a>
+    );
 };
 
 export default TLink;

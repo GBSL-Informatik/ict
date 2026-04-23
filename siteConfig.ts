@@ -64,7 +64,32 @@ const getSiteConfig: SiteConfigProvider = () => {
         navbarItems: [taskStateOverview, devModeAccessLocalFS],
         footer: {
             style: 'dark',
-            links: [],
+            links: [
+                {
+                    items: [
+                        {
+                            label: 'ICT-Website V1 (Legacy)',
+                            href: 'https://ict.v1.gbsl.website'
+                        }
+                    ]
+                },
+                {
+                    items: [
+                        {
+                            label: 'GBSL Website',
+                            href: 'https://gbsl.ch'
+                        }
+                    ]
+                },
+                {
+                    items: [
+                        {
+                            label: 'Terminplan',
+                            href: 'https://events.gbsl.website'
+                        }
+                    ]
+                }
+            ],
             copyright: `Copyright © ${new Date().getFullYear()} Begleitgruppe DigiTrans - GBSL. <br />
       <a class="badge badge--primary" href="https://github.com/GBSL-Informatik/ict-v2/commits/${GIT_COMMIT_SHA}">
             ᚶ ${GIT_COMMIT_SHA.substring(0, 7)}

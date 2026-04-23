@@ -43,7 +43,7 @@ const IndexPages: React.ComponentProps<typeof Feature>[] = [
             id: 'main.link.infrastructure.name'
         }),
         icon: 'mdi-home-circle',
-        route: 'https://ict.gbsl.website/infra/',
+        route: 'https://ict.v1.gbsl.website/infra/',
         description: translate({
             message: 'Unterrichtszimmer, Drucker, Infrastruktur',
             id: 'main.link.infrastructure.description'
