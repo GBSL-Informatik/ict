@@ -27,7 +27,7 @@ jobs:
           BACKEND_URL: ${{ secrets.BACKEND_URL }}
           GH_OAUTH_CLIENT_ID: ${{ vars.GH_OAUTH_CLIENT_ID}}
           UMAMI_ID: ${{ secrets.UMAMI_ID }}
-          OFFLINE_API: ${{ env.OFFLINE_API }}
+          OFFLINE_API: indexedDB
         run: yarn build
         working-directory: .
       - name: Upload Build Artifact
