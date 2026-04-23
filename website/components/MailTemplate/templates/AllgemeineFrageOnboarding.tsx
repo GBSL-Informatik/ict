@@ -1,11 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import { DynamicInput } from '@tdev-components/DynamicValues';
 import MailTemplate, { alignLeft } from '..';
 import { translate } from '@docusaurus/Translate';
-import { validateEmail, validatePhoneNumber } from '../validations';
-import { capitalize } from 'es-toolkit/string';
 
 interface Props {}
 
