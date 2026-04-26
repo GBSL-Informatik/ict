@@ -7,6 +7,10 @@ interface Props {
 const Redirect = (props: Props) => {
     React.useEffect(() => {
         const newTab = window.open(props.to, '_blank');
+        if (!newTab) {
+            window.location.href = props.to;
+            return;
+        }
         newTab?.focus();
         if (window.history.length > 1) {
             window.history.back();
