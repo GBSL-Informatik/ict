@@ -1,6 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.scss';
 
 interface Props {
     to: string;
@@ -8,8 +6,13 @@ interface Props {
 
 const Redirect = (props: Props) => {
     React.useEffect(() => {
-        window.location.href = props.to;
-        console.log(`Redirecting to ${props.to}`);
+        const newTab = window.open(props.to, '_blank');
+        newTab?.focus();
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.close();
+        }
     }, [props.to]);
     return <small>Redirect to {props.to}</small>;
 };
