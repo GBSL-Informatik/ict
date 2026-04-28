@@ -2,7 +2,10 @@
   dst: 01-accounts
   ignore:
       - 02-mfa/01-wechsel-smartphone
+      - 04-ausweisfoto
+- src: 04-accounts/04-ausweisfoto
+  dst: 02-ausweisfoto
 - src: 05-tips/01-updates
-  dst: 02-updates
+  dst: 03-updates
 - src: 02-software-communication
-  dst: 03-software-communication
+  dst: 04-software-communication
