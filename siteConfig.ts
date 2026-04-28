@@ -112,7 +112,20 @@ const getSiteConfig: SiteConfigProvider = () => {
                 }
             ]
         ] as unknown as PluginOptions[],
-        apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')]
+        apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')],
+        plugins: [
+            [
+                '@docusaurus/plugin-client-redirects',
+                {
+                    redirects: [
+                        {
+                            from: '/support/it-hilfe/',
+                            to: '/support/faq/'
+                        }
+                    ]
+                }
+            ]
+        ]
     };
 };
 
