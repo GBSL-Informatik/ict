@@ -76,15 +76,30 @@ const getSiteConfig: SiteConfigProvider = () => {
                     ]
                 }
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} Begleitgruppe DigiTrans - GBSL. <br />
-      <a class="badge badge--primary" href="https://github.com/GBSL-Informatik/ict-v2/commits/${GIT_COMMIT_SHA}">
-            ᚶ ${GIT_COMMIT_SHA.substring(0, 7)}
-      </a>
-      `
+            copyright: `<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div>
+                                    Copyright © ${new Date().getFullYear()} Begleitgruppe DigiTrans - GBSL.
+                                </div>
+                                <img style="height: 2em" src="/img/by-nc-sa.eu.svg" alt="CC-BY-NC-SA">
+                            </div>
+                        </a>
+                        <a class="badge badge--primary" href="https://github.com/GBSL-Informatik/ict-v2/commits/${GIT_COMMIT_SHA}">
+                                ᚶ ${GIT_COMMIT_SHA.substring(0, 7)}
+                        </a>
+                        `
         },
         tdevConfig: {
             excalidraw: {
                 excalidoc: true
+            }
+        },
+        themeConfig: {
+            algolia: {
+                appId: 'SMV7ALCKHR',
+                apiKey: '804f01d86cb54c95c4821020bcd38dcb',
+                indexName: 'ict-gbsl',
+                searchPagePath: 'search'
             }
         },
         scripts: [
