@@ -24,6 +24,8 @@ trackedElements:
       dst: src/theme/DocSidebarItem/
     - src: src/theme/NavbarItem/
       dst: src/theme/NavbarItem/
+      ignore:
+          - ComponentTypes.tsx
     - src: packages/tdev/excalidoc/
       dst: packages/tdev/excalidoc
     - src: packages/tdev/remark-pdf/
@@ -58,3 +60,4 @@ watchedElements:
     - package.json
     - .env.example
     - src/theme/
+    - src/theme/NavbarItem/ComponentTypes.tsx

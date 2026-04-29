@@ -1,0 +1,12 @@
+.card {
+    --ifm-card-background-color: var(--ifm-color-info-contrast-background);
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .content {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+}

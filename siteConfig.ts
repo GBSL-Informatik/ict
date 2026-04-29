@@ -2,13 +2,16 @@
 // Use it to override or extend your app configuration.
 
 import {
+    commentPluginConfig,
     detailsPluginConfig,
-    recommendedBeforeDefaultRemarkPlugins
+    recommendedBeforeDefaultRemarkPlugins,
+    recommendedRemarkPlugins
 } from './src/siteConfig/markdownPluginConfigs';
 import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
 import { SiteConfigProvider } from './src/siteConfig/siteConfig';
 import detailsPlugin from './src/plugins/remark-details/plugin';
-import { PluginOptions } from '@docusaurus/types';
+import { PluginConfig, PluginOptions } from '@docusaurus/types';
+import logger from '@docusaurus/logger';
 const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
 const ADMONITION_CONFIG = {
     admonitions: {
@@ -16,6 +19,7 @@ const ADMONITION_CONFIG = {
         extendDefaults: true
     }
 };
+import dynamicRouter from './src/plugins/plugin-dynamic-routes';
 
 const getSiteConfig: SiteConfigProvider = () => {
     return {
@@ -29,6 +33,7 @@ const getSiteConfig: SiteConfigProvider = () => {
         blog: false,
         onBrokenLinks: 'warn',
         locales: ['de'],
+        defaultLocale: 'de',
         docs: {
             ...ADMONITION_CONFIG,
             routeBasePath: '/',
@@ -47,7 +52,11 @@ const getSiteConfig: SiteConfigProvider = () => {
             }
         },
         siteStyles: ['website/css/custom.scss'],
-        navbarItems: [taskStateOverview, devModeAccessLocalFS],
+        navbarItems: [
+            taskStateOverview,
+            devModeAccessLocalFS,
+            { type: 'custom-languageHelp', position: 'right' }
+        ],
         footer: {
             style: 'dark',
             links: [
@@ -127,6 +136,9 @@ const getSiteConfig: SiteConfigProvider = () => {
                 }
             ]
         ] as unknown as PluginOptions[],
+        remarkPlugins: recommendedRemarkPlugins.filter(
+            (p) => p !== commentPluginConfig
+        ) as unknown as PluginOptions[],
         apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')],
         plugins: [
             [
@@ -140,7 +152,20 @@ const getSiteConfig: SiteConfigProvider = () => {
                     ]
                 }
             ]
-        ]
+        ],
+        transformers: {
+            plugins: (current: PluginConfig[]) => {
+                return current.filter((p) => {
+                    if (Array.isArray(p) && p[0] === dynamicRouter) {
+                        logger.warn(
+                            'Removing "@tdev-plugins/plugin-dynamic-routes" from config in ./siteConfig.ts.'
+                        );
+                        return false;
+                    }
+                    return true;
+                });
+            }
+        }
     };
 };
 

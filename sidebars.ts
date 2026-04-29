@@ -35,7 +35,7 @@ const sidebars: SidebarsConfig = {
                     customProps: {
                         icon: 'mdiPrinter'
                     },
-                    href: 'https://ict-v1.gbsl.website/byod/infra/uniflow-drucker/'
+                    href: 'https://ict-v1.gbsl.website/infra/uniflow-drucker/'
                 },
                 {
                     type: 'link',
