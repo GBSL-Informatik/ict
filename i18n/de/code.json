@@ -2,18 +2,6 @@
     "support.servicedesk.email": {
         "message": "servicedesk@edubern.ch"
     },
-    "support.edubern.email": {
-        "message": "Soarhe.Jahany@bernedu.ch"
-    },
-    "support.edubern.phone": {
-        "message": "079 807 10 11"
-    },
-    "support.edubern.name": {
-        "message": "Jahany"
-    },
-    "support.edubern.anrede": {
-        "message": "Herr"
-    },
     "support.students.email": {
         "message": "ITHelp@bernedu.ch"
     },

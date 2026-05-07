@@ -1,14 +1,10 @@
 import React from 'react';
-import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import { DynamicInput } from '@tdev-components/DynamicValues';
 import MailTemplate, { alignLeft } from '..';
 import { translate } from '@docusaurus/Translate';
 import { validateEmail, validatePhoneNumber } from '../validations';
 import { capitalize } from 'es-toolkit/string';
-
-const anrede = translate({ id: 'support.edubern.anrede' });
-const name = translate({ id: 'support.edubern.name' });
 
 interface Props {}
 
@@ -20,7 +16,7 @@ const ResetOfficeAccount = observer((props: Props) => {
 
             <MailTemplate
                 subject="Office 365 Account zurücksetzen"
-                to={translate({ id: 'support.edubern.email' })}
+                to={translate({ id: 'support.students.email' })}
                 validate={(page) => {
                     const email = page.dynamicValues.get('email');
                     const emailValidation = validateEmail(email);
@@ -38,7 +34,7 @@ const ResetOfficeAccount = observer((props: Props) => {
                         .map((p) => capitalize(p))
                         .join(' ');
                     const phone = page.dynamicValues.get('phone');
-                    return alignLeft(`Guten Tag ${anrede} ${name}
+                    return alignLeft(`Guten Tag
                 
                     Bitte setzen Sie meinen Account zurück:
                     
