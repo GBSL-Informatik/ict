@@ -1,81 +1,68 @@
 ---
-sidebar_custom_props:
-  icon: mdi-file-document-outline
-page_id: ed2b298f-838d-4c3b-b7a5-18a003d98c93
+page_id: f2c46684-86f6-44ff-8a56-a370bb2a538f
+sidebar_label: Admin-Konto
 sidebar_position: 0
 ---
 
-import ProgressState from '@tdev-components/documents/ProgressState';
-import AllgemeineFrageOnboarding from '@tdev-components/MailTemplate/templates/AllgemeineFrageOnboarding';
-import LanguageHelp from '@site/docs/03-support/10-language/_help.mdx';
+import PageReadCheck from '@tdev/page-read-check/PageReadCheck';
 
-# Onboarding
-Herzlich willkommen auf der ICT-Webseite unserer Schule! Hier finden Sie Antworten und Lösungen bei technischen Fragen und Problemen. Speichern Sie Seite [ict.gbsl.website](https://ict.gbsl.website) deshalb am besten gleich in Ihren Favoriten / Lesezeichen ab oder notieren sie sich für später.
+# Grundeinstellung: Adminrechte
+Im Unterrichtsalltag werden Sie regelmässig neue Programme installieren oder Einstellungen an Ihrem Laptop vornehmen müssen. Dafür müssen Sie Ihren Computer so einrichten, dass Ihr Benutzerkonto über **Administratorrechte** verfügt.
 
-<details>
-   <summary>Version française ?</summary>
-   <div>
-      <LanguageHelp />
-   </div>
-</details>
+## Kontotyp überprüfen
+<Tabs groupId="os">
+  <TabItem value="win" label="Windows">
+    1. Öffnen Sie die Systemeinstellungen.
+       ![--width=400px](images/win-open-settings.png)
+    2. Klicken Sie auf __Konten__.
 
-## Einrichtung vor dem ersten Schultag
+       ![](images/win-aktuelles-konto.png)
 
-Was? &nbsp; :mdi[check-circle-outline]{.green}
-: Alle Aufgaben sind erledigt.
-Bis Wann? 🕑
-: **15. Juni**
-Wo? 💻
-: Auf ihrem **Laptop**, den Sie am ersten Schultag\* mitbringen werden.
-: Einige Aufgaben müssen zusätzlich auf ihrem **Smartphone** erledigt werden.
-: \* <small>Falls Sie nach dem 15. Juni ein neues Gerät erhalten, müssen Sie die Onboarding-Aufgaben erneut auf dem neuen Gerät erledigen.</small>
+       1
+       :  Prüfen Sie, ob Ihr aktuelles Konto mit __Administrator__ markiert ist. Sollte dies nicht der Fall sein, folgen Sie den Anweisungen unter [Kontotyp wechseln](#kontotyp-wechseln).
+       2
+       : Stellen Sie sicher, dass Sie beim verwendeten Microsoft-Konto **nicht Ihre Schul-Email-Adresse** verwenden, da Sie nach dem Austritt aus der Schule keinen Zugriff mehr auf dieses Konto haben werden. Falls Sie Ihre Schul-Email-Adresse für Ihr Microsoft-Konto verwendet haben (sprich, sich mit Ihrer Schul-Email-Adresse bei Microsoft einloggen müssen), müssen Sie diese [online anpassen](https://support.microsoft.com/de-de/account-billing/%C3%A4ndern-der-e-mail-adresse-oder-telefonnummer-f%C3%BCr-ihr-microsoft-konto-761a662d-8032-88f4-03f3-c9ba8ba0e00b) und stattdessen eine **private, persönliche** E-Mail-Adresse verwenden.
+  </TabItem>
+  <TabItem value="mac" label="Mac">
+    1. Öffnen Sie die Systemeinstellungen.
+       ![--width=300px](images/macos-open-settings.png)
+    2. Identifizieren Sie das Konto, mit dem Sie angemeldet sind. Prüfen Sie, ob dieses mit __Admin__ markiert ist. Sollte dies nicht der Fall sein, folgen Sie den Anweisungen unter [Kontotyp wechseln](#kontotyp-wechseln).
+       ![--width=600px](images/macos-accounts.png)
+    3. Wenn Sie über ein Apple iCloud-Konto verfügen, stellen Sie sicher, dass Sie dazu **nicht Ihre Schul-Email-Adresse** verwendet haben, da Sie nach dem Austritt aus der Schule keinen Zugriff mehr auf dieses Konto haben werden. Falls Sie Ihre Schul-Email-Adresse für Ihr iCloud-Konto verwendet haben (sprich, sich mit Ihrer Schul-Email-Adresse bei iCloud einloggen müssen), müssen Sie diese [online anpassen](https://support.apple.com/de-ch/109353) und stattdessen eine **private, persönliche** E-Mail-Adresse verwenden.
+  </TabItem>
+</Tabs>
 
-Den Grossteil der Geräteeinrichtung können Sie bereits jetzt zu Hause erledigen. Es wird erwartet, dass Sie **dieses Onboarding bis am 15. Juni vollständig durchgearbeitet haben**.
-
-Diesen Auftrag haben Sie erledigt, sobald das Menü auf der linken Seite bei Ihnen so aussieht:
-
-![--width=300px](images/sidebar-done.png)
-
-:::info[Überprüfung am ersten Schultag]
-Am erste Schultag wird überprüft, ob bei sämtlichen Onboarding-Kapiteln (inkl. Unterseiten) ein grünes Gutzeichen angezeigt wird.
+:::aufgabe[Alles geprüft]
+<TaskState id="d508681c-7afa-46a6-bd02-31526ce3aa49" />
+Ich habe folgende Punkte geprüft:
+- Mein Konto ist mit Administratorrechten eingerichtet.
+- Ich bin mit einem Konto eingeloggt, das **nicht** meine Schul-Email-Adresse verwendet.
 :::
 
-Um diese Gutzeichen zu erhalten, treffen Sie in den einzelnen Kapiteln auf folgende Arten von Aufträgen:
+## Kontotyp wechseln
+Sollten Sie festgestellt haben, dass Sie nicht mit einem Konto mit Administratorrechten angemeldet sind, müssen Sie dies anpassen, bevor Sie mit dem Onboarding fortfahren können.
 
-Aufgaben
-: ![](images/aufgabe.png)
-: Klicken Sie das Kästchen oben links an, um eine Aufgabe als erledigt zu markieren.
-Slider
-: ![--width=300px](images/page-read-check.gif)
-: Ziehen Sie den Slider nach rechts, um zu bestätigen, dass Sie die Seite gelesen haben. **Gut zu wissen:** Jeder Slider hat eine Mindestlesezeit, die Sie einhalten müssen, bevor Sie den Slider ganz nach rechts ziehen können.
-Schritte
-:::dd
-::video[./images/check-progress-state.mp4]{controls=false autoplay=true loop=true muted=true}
-:::
-: Um bei solchen Schritt-für-Schritt-Anleitungen den aktuellen Schritt als erledigt zu markieren, klicken Sie links davon auf den grünen Punkt und dann auf das Gutzeichen. So kommen Sie zum nächsten Schritt.
+<Tabs groupId="os">
+  <TabItem value="win" label="Windows">
+    1. Loggen Sie sich mit einem Konto ein, das über Administratorrechte verfügt. Fragen Sie dazu bei Bedarf Ihre Eltern oder Erziehungsberechtigten.
+    2. Öffnen Sie die Systemeinstellungen.
+       ![--width=400px](images/win-open-settings.png)
+    3. Klicken Sie auf __Konten__ > __Weitere Benutzer__.
+       ![](images/win-weitere-benutzer.png)
+    3. Klappen Sie das Benutzerkonto aus, das dessen Kontotyp Sie ändern möchten, und klicken Sie auf __Kontotyp ändern__.
+       ![](images/win-kontotyp-aendern.png)
+    4. Wählen Sie die Option __Administrator__ aus und bestätigen Sie mit __OK__.
+       ![--width=600px](images/win-kontotyp-dialog.png)
+    5. Melden Sie sich ab (z.B. indem Sie den Computer neu starten) und loggen Sie sich wieder mit Ihrem bisherigen Konto ein. Prüfen Sie nun nochmal, ob dieses Konto jetzt mit __Administrator__ markiert ist (siehe oben).
+  </TabItem>
+  <TabItem value="mac" label="Mac">
+    1. Loggen Sie sich mit einem Konto ein, das über Administratorrechte verfügt. Fragen Sie dazu bei Bedarf Ihre Eltern oder Erziehungsberechtigten.
+    2. Im selben Fenster wie bei der Überprüfung des Kontotyps (siehe oben) Klicken Sie auf das __i__-Symbol neben dem Konto, dem Sie Administratorrechte geben möchten.
+       ![--width=600px](images/macos-accounts-user-bearbeiten.png)
+    3. Aktivieren Sie die Option __Benutzer:in darf diesen Computer verwalten__ und bestätigen Sie mit __OK__.
+       ![--width=600px](images/macos-kontotyp-aendern.png)
+    5. Melden Sie sich ab (z.B. indem Sie den Computer neu starten) und loggen Sie sich wieder mit Ihrem bisherigen Konto ein. Prüfen Sie nun nochmal, ob dieses Konto jetzt mit __Admin__ markiert ist (siehe oben).
+  </TabItem>
+</Tabs>
 
-
-Auf jeder Seite dieses Onboardings finden Sie oben eine Übersicht mit den zu erledigenden Aufträgen. Werden diese schwarz, rot oder gelb angezeigt, heisst das, dass es hier noch etwas zu tun gibt:
-
-![--width=450px](images/task-overview-in-progress.png)
-
-:::tip[Zum Auftrag springen]
-Klicken Sie in dieser Übersicht auf einen noch nicht erledigten Auftrag (noch nicht grün), um direkt dorthin zu springen.
-:::
-
-Sobald Sie auf einer Seite alles erledigt haben, sind alle Aufträge grün markiert und Sie können zur nächsten Seite weitergehen:
-
-![--width=450px](images/task-overview-done.png)
-
-## Vorbereitung
-:::danger[Altes Office-Konto entfernen]
-Falls Sie von ihrer alten Schule ein Office365-Konto haben, müssen Sie dieses zuerst entfernen, bevor Sie das neue GBSL-Konto einrichten können. Bevor Sie weitermachen, befolgen Sie in diesem Fall <TLink newTab protocol="https" id="ict.legacy.domain" suffix="/anderesoftware/office365/#das-alte-schulkonto-wird-angezeigt">👉 diese Anleitung</TLink>.
-:::
-
-## Unterstützung
-Falls Sie beim Einrichten Hilfe benötigen, können Sie sich beim IT-Support für Schüler:innen melden:
-<AllgemeineFrageOnboarding />
-
-Die entsprechende E-Mail-Adresse <TLink id="support.students.email" /> schreiben Sie sich für später bitte irgendwo auf, wo Sie sie jederzeit wiederfinden.
-
-Weitere Unterstützung erhalten Sie auch in der [Anleitung von EDUBERN](https://erzbe.sharepoint.com/sites/EDUBERN-Infohub-Hilfsmittel/Lists/Hilfsmittel/Attachments/157/Anleitung%20–%20Onboarding%20EDUBERN%20BYOD%20FED_RESET_D.pdf) (dem Informatikdienstleister unserer Schule), sowie von deren [Chatbot](https://qr.edubern.ch/assistent).
+<PageReadCheck id="2eb84ed2-a0cc-44ff-9779-ca135c006006" />

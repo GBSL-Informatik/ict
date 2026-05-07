@@ -29,4 +29,4 @@ yarn-error.log*
 versioned_docs/version-onboarding/*
 !versioned_docs/version-onboarding/index.mdx
 !versioned_docs/version-onboarding/images
-!versioned_docs/version-onboarding/00-admin-konto
+!versioned_docs/version-onboarding/00-intro
