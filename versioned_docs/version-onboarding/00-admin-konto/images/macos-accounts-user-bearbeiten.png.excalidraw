@@ -24,7 +24,7 @@
         "initExtension": ".png"
       },
       "version": 2,
-      "versionNonce": 1772509918,
+      "versionNonce": 821096339,
       "index": "a0",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -37,7 +37,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1778134204863,
+      "updated": 1778138524928,
       "link": null,
       "status": "pending",
       "crop": null
@@ -58,7 +58,7 @@
       "opacity": 100,
       "locked": true,
       "version": 2,
-      "versionNonce": 1772509918,
+      "versionNonce": 1183172381,
       "index": "a1",
       "isDeleted": false,
       "angle": 0,
@@ -67,16 +67,16 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1778134204863,
+      "updated": 1778138524928,
       "link": null
     },
     {
-      "id": "HVG1i-IfHK9Qdpaq3Kgdl",
-      "type": "ellipse",
-      "x": 11.919299848466864,
-      "y": 291.4787471277432,
-      "width": 223.08409115370506,
-      "height": 50.336919483117356,
+      "id": "bneDQSSRyuN7O9DBka0qW",
+      "type": "arrow",
+      "x": 576.1399147727273,
+      "y": 131.48103378302733,
+      "width": 170.7954545454545,
+      "height": 5.3622159090909065,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "transparent",
@@ -91,47 +91,12 @@
       "roundness": {
         "type": 2
       },
-      "seed": 300484509,
-      "version": 96,
-      "versionNonce": 591675901,
+      "seed": 257058515,
+      "version": 43,
+      "versionNonce": 940949437,
       "isDeleted": false,
-      "boundElements": [
-        {
-          "id": "bcK8TOj7RpGvdDA2Hbxo_",
-          "type": "arrow"
-        }
-      ],
-      "updated": 1778138354244,
-      "link": null,
-      "locked": false
-    },
-    {
-      "id": "bcK8TOj7RpGvdDA2Hbxo_",
-      "type": "arrow",
-      "x": 192.22536610759533,
-      "y": 291.16011993783695,
-      "width": 80.31226872430608,
-      "height": 140.04502474028803,
-      "angle": 0,
-      "strokeColor": "#e03131",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 4,
-      "strokeStyle": "solid",
-      "roughness": 0,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "index": "a4",
-      "roundness": {
-        "type": 2
-      },
-      "seed": 182225779,
-      "version": 196,
-      "versionNonce": 1422195293,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1778138354244,
+      "boundElements": null,
+      "updated": 1778138532538,
       "link": null,
       "locked": false,
       "points": [
@@ -140,58 +105,8 @@
           0
         ],
         [
-          80.31226872430608,
-          -140.04502474028803
-        ]
-      ],
-      "lastCommittedPoint": null,
-      "startBinding": {
-        "elementId": "HVG1i-IfHK9Qdpaq3Kgdl",
-        "focus": 0.42982814036077654,
-        "gap": 6.226128820734032
-      },
-      "endBinding": null,
-      "startArrowhead": null,
-      "endArrowhead": "triangle",
-      "elbowed": false
-    },
-    {
-      "id": "sNaDZxZ2DKgLqOu5hbCMp",
-      "type": "arrow",
-      "x": 241.27693526334798,
-      "y": 211.7788555053044,
-      "width": 67.11204921312549,
-      "height": 64.67929733500111,
-      "angle": 0,
-      "strokeColor": "#e03131",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 4,
-      "strokeStyle": "solid",
-      "roughness": 0,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "index": "a5",
-      "roundness": {
-        "type": 2
-      },
-      "seed": 1478456733,
-      "version": 276,
-      "versionNonce": 2007023699,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1778138343927,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          67.11204921312549,
-          -64.67929733500111
+          170.7954545454545,
+          -5.3622159090909065
         ]
       ],
       "lastCommittedPoint": null,
