@@ -8,6 +8,7 @@ import Badge from '@tdev-components/shared/Badge'
 import ProgressState from '@tdev-components/documents/ProgressState';
 import PageReadCheck from '@tdev/page-read-check/PageReadCheck';
 import OfficeAccountReset from '@site/docs/03-support/01-faq/questions/\_office-account-reset.mdx';
+import MfaPrivateEmailHinterlegen from '@site/docs/03-support/01-faq/questions/\_mfa-private-email-hinterlegen.mdx';
 import MfaAuthenticatorEinrichten from '@site/docs/03-support/01-faq/questions/\_mfa-authenticator-einrichten.mdx';
 import AuthenticatorAppBackup from '@site/docs/03-support/01-faq/questions/\_authenticator-app-backup.mdx';
 import MfaWeitereInfos from '@site/docs/03-support/01-faq/questions/\_mfa-weitere-informationen.mdx';
@@ -25,11 +26,13 @@ Eine "Multi-Faktor-Authentifizierung" (kurz _MFA_) dient der Sicherheit. Wenn ma
    ![--width=350px](images/mfa1.jpg)
 3. Geben Sie das Passwort für Ihr Schulkonto ein und klicken Sie auf __Anmelden__.
    ![--width=350px](images/mfa2.jpg)
-4. Wenn Sie danach einen Code per SMS erhalten, ist die Einrichtung abgeschlossen. In diesem Fall können Sie die Webseite verlassen.
+4. Wenn Sie danach einen Code per SMS erhalten, ist die Grundeinrichtung abgeschlossen. Fahren Sie weiter mit dem nächsten Schritt.
    ![--width=350px](images/mfa8.jpg)
    :::danger[Kein Code erhalten?]
-   Falls Sie **keinen Code erhalten**, ist die MFA-Einrichtung **noch nicht abgeschlossen**. Suchen Sie unter [Problemlösung](#problemlösungen) nach der passenden Lösung, um das Problem zu beheben. Führen Sie diese Anleitung anschliessend erneut durch.
+   Falls Sie **keinen Code erhalten**, ist die MFA-Grundeinrichtung **noch nicht abgeschlossen**. Suchen Sie unter [Problemlösung](#problemlösungen) nach der passenden Lösung, um das Problem zu beheben. Führen Sie diese Anleitung anschliessend erneut durch.
    :::
+5. Damit Sie auch ohne Ihr Mobiltelefon oder Smartphone Zugriff auf Ihr Konto haben, richten Sie zusätzlich zur Authentifizierung per SMS auch noch eine private E-Mail-Adresse als weitere MFA-Option ein.
+   <MfaPrivateEmailHinterlegen />
 </ProgressState>
 
 ## Problemlösungen
