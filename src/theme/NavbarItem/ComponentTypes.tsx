@@ -13,6 +13,7 @@ import LoginProfileButton from '@tdev-components/Navbar/LoginProfileButton';
 import AccountSwitcher from '@tdev-components/Navbar/AccountSwitcher';
 import EditingOverview from '@tdev-components/EditingOverview';
 import RequestTarget from '@tdev-components/Navbar/RequestTarget';
+import LanguageHelp from '@tdev-components/Navbar/LanguageHelp';
 import PersonalSpaceOverlay from '@tdev-components/Navbar/PersonalSpaceOverlay';
 import DevModeAccessLocalFS from '@tdev-components/Navbar/DevModeAccessLocalFS';
 
@@ -31,6 +32,7 @@ const ComponentTypes: ComponentTypesObject = {
     ['custom-loginProfileButton']: LoginProfileButton,
     ['custom-taskStateOverview']: EditingOverview,
     ['custom-requestTarget']: RequestTarget,
+    ['custom-languageHelp']: LanguageHelp,
     ['custom-personalSpaceOverlay']: PersonalSpaceOverlay
 };
 

@@ -8,7 +8,7 @@
       "x": 0,
       "y": 0,
       "width": 800,
-      "height": 847.603305785124,
+      "height": 568.2093848866865,
       "roughness": 0,
       "opacity": 100,
       "isDeleted": false,
@@ -23,8 +23,8 @@
         "scale": 1.5,
         "initExtension": ".png"
       },
-      "version": 2,
-      "versionNonce": 1155888559,
+      "version": 35,
+      "versionNonce": 374639155,
       "index": "a0",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -37,10 +37,17 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1776962918463,
+      "updated": 1777470084754,
       "link": null,
       "status": "pending",
-      "crop": null
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1210,
+        "height": 859.4166946411138,
+        "naturalWidth": 1210,
+        "naturalHeight": 1282
+      }
     },
     {
       "id": "TDEV-IMAGE--RECTANGLE",
