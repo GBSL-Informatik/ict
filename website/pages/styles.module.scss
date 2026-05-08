@@ -43,3 +43,8 @@
 .center {
     grid-template-columns: 1fr !important;
 }
+
+.onboarding {
+    --ifm-link-color: var(--ifm-color-warning);
+    --ifm-link-hover-color: var(--ifm-color-warning-dark);
+}

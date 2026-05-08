@@ -33,9 +33,10 @@ const IndexPages: React.ComponentProps<typeof Feature>[] = [
         icon: 'mdi-hand-wave-outline',
         route: '/onboarding',
         description: translate({
-            message: 'Willkommen an der Schule',
+            message: 'Grundeinrichtung: Adminrechte',
             id: 'main.link.onboarding.description'
-        })
+        }),
+        className: styles.onboarding
     },
     {
         name: translate({

@@ -11,6 +11,7 @@ import { getIcon } from './icons.helper';
 export interface FeatureProps {
     name: string;
     icon?: string;
+    className?: string;
     route: string;
     pages?: number;
     extern?: boolean;
@@ -23,8 +24,8 @@ type MdiIconType = keyof typeof MdiIcons;
 const Feature = (props: FeatureProps) => {
     const { name, icon, route, pages, extern, description } = props;
     return (
-        <Link to={route}>
-            <Card classNames={{ card: clsx(styles.feature, extern && styles.extern) }}>
+        <Link to={route} className={clsx(props.className)}>
+            <Card classNames={{ card: clsx(styles.feature, extern && styles.extern, props.className) }}>
                 {pages === 1 && (
                     <span className={clsx(styles.pages)}>
                         <Icon path={MdiIcons.mdiFile} className={clsx(styles.file)} size={SIZE_INDICATOR} />

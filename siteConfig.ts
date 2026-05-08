@@ -109,6 +109,13 @@ const getSiteConfig: SiteConfigProvider = () => {
                 apiKey: '804f01d86cb54c95c4821020bcd38dcb',
                 indexName: 'ict-gbsl',
                 searchPagePath: 'search'
+            },
+            announcementBar: {
+                backgroundColor: 'var(--ifm-color-primary-lightest)',
+                textColor: '#000000',
+                content:
+                    '👋 Neu am GBSL? <a href="/onboarding">👉 Hier geht\'s zum ersten Schritt "Grundeinrichtung: Adminrechte"</a>',
+                isCloseable: true
             }
         },
         scripts: [
