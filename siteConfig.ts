@@ -72,7 +72,7 @@ const getSiteConfig: SiteConfigProvider = () => {
                     items: [
                         {
                             label: 'GBSL Website',
-                            href: 'https://gbsl.ch'
+                            href: 'https://www.gbsl.ch'
                         }
                     ]
                 },
