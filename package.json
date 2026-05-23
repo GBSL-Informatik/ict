@@ -28,7 +28,6 @@
     "dependencies": {
         "@azure/msal-browser": "^v3.28.0",
         "@azure/msal-react": "^2.2.0",
-        "@directus/sdk": "^21.3.0",
         "@docusaurus/core": "^3.10.0",
         "@docusaurus/faster": "^3.10.0",
         "@docusaurus/plugin-client-redirects": "^3.10.0",
