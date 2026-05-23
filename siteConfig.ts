@@ -21,6 +21,12 @@ const ADMONITION_CONFIG = {
 };
 import dynamicRouter from './src/plugins/plugin-dynamic-routes';
 
+declare module './src/siteConfig/siteConfig' {
+    export interface TdevConfig {
+        foo: string;
+    }
+}
+
 const getSiteConfig: SiteConfigProvider = () => {
     return {
         title: 'ICT am Gymnasium Biel-Seeland',
@@ -146,7 +152,10 @@ const getSiteConfig: SiteConfigProvider = () => {
         remarkPlugins: recommendedRemarkPlugins.filter(
             (p) => p !== commentPluginConfig
         ) as unknown as PluginOptions[],
-        apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')],
+        apiDocumentProviders: [
+            require.resolve('@tdev/page-read-check/register'),
+            require.resolve('@ict/directus/register')
+        ],
         plugins: [
             [
                 '@docusaurus/plugin-client-redirects',

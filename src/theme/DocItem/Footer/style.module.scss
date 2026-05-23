@@ -1,13 +1,5 @@
 .footer {
     margin-top: 3rem;
-    .ratingContainer {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        .rating {
-            display: flex;
-        }
-    }
     :global(.theme-doc-footer.docusaurus-mt-lg) {
         margin-top: 0.5rem;
     }
