@@ -1,0 +1,83 @@
+---
+page_id: 3da35657-6126-4ab7-9689-9dce8b2d31fa
+---
+
+# Directus Page Ratings
+
+Mit `@ict/directus` werden simple Page Ratings am Ende jeder Seite dargestellt.
+
+## Frontmatter
+
+Über das Frontmatter können zusätzliche Einstellungen vorgenommen werden:
+
+`hide_rating`
+: `boolean` - Versteckt die Page Ratings auf der Seite, auf der diese Einstellung gesetzt ist. Nützlich für Seiten, die nicht bewertet werden sollen (z.B. Startseite, Kontaktseite, etc.).
+: @default `false`
+`rating_label`
+: `string` - Überschreibt die Standard-Beschriftung.
+: @default `Wie hilfreich war diese Seite?`
+
+:::details[Zusammenfassung anzeigen]
+Um die Zusammenfassung (durchschnittliche Bewertung und Anzahl der Bewertungen) anzuzeigen,
+kann das Label 5x geklickt werden.
+:::
+
+## Directus Aufsetzen
+
+### Directus Collection
+Erstelle eine Collection (`ict_page_ratings`) mit folgenden Feldern:
+- `id` (integer, autoincrement, primary key)
+- `rating` (integer)
+- `client_id` (string)
+- `page_id` (string)
+- `pathname` (string)
+- `created_at` (datetime, autogeneriert)
+
+### Directus Flow
+
+Erstelle einen Flow um mehrfache Bewertungen vom selben Client zu bereinigen. Dies könnte auch durch DB-Constraints und `update` statt `create` zu verwenden, was mehr Client-Code erfordern würde.  
+
+![](./images/feedback-unifier-flow.png)
+
+Trigger
+: `items.create` Trigger auf `ict_page_ratings`
+: `Non-Blocking`
+Delete Data
+: Collection `ict_page_ratings`
+: Permission `full access`
+: Query
+:::dd
+```json
+{
+    "filter": {
+        "id": {
+            "_neq": "{{$trigger.key}}"
+        },
+        "page_id": {
+            "_eq": "{{$trigger.payload.page_id}}"
+        },
+        "client_id": {
+            "_eq": "{{$trigger.payload.client_id}}"
+        }
+    }
+}
+```
+:::
+ 
+### CORS
+Sicherstellen, dass die Directus-Instanz CORS-Anfragen von der Domain (ict-Seite) erlaubt.
+
+```env title="/home/dokku/directus/ENV"
+CORS_ENABLED="true"
+CORS_ORIGIN="https://ict.gbsl.website"
+```
+
+### Access Policies
+
+Damit ein nicht angemeldete Nutzer:in eine Bewertung abgeben kann, muss unter __Settings > Access Policies > Public Policy > #Permissions__ folgende Einstellung vorgenommen werden:
+
+Collection
+: `ict_page_ratings`
+Actions
+: `Create`
+: `Read`

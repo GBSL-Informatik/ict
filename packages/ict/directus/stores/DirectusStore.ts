@@ -1,11 +1,17 @@
-import { action, computed, observable, runInAction } from 'mobx';
+import { action, observable, runInAction } from 'mobx';
 import ViewStore from '@tdev-stores/ViewStores/index';
 import client from './directusClient';
 import { aggregate, createItem, readItems } from '@directus/sdk';
 import { v4 as uuidv4 } from 'uuid';
 import Storage from '@tdev-stores/utils/Storage';
+import siteConfig from '@generated/docusaurus.config';
+import { type DirectusConfig } from '..';
+const {
+    tdevConfig: { directus: Config }
+} = siteConfig.customFields as { tdevConfig: { directus: DirectusConfig } };
 
 const DEFAULT_CLIENT_ID = uuidv4();
+const STORAGE_KEY = Config?.localStorageKey || 'DIRECTUS_CLIENT_ID';
 
 export default class DirectusStore {
     readonly viewStore: ViewStore;
@@ -17,9 +23,9 @@ export default class DirectusStore {
 
     constructor(viewStore: ViewStore) {
         this.viewStore = viewStore;
-        const clientId = Storage.getUnsafe('DIRECTUS_CLIENT_ID', undefined, false);
+        const clientId = Storage.getUnsafe(STORAGE_KEY, undefined, false);
         if (!clientId) {
-            Storage.setUnsafe('DIRECTUS_CLIENT_ID', DEFAULT_CLIENT_ID, false);
+            Storage.setUnsafe(STORAGE_KEY, DEFAULT_CLIENT_ID, false);
         }
         this.CLIENT_ID = clientId || DEFAULT_CLIENT_ID;
     }
@@ -39,7 +45,7 @@ export default class DirectusStore {
         // then submit the rating to the server
         client
             .request(
-                createItem('ict_page_ratings', {
+                createItem(Config.collection, {
                     page_id: pageId,
                     rating: rating,
                     pathname: pathname,
@@ -60,7 +66,7 @@ export default class DirectusStore {
         }
         try {
             const ratings = await client.request(
-                aggregate('ict_page_ratings', {
+                aggregate(Config.collection, {
                     aggregate: {
                         count: '*',
                         avg: 'rating'
@@ -74,7 +80,6 @@ export default class DirectusStore {
                     }
                 })
             );
-            console.log(ratings);
             if (ratings.length === 0 || !ratings[0].count) {
                 return;
             }
@@ -93,7 +98,7 @@ export default class DirectusStore {
     async fetchPageRating(pageId: string) {
         try {
             const rating = await client.request(
-                readItems('ict_page_ratings', {
+                readItems(Config.collection, {
                     filter: {
                         page_id: {
                             _eq: pageId

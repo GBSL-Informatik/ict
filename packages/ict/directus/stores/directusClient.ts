@@ -1,4 +1,9 @@
 import { createDirectus, authentication, rest } from '@directus/sdk';
+import siteConfig from '@generated/docusaurus.config';
+import { type DirectusConfig } from '..';
+const {
+    tdevConfig: { directus: Config }
+} = siteConfig.customFields as { tdevConfig: { directus: DirectusConfig } };
 
 interface Rating {
     id: number;
@@ -8,6 +13,8 @@ interface Rating {
     client_id: string;
     created_at: string;
 }
-const client = createDirectus<{ ict_page_ratings: Rating[] }>('https://directus.gbsl.website').with(rest());
+const client = createDirectus<{ [Config?.collection]: Rating[] }>(Config?.url ?? 'http://directus').with(
+    rest()
+);
 
 export default client;

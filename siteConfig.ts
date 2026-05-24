@@ -20,10 +20,11 @@ const ADMONITION_CONFIG = {
     }
 };
 import dynamicRouter from './src/plugins/plugin-dynamic-routes';
+import { DirectusConfig } from '@ict/directus';
 
 declare module './src/siteConfig/siteConfig' {
     export interface TdevConfig {
-        foo: string;
+        directus: DirectusConfig;
     }
 }
 
@@ -107,6 +108,10 @@ const getSiteConfig: SiteConfigProvider = () => {
         tdevConfig: {
             excalidraw: {
                 excalidoc: true
+            },
+            directus: {
+                collection: 'ict_page_ratings',
+                url: 'https://directus.gbsl.website'
             }
         },
         themeConfig: {
