@@ -56,6 +56,12 @@ export default class DirectusStore {
                 action((res) => {
                     this.pageRatings.set(pageId, rating);
                 })
+            )
+            .catch(
+                action((error) => {
+                    console.warn('Failed to submit rating', error);
+                    // this.pageRatings.delete(pageId);
+                })
             );
     }
 
@@ -64,8 +70,8 @@ export default class DirectusStore {
         if (!pageId || this.pageSummary.has(pageId)) {
             return;
         }
-        try {
-            const ratings = await client.request(
+        const ratings = await client
+            .request(
                 aggregate(Config.collection, {
                     aggregate: {
                         count: '*',
@@ -79,25 +85,25 @@ export default class DirectusStore {
                         }
                     }
                 })
-            );
-            if (ratings.length === 0 || !ratings[0].count) {
-                return;
-            }
-            runInAction(() => {
-                this.pageSummary.set(pageId, {
-                    count: Number(ratings[0].count!),
-                    avg: Number((ratings[0].avg as unknown as { rating: string }).rating)
-                });
+            )
+            .catch(() => {
+                return [];
             });
-        } catch (error) {
+        if (ratings.length === 0 || !ratings[0].count) {
             return;
         }
+        runInAction(() => {
+            this.pageSummary.set(pageId, {
+                count: Number(ratings[0].count!),
+                avg: Number((ratings[0].avg as unknown as { rating: string }).rating)
+            });
+        });
     }
 
     @action
     async fetchPageRating(pageId: string) {
-        try {
-            const rating = await client.request(
+        const rating = await client
+            .request(
                 readItems(Config.collection, {
                     filter: {
                         page_id: {
@@ -109,14 +115,15 @@ export default class DirectusStore {
                     },
                     sort: ['-created_at']
                 })
-            );
-            if (rating.length > 0) {
-                runInAction(() => {
-                    this.pageRatings.set(pageId, rating[0].rating);
-                });
-            }
-        } catch (error) {
+            )
+            .catch(() => {
+                return [];
+            });
+        if (rating.length === 0) {
             return;
         }
+        runInAction(() => {
+            this.pageRatings.set(pageId, rating[0].rating);
+        });
     }
 }
