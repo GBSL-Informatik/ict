@@ -3,9 +3,7 @@ import clsx from 'clsx';
 import styles from './styles.module.scss';
 import { useStore } from '@tdev-hooks/useStore';
 import { observer } from 'mobx-react-lite';
-import { mdiStar, mdiStarHalfFull, mdiStarOutline } from '@mdi/js';
-import Badge from '@tdev-components/shared/Badge';
-import Icon from '@mdi/react';
+import { mdiStar, mdiStarOutline } from '@mdi/js';
 import Button from '@tdev-components/shared/Button';
 import { useLocation } from '@docusaurus/router';
 
@@ -14,17 +12,7 @@ interface Props {
     label?: string;
 }
 
-const getIconPath = (avg?: number) => {
-    if (!avg || avg < 2) {
-        return mdiStarOutline;
-    }
-    if (avg > 3) {
-        return mdiStar;
-    }
-    return mdiStarHalfFull;
-};
-
-const PageSummary = observer((props: Props) => {
+const PageRating = observer((props: Props) => {
     const { pageId } = props;
     const clientStore = useStore('viewStore');
     const { pathname } = useLocation();
@@ -60,4 +48,4 @@ const PageSummary = observer((props: Props) => {
     );
 });
 
-export default PageSummary;
+export default PageRating;
