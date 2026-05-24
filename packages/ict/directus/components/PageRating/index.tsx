@@ -31,6 +31,7 @@ const PageRating = observer((props: Props) => {
     const { pathname } = useLocation();
     const directusStore = clientStore.useStore('directusStore');
     const rating = directusStore.pageRatings.get(pageId) ?? 0;
+    const [clickedAt, setClickedAt] = React.useState<number[]>([]);
     React.useEffect(() => {
         if (!pageId) {
             return;
@@ -38,9 +39,24 @@ const PageRating = observer((props: Props) => {
         directusStore.fetchPageRating(pageId);
     }, [pageId, directusStore]);
 
+    React.useEffect(() => {
+        const now = Date.now();
+        const withinLastSecond = clickedAt.filter((time) => now - time < 1000);
+        if (withinLastSecond.length < 5) {
+            return;
+        }
+        directusStore.setShowSummary(true);
+        setClickedAt([]);
+    }, [clickedAt]);
+
     return (
         <div className={clsx(styles.pageSummary)}>
-            {props.label || 'Wie hilfreich war diese Seite?'}
+            <span
+                onClick={() => setClickedAt((prev) => [...prev, Date.now()])}
+                className={clsx(styles.label)}
+            >
+                {props.label || 'Wie hilfreich war diese Seite?'}
+            </span>
             <div className={clsx(styles.rating)}>
                 {[1, 2, 3, 4, 5].map((i) => {
                     const isActive = i <= Math.abs(rating);

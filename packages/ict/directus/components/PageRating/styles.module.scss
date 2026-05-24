@@ -5,4 +5,7 @@
     .rating {
         display: flex;
     }
+    .label {
+        user-select: none;
+    }
 }
