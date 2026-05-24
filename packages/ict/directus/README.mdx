@@ -6,6 +6,8 @@ page_id: 3da35657-6126-4ab7-9689-9dce8b2d31fa
 
 Mit `@ict/directus` werden simple Page Ratings am Ende jeder Seite dargestellt.
 
+![](./images/page-feedback.png)
+
 ## Frontmatter
 
 Über das Frontmatter können zusätzliche Einstellungen vorgenommen werden:
@@ -81,3 +83,63 @@ Collection
 Actions
 : `Create`
 : `Read`
+
+
+## Installation
+
+1. `packages/ict/directus` kopieren und `yarn install` ausführen.
+2. In der `siteConfig` die Directus-Konfiguration hinzufügen:
+    ```ts title="siteConfig.ts"
+    import { type DirectusConfig } from '@ict/directus';
+
+    declare module './src/siteConfig/siteConfig' {
+        export interface TdevConfig {
+            directus: DirectusConfig;
+        }
+    }
+    
+    const getSiteConfig: SiteConfigProvider = () => {
+        return {
+            /*...*/
+            tdevConfig: {
+                directus: {
+                    collection: 'page_ratings',
+                    url: 'https://directus.foo.ch'
+                }
+            },
+            apiDocumentProviders: [
+                require.resolve('@ict/directus/register')
+            ],
+        }
+    }
+    ```
+3. `DocItem.Footer` swizzeln (`wrap`):
+    ```tsx title="src/theme/DocItem/Footer/index.tsx"
+    import Footer from '@theme-original/DocItem/Footer';
+    import PageRating from '@ict/directus/components/PageRating';
+    import PageSummary from '@ict/directus/components/PageSummary';
+    import { useDoc } from '@docusaurus/plugin-content-docs/client';
+    
+    type Props = WrapperProps<typeof FooterType>;
+
+    type DocFrontMatter = {
+        page_id: string;
+        rating_label?: string;
+        hide_rating?: boolean;
+    };
+    const FooterWrapper = (props: Props): ReactNode => {
+        const { frontMatter } = useDoc();
+        const {
+            page_id: pageId,
+            rating_label: ratingLabel,
+            hide_rating: hideRating
+        } = frontMatter as DocFrontMatter;
+        return (
+            <div>
+                <PageRating pageId={pageId} label={ratingLabel} />
+                <PageSummary pageId={pageId} />
+                <Footer {...props} />
+            </div>
+        )
+    };
+    ```

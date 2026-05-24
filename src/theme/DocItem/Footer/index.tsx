@@ -17,7 +17,7 @@ type ICTDocFrontMatter = {
     hide_rating?: boolean;
 };
 
-const FooterWrapper = observer((props: Props): ReactNode => {
+const FooterWrapper = (props: Props): ReactNode => {
     const { frontMatter } = useDoc();
     const {
         page_id: pageId,
@@ -48,6 +48,6 @@ const FooterWrapper = observer((props: Props): ReactNode => {
             <Footer {...props} />
         </div>
     );
-});
+};
 
 export default FooterWrapper;
