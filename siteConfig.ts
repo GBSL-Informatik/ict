@@ -20,6 +20,13 @@ const ADMONITION_CONFIG = {
     }
 };
 import dynamicRouter from './src/plugins/plugin-dynamic-routes';
+import { type DirectusConfig } from '@ict/directus';
+
+declare module './src/siteConfig/siteConfig' {
+    export interface TdevConfig {
+        directus: DirectusConfig;
+    }
+}
 
 const getSiteConfig: SiteConfigProvider = () => {
     return {
@@ -101,6 +108,10 @@ const getSiteConfig: SiteConfigProvider = () => {
         tdevConfig: {
             excalidraw: {
                 excalidoc: true
+            },
+            directus: {
+                collection: 'ict_page_ratings',
+                url: 'https://directus.gbsl.website'
             }
         },
         themeConfig: {
@@ -146,7 +157,10 @@ const getSiteConfig: SiteConfigProvider = () => {
         remarkPlugins: recommendedRemarkPlugins.filter(
             (p) => p !== commentPluginConfig
         ) as unknown as PluginOptions[],
-        apiDocumentProviders: [require.resolve('@tdev/page-read-check/register')],
+        apiDocumentProviders: [
+            require.resolve('@tdev/page-read-check/register'),
+            require.resolve('@ict/directus/register')
+        ],
         plugins: [
             [
                 '@docusaurus/plugin-client-redirects',
