@@ -55,7 +55,7 @@ const PageRating = observer((props: Props) => {
                 onClick={() => setClickedAt((prev) => [...prev, Date.now()])}
                 className={clsx(styles.label)}
             >
-                {props.label || 'Wie hilfreich war diese Seite?'}
+                {props.label || 'Rückmeldung zu dieser Seite?'}
             </span>
             <div className={clsx(styles.rating)}>
                 {[1, 2, 3, 4, 5].map((i) => {
