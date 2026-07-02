@@ -7,6 +7,7 @@ import {
     recommendedBeforeDefaultRemarkPlugins,
     recommendedRemarkPlugins
 } from './src/siteConfig/markdownPluginConfigs';
+import linkMappingRemarkPlugin from './packages/ict/link-mapping';
 import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
 import { SiteConfigProvider } from './src/siteConfig/siteConfig';
 import detailsPlugin from './src/plugins/remark-details/plugin';
@@ -21,6 +22,7 @@ const ADMONITION_CONFIG = {
 };
 import dynamicRouter from './src/plugins/plugin-dynamic-routes';
 import { type DirectusConfig } from '@ict/directus';
+import path from 'path';
 
 declare module './src/siteConfig/siteConfig' {
     export interface TdevConfig {
@@ -139,6 +141,7 @@ const getSiteConfig: SiteConfigProvider = () => {
             }
         ],
         beforeDefaultRemarkPlugins: [
+            [linkMappingRemarkPlugin, { mappingFilePath: './docs/link-mappings.yaml' }],
             ...recommendedBeforeDefaultRemarkPlugins.filter((p) => p !== detailsPluginConfig),
             [
                 detailsPlugin,
@@ -154,9 +157,9 @@ const getSiteConfig: SiteConfigProvider = () => {
                 }
             ]
         ] as unknown as PluginOptions[],
-        remarkPlugins: recommendedRemarkPlugins.filter(
-            (p) => p !== commentPluginConfig
-        ) as unknown as PluginOptions[],
+        remarkPlugins: [
+            ...recommendedRemarkPlugins.filter((p) => p !== commentPluginConfig)
+        ] as unknown as PluginOptions[],
         apiDocumentProviders: [
             require.resolve('@tdev/page-read-check/register'),
             require.resolve('@ict/directus/register')
