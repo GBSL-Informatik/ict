@@ -21,6 +21,7 @@ const ADMONITION_CONFIG = {
 };
 import dynamicRouter from './src/plugins/plugin-dynamic-routes';
 import { type DirectusConfig } from '@ict/directus';
+import linkMappingPlugin from '@ict/link-mapping';
 
 declare module './src/siteConfig/siteConfig' {
     export interface TdevConfig {
@@ -154,9 +155,10 @@ const getSiteConfig: SiteConfigProvider = () => {
                 }
             ]
         ] as unknown as PluginOptions[],
-        remarkPlugins: recommendedRemarkPlugins.filter(
-            (p) => p !== commentPluginConfig
-        ) as unknown as PluginOptions[],
+        remarkPlugins: [
+            [linkMappingPlugin, { mappingFilePath: './docs/link-mappings.yaml' }],
+            ...recommendedRemarkPlugins.filter((p) => p !== commentPluginConfig)
+        ] as unknown as PluginOptions[],
         apiDocumentProviders: [
             require.resolve('@tdev/page-read-check/register'),
             require.resolve('@ict/directus/register')

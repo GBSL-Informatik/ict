@@ -1,0 +1,39 @@
+---
+page_id: 979630e9-9272-410b-a7c1-fe40601be7a4
+---
+
+# Link Mapping
+
+Mit `@ict/link-mapping` lassen sich links in einer `.yaml`-Datei festlegen und dann als Markdown-Link verwenden.
+
+```yaml
+foo: https://foo.com
+bar: https://bar.com
+```
+
+```md
+Auf [foo](@foo) sieht man einen Link zu [bar](@bar).
+```
+
+Der MD-Link muss mit einem @ beginnen, damit es der Schlüssel im YAML gesucht wird.
+
+## Vorteile
+Links sind an einem Ort und können leicht überprüft/aktualisiert werden, ggf. auch automatisch.
+
+## Installation
+
+```ts title="siteConfig.ts"
+import linkMappingPlugin from '@ict/link-mapping';
+
+const getSiteConfig: SiteConfigProvider = () => {
+    return {
+        /*...*/
+        remarkPlugins: [
+            /*...*/
+            // highlight-next-line
+            [linkMappingPlugin, { mappingFilePath: './docs/link-mappings.yaml' }]
+            /*...*/
+        ],
+    }
+}
+```
