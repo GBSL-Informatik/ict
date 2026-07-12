@@ -5,6 +5,8 @@ import type {
   ShowEditThisPage,
   TdevConfig
 } from '@tdev/siteConfig/siteConfig';
+import type { VersionOptions } from '@docusaurus/plugin-content-docs';
+
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config, OnBrokenMarkdownImagesFunction } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
@@ -42,6 +44,7 @@ import {
 } from './src/siteConfig/markdownPluginConfigs';
 import { remarkPdfPluginConfig } from '@tdev/remark-pdf';
 import { GlobExcludeDefault } from '@docusaurus/utils';
+import { TdevCustomFields } from '@tdev/siteConfig/TdevCustomFields';
 
 const BUILD_LOCATION = __dirname;
 const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
@@ -97,6 +100,17 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
     loadedPlugins.push(excalidrawPluginConfig);
   }
 
+  const hasVersions = await fs.access(path.join(BUILD_LOCATION, 'versions.json')).then(() => true).catch(() => false);
+  const DEFAULT_VERSIONS: { [version: string]: VersionOptions } = {} ;
+  if (hasVersions) {
+    const docusaurusVersions = await fs.readFile(path.join(BUILD_LOCATION, 'versions.json'), 'utf-8').then((data) => JSON.parse(data) as string[]);
+    docusaurusVersions.forEach((version) => {
+      DEFAULT_VERSIONS[version] = { label: version, banner: 'none' };
+    });
+    DEFAULT_VERSIONS['current'] = { label: 'Material', banner: 'none' }
+  }
+
+
   const config: Config = applyTransformers(
     {
       title: TITLE,
@@ -120,7 +134,7 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
         /** Use test user in local dev: set DEFAULT_TEST_USER to the default test users email adress*/
         TEST_USER: DEFAULT_TEST_USER,
         OFFLINE_API: OFFLINE_API,
-        NO_AUTH: (process.env.NODE_ENV !== 'production' && !!DEFAULT_TEST_USER) || OFFLINE_API,
+        NO_AUTH: (process.env.NODE_ENV !== 'production' && !!DEFAULT_TEST_USER) || !!OFFLINE_API,
         /** The Domain Name where the api is running */
         APP_URL: process.env.NETLIFY
           ? process.env.CONTEXT === 'production'
@@ -137,10 +151,10 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
         showEditThisPage: siteConfig.showEditThisPage ?? ('always' satisfies ShowEditThisPage),
         showEditThisPageOptions:
           siteConfig.showEditThisPageOptions ??
-          (['github', 'github-dev', 'cms'] satisfies EditThisPageOption[]),
+          (['github', 'github-dev'] satisfies EditThisPageOption[]),
         editThisPageCmsUrl: siteConfig.editThisPageCmsUrl ?? '/cms/',
         tdevConfig: siteConfig.tdevConfig ?? ({} satisfies Partial<TdevConfig>)
-      },
+      } satisfies TdevCustomFields,
       future: {
         v4: true,    
         faster: {
@@ -157,7 +171,8 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
           mdxCrossCompilerCache: true,
           ssgWorkerThreads: true
         },
-        experimental_vcs: 'default-v2'
+        experimental_vcs: 'default-v2',
+        // experimental_router: 'hash'
       },
       webpack: {
         jsLoader: (isServer) => {
@@ -270,6 +285,7 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
                   beforeDefaultRemarkPlugins: BEFORE_DEFAULT_REMARK_PLUGINS,
                   ...DEFAULT_ADMONITION_CONFIG,
                   exclude: [...new Set([...GlobExcludeDefault, '**/node_modules/**'])],
+                  versions: Object.keys(DEFAULT_VERSIONS).length > 0 ? DEFAULT_VERSIONS : undefined,
                   ...(siteConfig.docs || {})
                 }
               : false,
@@ -363,7 +379,7 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
       } satisfies Preset.ThemeConfig,
       plugins: [
         sassPluginConfig,
-        dynamicRouterPluginConfig,
+        dynamicRouterPluginConfig(siteConfig),
         rsDoctorPluginConfig,
         [
           aliasConfigurationPlugin,
@@ -383,7 +399,7 @@ const docusaurusConfig = withSiteConfig().then(async (siteConfig) => {
             remarkPlugins: REMARK_PLUGINS,
             rehypePlugins: REHYPE_PLUGINS,
             beforeDefaultRemarkPlugins: BEFORE_DEFAULT_REMARK_PLUGINS,
-            editUrl: `/cms/${ORGANIZATION_NAME}/${PROJECT_NAME}/`,
+            editUrl: `/`,
             ...pagesConfig
           }
         ],

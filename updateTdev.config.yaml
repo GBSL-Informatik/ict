@@ -1,63 +1,69 @@
 tdevPath: ../teaching-dev
 expectedTdevBranch: main
 trackedElements:
-    - src: docusaurus.config.ts
-      dst: docusaurus.config.ts
-    - src: .devcontainer/devcontainer.json
-      dst: .devcontainer/devcontainer.json
-    - src: .github/workflows/prettier-check.yml
-      dst: .github/workflows/prettier-check.yml
-    - src: src/
-      dst: src
-      ignore:
-          - pages/index.tsx
-          - pages/__index.tsx
-          - pages/.gitignore
-          - theme/**
-    - src: src/theme/Root.tsx
-      dst: src/theme/Root.tsx
-    - src: src/theme/Root.helpers.ts
-      dst: src/theme/Root.helpers.ts
-    - src: src/theme/Admonition/
-      dst: src/theme/Admonition/
-    - src: src/theme/DocSidebarItem/
-      dst: src/theme/DocSidebarItem/
-    - src: src/theme/NavbarItem/
-      dst: src/theme/NavbarItem/
-      ignore:
-          - ComponentTypes.tsx
-    - src: packages/tdev/excalidoc/
-      dst: packages/tdev/excalidoc
-    - src: packages/tdev/remark-pdf/
-      dst: packages/tdev/remark-pdf
-    - src: packages/tdev/remark-graphviz/
-      dst: packages/tdev/remark-graphviz
-    - src: packages/tdev/page-index/
-      dst: packages/tdev/page-index
-    - src: packages/tdev/page-read-check/
-      dst: packages/tdev/page-read-check
-    - src: updateSync/
-      dst: updateSync
-      ignore:
-          - sync-onboarding.ts
-          - clean-onboarding.ts
-    - src: tsconfig.tdev.json
-      dst: tsconfig.json
-    - src: tsconfig.package.json
-      dst: tsconfig.package.json
-    - src: .prettierrc
-      dst: .prettierrc
-    - src: .prettierignore
-      dst: .prettierignore
-    - src: vitest.config.ts
-      dst: vitest.config.ts
-    - src: static/tdev-artifacts/
-      dst: static/tdev-artifacts/
-      ignore:
-          - '*/**'
+  - src: docusaurus.config.ts
+    dst: docusaurus.config.ts
+  - src: .devcontainer/devcontainer.json
+    dst: .devcontainer/devcontainer.json
+  - src: .github/workflows/prettier-check.yml
+    dst: .github/workflows/prettier-check.yml
+  - src: src/
+    dst: src
+    ignore:
+      - pages/index.tsx
+      - pages/__index.tsx
+      - pages/.gitignore
+      - theme/**
+  - src: src/theme/Root.tsx
+    dst: src/theme/Root.tsx
+  - src: src/theme/Root.helpers.ts
+    dst: src/theme/Root.helpers.ts
+  - src: src/theme/Admonition/
+    dst: src/theme/Admonition/
+  - src: src/theme/DocSidebarItem/
+    dst: src/theme/DocSidebarItem/
+  - src: src/theme/NavbarItem/
+    dst: src/theme/NavbarItem/
+    ignore:
+      - ComponentTypes.tsx
+  - src: packages/tdev/excalidoc/
+    dst: packages/tdev/excalidoc
+  - src: packages/tdev/remark-pdf/
+    dst: packages/tdev/remark-pdf
+  - src: packages/tdev/remark-graphviz/
+    dst: packages/tdev/remark-graphviz
+  - src: packages/tdev/page-index/
+    dst: packages/tdev/page-index
+  - src: packages/tdev/page-read-check/
+    dst: packages/tdev/page-read-check
+  - src: updateSync/
+    dst: updateSync
+    ignore:
+      - sync-onboarding.ts
+      - clean-onboarding.ts
+  - src: tsconfig.tdev.json
+    dst: tsconfig.json
+  - src: tsconfig.package.json
+    dst: tsconfig.package.json
+  - src: .prettierrc
+    dst: .prettierrc
+  - src: .prettierignore
+    dst: .prettierignore
+  - src: vitest.config.ts
+    dst: vitest.config.ts
+  - src: static/tdev-artifacts/
+    dst: static/tdev-artifacts/
+    ignore:
+      - '*/**'
+  - src: tsconfig.docusaurus.json
+    dst: tsconfig.docusaurus.json
+  - src: static/bry-libs/
+    dst: static/bry-libs
+  - src: static/pyodide.sw.js
+    dst: static/pyodide.sw.js
 watchedElements:
-    - .babel.config.js
-    - package.json
-    - .env.example
-    - src/theme/
-    - src/theme/NavbarItem/ComponentTypes.tsx
+  - .babel.config.js
+  - package.json
+  - .env.example
+  - src/theme/
+  - src/theme/NavbarItem/ComponentTypes.tsx
