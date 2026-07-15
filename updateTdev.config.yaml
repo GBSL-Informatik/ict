@@ -61,6 +61,10 @@ trackedElements:
     dst: static/bry-libs
   - src: static/pyodide.sw.js
     dst: static/pyodide.sw.js
+  - src: packages/tdev/
+    dst: packages/tdev
+    ignore:
+      - material-sync/src/migrate_tdev/migrations
 watchedElements:
   - .babel.config.js
   - package.json
