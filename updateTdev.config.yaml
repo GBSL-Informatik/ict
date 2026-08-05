@@ -64,7 +64,7 @@ trackedElements:
   - src: packages/tdev/
     dst: packages/tdev
     ignore:
-      - material-sync/src/migrate_tdev/migrations
+      - migrate-tdev/migrations
   - src: src/theme/AnnouncementBar/
     dst: src/theme/AnnouncementBar/
 watchedElements:
