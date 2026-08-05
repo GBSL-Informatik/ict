@@ -65,6 +65,8 @@ trackedElements:
     dst: packages/tdev
     ignore:
       - material-sync/src/migrate_tdev/migrations
+  - src: src/theme/AnnouncementBar/
+    dst: src/theme/AnnouncementBar/
 watchedElements:
   - .babel.config.js
   - package.json
