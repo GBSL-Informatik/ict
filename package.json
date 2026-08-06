@@ -40,7 +40,7 @@
         "@sentry/react": "^10.64.0",
         "@sentry/webpack-plugin": "^3.3.1",
         "ace-builds": "^1.44.0",
-        "axios": "^1.15.0",
+        "axios": "^1.18.1",
         "better-auth": "^1.6.26",
         "browser-image-compression": "^2.0.2",
         "clsx": "^2.1.1",
@@ -66,10 +66,10 @@
         "quill": "^2.0.3",
         "raw-loader": "^4.0.2",
         "rc-slider": "^11.1.9",
-        "react": "^19.2.4",
+        "react": "^19.2.7",
         "react-ace": "^15.0.0",
         "react-diff-viewer-continued": "^3.4.0",
-        "react-dom": "^19.2.4",
+        "react-dom": "^19.2.7",
         "react-draggable": "4.5.0",
         "react-katex": "^3.1.0",
         "react-quilljs": "^2.0.5",
@@ -107,7 +107,8 @@
         "tsx": "^4.22.4",
         "typescript": "^7.0.2",
         "vfile": "^6.0.3",
-        "vitest": "^4.1.10"
+        "vitest": "^4.1.10",
+        "yaml-loader": "^0.9.0"
     },
     "peerDependencies": {
         "react-hook-form": "*"
