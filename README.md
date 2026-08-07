@@ -1,5 +1,7 @@
 # ICT Webseite, V2
 
+[![Deploy to GitHub Pages](https://github.com/GBSL-Informatik/ict/actions/workflows/deploy.yml/badge.svg)](https://github.com/GBSL-Informatik/ict/actions/workflows/deploy.yml)
+
 [👉 ict.gbsl.website](https://ict.gbsl.website) [![Deploy to GitHub Pages](https://github.com/GBSL-Informatik/ict/actions/workflows/deploy.yml/badge.svg)](https://github.com/GBSL-Informatik/ict/actions/workflows/deploy.yml) [![Prettier Check](https://github.com/GBSL-Informatik/ict/actions/workflows/prettier-check.yml/badge.svg)](https://github.com/GBSL-Informatik/ict/actions/workflows/prettier-check.yml)
 
 Technische Hintergründe und Entwicklungen werden unter [teaching-dev](https://github.com/GBSL-Informatik/teaching-dev) umgesetzt und unter [teaching-dev.gbsl.website](https://teaching-dev.gbsl.website) dokumentiert.
