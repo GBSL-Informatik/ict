@@ -33,21 +33,20 @@ const PageSummary = observer((props: Props) => {
     }, [pageId, directusStore.showSummary]);
 
     const summary = directusStore.pageSummary.get(pageId);
-    if ((summary?.count ?? 0) < 5 && !directusStore.showSummary) {
+    const showSummary = directusStore.showSummary || (summary?.count ?? 0) >= 5;
+    if (!showSummary) {
         return null;
     }
 
     return (
         <div className={clsx(styles.pageSummary)}>
             Zusammenfassung{' '}
-            {directusStore.showSummary && (
-                <Badge
-                    title={`${summary?.count ?? 0} Bewertungen, durchschnittlich ${summary?.avg?.toFixed(1) ?? 'null'} Sterne`}
-                >
-                    {summary?.avg?.toFixed(1) ?? 'null'}{' '}
-                    <Icon path={getIconPath(summary?.avg)} size={0.8} color="gold" /> {summary?.count ?? 0}
-                </Badge>
-            )}
+            <Badge
+                title={`${summary?.count ?? 0} Bewertungen, durchschnittlich ${summary?.avg?.toFixed(1) ?? 'null'} Sterne`}
+            >
+                {summary?.avg?.toFixed(1) ?? 'null'}{' '}
+                <Icon path={getIconPath(summary?.avg)} size={0.8} color="gold" /> {summary?.count ?? 0}
+            </Badge>
         </div>
     );
 });
