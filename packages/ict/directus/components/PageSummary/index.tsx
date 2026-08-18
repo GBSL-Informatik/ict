@@ -26,17 +26,16 @@ const PageSummary = observer((props: Props) => {
     const clientStore = useStore('viewStore');
     const directusStore = clientStore.useStore('directusStore');
     React.useEffect(() => {
-        if (!pageId || !directusStore.showSummary) {
+        if (!pageId) {
             return;
         }
         directusStore.fetchPageRatings(pageId);
     }, [pageId, directusStore.showSummary]);
 
-    if (!directusStore.showSummary) {
+    const summary = directusStore.pageSummary.get(pageId);
+    if ((summary?.count ?? 0) < 5 || !directusStore.showSummary) {
         return null;
     }
-
-    const summary = directusStore.pageSummary.get(pageId);
 
     return (
         <div className={clsx(styles.pageSummary)}>
