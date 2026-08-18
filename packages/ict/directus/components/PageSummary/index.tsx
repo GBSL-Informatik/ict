@@ -33,7 +33,7 @@ const PageSummary = observer((props: Props) => {
     }, [pageId, directusStore.showSummary]);
 
     const summary = directusStore.pageSummary.get(pageId);
-    if ((summary?.count ?? 0) < 5 || !directusStore.showSummary) {
+    if ((summary?.count ?? 0) < 5 && !directusStore.showSummary) {
         return null;
     }
 
