@@ -43,18 +43,31 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
     @observable accessor scrollTo: boolean = false;
     @observable accessor _assessed: boolean;
     // @observableRef accessor scoringFunction: ((self: this) => Assessement) | null = null;
-    @observableRef accessor linkedMeta: AssessableMeta<T> | null = null;
+    @observableRef accessor _linkedMeta: AssessableMeta<T> | null = null;
     @observable accessor showAllOptions: boolean = false;
 
     constructor(props: DocumentProps<T>, store: DocumentStore) {
         super(props, store, 50);
         this._assessed = props.data?.assessed || false;
         this.qid = props.data.qid;
+        this._checkIntegrity();
+    }
+
+    @computed
+    get linkedMeta() {
+        if (!this._linkedMeta && this.quiz) {
+            // try getting a linked meta from the quiz
+            const refMeta = this.root?.allDocuments.find(
+                (doc) => doc.type === this.type && !!doc._linkedMeta && doc.qid === this.qid
+            ) as iAssessable<T> | undefined;
+            return refMeta?._linkedMeta;
+        }
+        return this._linkedMeta;
     }
 
     @action
     setLinkedMeta(metadata: AssessableMeta<T>) {
-        this.linkedMeta = metadata;
+        this._linkedMeta = metadata;
         this.onLinkedMetaChange();
     }
 
@@ -106,8 +119,13 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
     @computed
     get editingIconState() {
         return {
-            path: mdiTooltipQuestionOutline,
-            color: this.isAssessed ? CorrectnessColors[this.correctness] : IfmColors.gray
+            path: this.icon,
+            color: this.isAssessed ? CorrectnessColors[this.correctness] : IfmColors.gray,
+            title: this.isAssessed
+                ? this.assessment?.scoring
+                    ? `${this.assessment.scoring.pointsAchieved}/${this.assessment.scoring.maxPoints}`
+                    : `${this.hits}/${this.maxHits}`
+                : 'N/A'
         };
     }
 
@@ -116,11 +134,14 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
         if (!this.isAssessed) {
             return 0;
         }
-        return this.assessment?.scoring?.pointsAchieved || 0;
+        return this.hits;
     }
 
     get totalSteps(): number {
-        return 1;
+        if (!this.isAssessed) {
+            return 1;
+        }
+        return this.maxHits;
     }
 
     @action
@@ -130,14 +151,13 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
 
     @computed
     get quiz(): Quiz | undefined {
-        if (!this.inQuiz) {
+        if (this.type === 'quiz' || !this.inQuiz) {
             return undefined;
         }
-        const firstQuiz = this.root?.documents.find((d) => d.type === 'quiz') as Quiz | undefined;
-        if (!firstQuiz || firstQuiz.id === this.id) {
-            return undefined;
-        }
-        return firstQuiz;
+        const quiz = this.root?.allDocuments.find(
+            (doc) => doc.authorId === this.authorId && doc.type === 'quiz'
+        );
+        return quiz as Quiz | undefined;
     }
 
     @computed
@@ -145,14 +165,10 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
         if (this.linkedMeta?.scoring) {
             return this.linkedMeta.scoring;
         }
-        if (!this.inQuiz || this.type === 'quiz') {
+        if (!this.inQuiz || !this.quiz) {
             return null;
         }
-        const quiz = this.root?.documentsByType?.get('quiz')?.[0] as Quiz | undefined;
-        if (quiz?.type !== 'quiz') {
-            return null;
-        }
-        return quiz.scoringFunction as ((self: iAssessable<T>) => Assessement) | null;
+        return this.quiz.scoringFunction as ((self: iAssessable<T>) => Assessement) | null;
     }
 
     @computed
@@ -161,11 +177,6 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
             return this._assessed;
         }
         return this._assessed || !!this.quiz?.isAssessed;
-    }
-
-    @computed
-    get isNA(): boolean {
-        return this.hits === 0 && this.misses === 0;
     }
 
     @computed
@@ -189,7 +200,7 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
 
     @computed
     get correctness(): Correctness {
-        if (!this.isAssessed || this.isNA) {
+        if (!this.isAssessed) {
             return Correctness.NA;
         }
         if (this.assessment) {
@@ -197,17 +208,18 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
         }
         return this.hits === this.maxHits && this.misses === 0
             ? Correctness.Correct
-            : this.hits === 0
-              ? Correctness.Incorrect
-              : Correctness.PartiallyCorrect;
+            : this.isNA
+              ? Correctness.NA
+              : this.hits > 0
+                ? Correctness.PartiallyCorrect
+                : Correctness.Incorrect;
     }
 
     /**
      * Returns the maximum achievable "hits" for this assessable item.
      */
-    @computed
     get maxHits(): number {
-        return this.linkedMeta?.correct?.length || 0;
+        return this._meta?.correct?.length ?? 1;
     }
 
     /**
@@ -251,7 +263,11 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
         return this.linkedMeta.title ? `Frage ${nr} – ${this.linkedMeta.title}` : `Frage ${nr}`;
     }
 
+    abstract get icon(): string;
+
     abstract reset(): void;
+
+    abstract get isNA(): boolean;
 
     shuffle(): void {
         // By default, do nothing. Only applicable for certain assessable document types (e.g. ChoiceAnswer).
@@ -263,6 +279,60 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
             return undefined;
         }
         return this.quiz.questionDisplayOrder(this.linkedMeta?.qid);
+    }
+
+    @computed
+    get _meta(): AssessableMeta<T> | undefined {
+        if (this.linkedMeta) {
+            return this.linkedMeta as AssessableMeta<T>;
+        }
+        if (this.root?.type === this.type) {
+            return this.root.meta as AssessableMeta<T>;
+        }
+    }
+
+    @action
+    _checkIntegrity() {
+        const user = this.store.root.userStore.current;
+        if (user && this.authorId !== user.id) {
+            return;
+        }
+        if (this.inQuiz && this.quiz) {
+            // ensure the current document is unique for the given qid and authorId
+            if (!this.quiz.questionIds.has(this.qid!)) {
+                this._destroy();
+            } else {
+                // check for duplicates
+                const duplicates = this.quiz.questions.filter(
+                    (q) => q.qid === this.qid && q.authorId === this.authorId
+                );
+                if (duplicates.length > 1) {
+                    // only keep the oldest one, delete the rest
+                    const sorted = duplicates.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+                    const toDelete = sorted.slice(1);
+                    toDelete.forEach((doc) => {
+                        doc._destroy();
+                    });
+                }
+            }
+        }
+    }
+
+    @action
+    _destroy() {
+        const user = this.store.root.userStore.current;
+        if (user && this.authorId !== user?.id) {
+            return;
+        }
+        // for now, only allow deletion of nested docs
+        if (!this.inQuiz) {
+            return;
+        }
+        if (user) {
+            this.store.apiDelete(this);
+        } else {
+            this.store.removeFromStore(this);
+        }
     }
 }
 

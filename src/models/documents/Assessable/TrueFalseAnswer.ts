@@ -5,6 +5,12 @@ import { action, computed, observable } from 'mobx';
 import iAssessable from './iAssessable';
 import type { Props as TrueFalseProps } from '@tdev-components/documents/Assessable/TrueFalseAnswer';
 import { AssessableMeta } from './AssessableMeta';
+import {
+    mdiCircleHalfFull,
+    mdiCommentAlertOutline,
+    mdiCommentCheckOutline,
+    mdiToggleSwitchVariantOff
+} from '@mdi/js';
 
 export class ModelMeta
     extends AssessableMeta<'true_false_answer'>
@@ -16,6 +22,7 @@ export class ModelMeta
     constructor(props: Partial<TrueFalseProps>) {
         const isTruthy = (props.isTrue ?? props.correct) === true;
         const isFalsey = (props.isFalse ?? props.incorrect) === true;
+        // will be reduced by one when calling super
         const correct = isTruthy ? [1] : isFalsey ? [2] : [2];
         super('true_false_answer', { ...props, correct });
         if (isTruthy && isFalsey) {
@@ -23,6 +30,7 @@ export class ModelMeta
         }
     }
 
+    @computed
     get defaultData(): TypeDataMapping['true_false_answer'] {
         const data: TypeDataMapping['true_false_answer'] = {
             value: null,
@@ -93,6 +101,11 @@ class TrueFalseAnswer extends iAssessable<'true_false_answer'> implements iAsses
         return 1 - this.hits;
     }
 
+    @computed
+    get isNA(): boolean {
+        return this.value === null;
+    }
+
     get data(): TypeDataMapping['true_false_answer'] {
         const raw: TypeDataMapping['true_false_answer'] = {
             value: this.value,
@@ -106,13 +119,12 @@ class TrueFalseAnswer extends iAssessable<'true_false_answer'> implements iAsses
 
     @computed
     get meta(): ModelMeta {
-        if (this.linkedMeta) {
-            return this.linkedMeta as ModelMeta;
-        }
-        if (this.root?.type === 'true_false_answer') {
-            return this.root.meta as ModelMeta;
-        }
-        return DEFAULT_META;
+        return (this._meta as ModelMeta) ?? DEFAULT_META;
+    }
+
+    @computed
+    get icon(): string {
+        return mdiCommentAlertOutline;
     }
 }
 

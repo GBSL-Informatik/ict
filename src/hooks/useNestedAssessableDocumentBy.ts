@@ -45,18 +45,21 @@ export const useNestedAssessableDocumentBy = <Type extends AssessableType>(
     const documentRoot = useDocumentRoot(documentRootId, meta, true, access, skipCreate);
     const userStore = useStore('userStore');
     const documentStore = useStore('documentStore');
-    const [dummyDocument] = React.useState(
-        documentStore.createDocument({
-            id: defaultDocId,
-            type: meta.type,
-            data: meta.defaultData,
-            authorId: DUMMY_DOCUMENT_ID,
-            documentRootId: documentRoot.id,
-            parentId: null,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        }) as AssessableTypeModelMapping[Type]
+    const dummyDocument = React.useMemo(
+        () =>
+            documentStore.createDocument({
+                id: defaultDocId,
+                type: meta.type,
+                data: meta.defaultData,
+                authorId: DUMMY_DOCUMENT_ID,
+                documentRootId: documentRoot.id,
+                parentId: null,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            }) as AssessableTypeModelMapping[Type],
+        [meta.type, defaultDocId, documentRoot.id, meta.defaultData]
     );
+
     const [canRequest, setCanRequest] = React.useState(false);
     React.useEffect(() => {
         if (!documentRoot) {
@@ -64,7 +67,7 @@ export const useNestedAssessableDocumentBy = <Type extends AssessableType>(
         }
         const timeoutId = setTimeout(() => {
             setCanRequest(true);
-        }, 5);
+        }, 25);
         return () => {
             clearTimeout(timeoutId);
         };
@@ -75,7 +78,13 @@ export const useNestedAssessableDocumentBy = <Type extends AssessableType>(
             return;
         }
         return reaction(
-            () => documentRoot?._canInitializeDocuments && !documentRoot.documents.some(selector),
+            () => {
+                if (!documentRoot?._canInitializeDocuments) {
+                    return false;
+                }
+                const byType = documentRoot.documentsByType.get(meta.type);
+                return !byType?.find(selector);
+            },
             (needsCreation) => {
                 if (!needsCreation) {
                     return;
@@ -99,8 +108,8 @@ export const useNestedAssessableDocumentBy = <Type extends AssessableType>(
             { fireImmediately: true }
         );
     }, [userStore, documentRoot, canRequest]);
-
-    const firstDoc = documentRoot?.documents.find(selector) as AssessableTypeModelMapping[Type] | undefined;
+    const byType = documentRoot?.documentsByType.get(meta.type);
+    const firstDoc = byType?.find(selector) as AssessableTypeModelMapping[Type] | undefined;
     const doc = firstDoc || dummyDocument;
 
     useLinkedMetaModel(doc, meta);
