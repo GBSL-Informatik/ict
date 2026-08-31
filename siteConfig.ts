@@ -36,8 +36,10 @@ const getSiteConfig: SiteConfigProvider = () => {
         url: 'https://ict.gbsl.website',
         baseUrl: '/',
         favicon: 'img/favicon.ico',
-        organizationName: 'GBSL-Informatik',
-        projectName: 'ict',
+        gitHub: {
+            orgName: 'GBSL-Informatik',
+            projectName: 'ict'
+        },
         blog: false,
         onBrokenLinks: 'warn',
         locales: ['de'],
