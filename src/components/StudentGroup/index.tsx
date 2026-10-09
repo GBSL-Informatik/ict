@@ -1,9 +1,3 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.scss';
-import { observer } from 'mobx-react-lite';
-import { default as StudentGroupModel } from '@tdev-models/StudentGroup';
-import Button from '@tdev-components/shared/Button';
 import {
     mdiAccountCancel,
     mdiAccountKey,
@@ -22,21 +16,27 @@ import {
     mdiToggleSwitchOff,
     mdiTrashCanOutline
 } from '@mdi/js';
-import { useStore } from '@tdev-hooks/useStore';
-import DefinitionList from '../DefinitionList';
-import Details from '@theme/Details';
-import { exportAsExcelSpreadsheet } from '@tdev-components/StudentGroup/services/excelExport';
-import { SIZE_S } from '@tdev-components/shared/iconSizes';
-import { Confirm } from '@tdev-components/shared/Button/Confirm';
-import Undo from './Undo';
-import AddUserPopup from './AddMembersPopup';
-import LiveStatusIndicator from '@tdev-components/LiveStatusIndicator';
-import { exportNameCards } from './services/exportNameCards';
-import AssignCredentials from './AssignCredentials';
-import Card from '@tdev-components/shared/Card';
-import Popup from 'reactjs-popup';
-import { exportNewPasswordList } from './services/excelNewPwExport';
 import ExportModal from '@tdev-components/Admin/ExportPanel/ExportModal';
+import LiveStatusIndicator from '@tdev-components/LiveStatusIndicator';
+import { exportAsExcelSpreadsheet } from '@tdev-components/StudentGroup/services/excelExport';
+import Button from '@tdev-components/shared/Button';
+import { Confirm } from '@tdev-components/shared/Button/Confirm';
+import Card from '@tdev-components/shared/Card';
+import { SIZE_S } from '@tdev-components/shared/iconSizes';
+import { useStore } from '@tdev-hooks/useStore';
+import { default as StudentGroupModel } from '@tdev-models/StudentGroup';
+import Details from '@theme/Details';
+import clsx from 'clsx';
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import Popup from 'reactjs-popup';
+import DefinitionList from '../DefinitionList';
+import AddUserPopup from './AddMembersPopup';
+import AssignCredentials from './AssignCredentials';
+import Undo from './Undo';
+import { exportNewPasswordList } from './services/excelNewPwExport';
+import { exportNameCards } from './services/exportNameCards';
+import styles from './styles.module.scss';
 
 interface Props {
     studentGroup: StudentGroupModel;
@@ -54,6 +54,7 @@ const StudentGroup = observer((props: Props) => {
     const adminStore = useStore('adminStore');
     const userStore = useStore('userStore');
     const groupStore = useStore('studentGroupStore');
+    const viewStore = useStore('viewStore');
     const group = props.studentGroup;
     const isAdmin = group.isGroupAdmin;
     React.useEffect(() => {
@@ -269,6 +270,7 @@ const StudentGroup = observer((props: Props) => {
                                     value={group.parentId || ''}
                                     onChange={(e) => {
                                         group.setParentId(e.target.value || null);
+                                        viewStore.adminView.setGroupOpen(group.id, true);
                                     }}
                                 >
                                     <option value="">Keine</option>
@@ -491,6 +493,7 @@ const StudentGroup = observer((props: Props) => {
                                 <span className={clsx('badge badge--primary')}>{group.children.length}</span>
                             </summary>
                         }
+                        open={viewStore.adminView.openGroupIds.has(group.id) ?? undefined}
                     >
                         <div>
                             {group.children.map((child) => (

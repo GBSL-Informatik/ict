@@ -1,13 +1,12 @@
 import { AssessableType, Document as DocumentProps } from '@tdev-api/document';
+import { IfmColors } from '@tdev-components/shared/Colors';
 import iDocument from '@tdev-models/iDocument';
+import { iTaskableDocument } from '@tdev-models/iTaskableDocument';
 import DocumentStore from '@tdev-stores/DocumentStore';
 import { action, computed, observable, observableRef } from 'mobx';
 import React from 'react';
 import { AssessableMeta, ExpandedOption } from './AssessableMeta';
 import Quiz from './Quiz';
-import { iTaskableDocument } from '@tdev-models/iTaskableDocument';
-import { mdiTooltipQuestionOutline } from '@mdi/js';
-import { IfmColors } from '@tdev-components/shared/Colors';
 
 export enum Correctness {
     Correct = 'correct',
@@ -298,6 +297,11 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
             return;
         }
         if (this.inQuiz && this.quiz) {
+            if (this.quiz.questionCount === 0) {
+                // A real quiz always has at least one questionId. If this is empty, the quiz hasn't loaded yet
+                // and we shouldn't delete anything.
+                return;
+            }
             // ensure the current document is unique for the given qid and authorId
             if (!this.quiz.questionIds.has(this.qid!)) {
                 this._destroy();
@@ -331,7 +335,7 @@ abstract class iAssessable<T extends AssessableType> extends iDocument<T> implem
         if (user) {
             this.store.apiDelete(this);
         } else {
-            this.store.removeFromStore(this);
+            this.store.removeFromStore(this, true);
         }
     }
 }

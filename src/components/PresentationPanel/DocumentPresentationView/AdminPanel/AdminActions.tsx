@@ -1,24 +1,27 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from '../styles.module.scss';
-import { observer } from 'mobx-react-lite';
+import { mdiClose, mdiProjectorScreenOffOutline, mdiSync } from '@mdi/js';
+import Button from '@tdev-components/shared/Button';
+import useIsMobileView from '@tdev-hooks/useIsMobileView';
 import { useStore } from '@tdev-hooks/useStore';
 import StudentGroup from '@tdev-models/StudentGroup';
-import Button from '@tdev-components/shared/Button';
-import { mdiClose, mdiProjectorScreenOffOutline, mdiSync } from '@mdi/js';
+import clsx from 'clsx';
+import { observer } from 'mobx-react-lite';
 import CanEditBadge from '../CanEditBadge';
-import useIsMobileView from '@tdev-hooks/useIsMobileView';
+import styles from '../styles.module.scss';
 
 interface Props {
     group: StudentGroup;
 }
 
 const AdminActions = observer((props: Props) => {
+    const userStore = useStore('userStore');
     const viewStore = useStore('viewStore');
     const isMobile = useIsMobileView(450);
     const isSmallDevice = useIsMobileView(420);
     const { group } = props;
-
+    const { current } = userStore;
+    if (!current?.id || !group.adminIds.has(current.id)) {
+        return null;
+    }
     return (
         <div className={clsx(styles.actions, isSmallDevice && styles.actionsSmall)}>
             <CanEditBadge group={group} hideText={isMobile} />

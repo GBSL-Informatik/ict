@@ -1,15 +1,31 @@
-import db from './db';
+import type { Statement } from 'better-sqlite3';
 import { promises as fs } from 'fs';
-import { pageIndexPath } from './options';
 import { PageIndex } from '..';
+import { pageIndexPath } from './options';
 
-const getDocumentRoots = db.prepare('SELECT * FROM document_roots ORDER BY path ASC, position ASC');
+const _cachedImport = {
+    getDocumentRoots: null as Statement | null
+};
+const requireDb = async () => {
+    if (process.env.SHELL === '/bin/jsh') {
+        // WebContainers/Stackblitz does not support better-sqlite3, so we skip the database export
+        return Promise.resolve();
+    }
+    const db = (await import('./db')).default;
+    const getDocumentRoots = db.prepare('SELECT * FROM document_roots ORDER BY path ASC, position ASC');
+    _cachedImport.getDocumentRoots = getDocumentRoots;
+};
 
-export const getContent = () => {
+const getContent = () => {
+    const { getDocumentRoots } = _cachedImport;
+    if (!getDocumentRoots) {
+        return { documentRoots: [] as PageIndex[] };
+    }
     const documentRoots = getDocumentRoots.all() as PageIndex[];
     return { documentRoots };
 };
 
 export const exportDB = async () => {
+    await requireDb();
     await fs.writeFile(pageIndexPath, JSON.stringify(getContent(), null, 2));
 };

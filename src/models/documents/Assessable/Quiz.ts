@@ -1,14 +1,14 @@
-import { TypeDataMapping, Document as DocumentProps, AssessableType } from '@tdev-api/document';
+import { mdiTimelineQuestionOutline } from '@mdi/js';
+import { AssessableType, Document as DocumentProps, TypeDataMapping } from '@tdev-api/document';
+import type { Props as QuizProps } from '@tdev-components/documents/Assessable/Quiz';
+import { IfmColors } from '@tdev-components/shared/Colors';
 import { Source } from '@tdev-models/iDocument';
 import DocumentStore from '@tdev-stores/DocumentStore';
-import { action, computed, observableRef } from 'mobx';
-import iAssessable, { Assessement, Correctness, CorrectnessColors } from './iAssessable';
-import { range } from 'es-toolkit/math';
 import { shuffle } from 'es-toolkit/array';
-import type { Props as QuizProps } from '@tdev-components/documents/Assessable/Quiz';
+import { range } from 'es-toolkit/math';
+import { action, computed, observableRef } from 'mobx';
 import { AssessableMeta } from './AssessableMeta';
-import { mdiTimelineQuestionOutline } from '@mdi/js';
-import { IfmColors } from '@tdev-components/shared/Colors';
+import iAssessable, { Assessement, Correctness, CorrectnessColors } from './iAssessable';
 
 const DEFAULT_DATA = Object.freeze<TypeDataMapping['quiz']>({
     questionOrder: [],
@@ -69,6 +69,26 @@ class Quiz extends iAssessable<AssessableType> implements iAssessable<Assessable
         this.setAssessed(false);
         this.questions.forEach((q) => q.reset());
         this.saveNow();
+    }
+
+    @action
+    resetFaulty(): void {
+        const correctIds = new Set(
+            this.questions.filter((q) => q.correctness === Correctness.Correct).map((q) => q.id)
+        );
+        this.setAssessed(false);
+        this.questions.filter((q) => !correctIds.has(q.id)).forEach((q) => q.reset());
+        this.saveNow();
+    }
+
+    @action
+    reshuffle(): Promise<any> {
+        this.shuffle();
+        const questionShuffling = this.questions.map((q) => {
+            q.shuffle();
+            return q.saveNow();
+        });
+        return Promise.all([this.saveNow(), ...questionShuffling]);
     }
 
     @computed

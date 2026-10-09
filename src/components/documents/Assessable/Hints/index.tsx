@@ -1,15 +1,14 @@
 import { mdiCloseCircleOutline, mdiInformationOutline } from '@mdi/js';
 import Icon from '@mdi/react';
+import type { AssessableType, AssessableTypeModelMapping } from '@tdev-api/document';
 import Button from '@tdev-components/shared/Button';
 import Card from '@tdev-components/shared/Card';
-import ChoiceAnswerDocument from '@tdev-models/documents/Assessable/ChoiceAnswer';
 import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 import styles from './styles.module.scss';
-import type { AssessableType, AssessableTypeModelMapping } from '@tdev-api/document';
 
 interface QuestionScoringHintProps<T extends AssessableType> {
     doc?: AssessableTypeModelMapping[T];
