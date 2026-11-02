@@ -14,6 +14,7 @@ trackedElements:
       - pages/__index.tsx
       - pages/.gitignore
       - theme/**
+      - components/documents/SelfCheck
   - src: src/theme/Root.tsx
     dst: src/theme/Root.tsx
   - src: src/theme/Root.helpers.ts
@@ -64,8 +65,12 @@ trackedElements:
   - src: packages/tdev/
     dst: packages/tdev
     ignore:
-      - migrate-tdev/migrations
-      - migrate-tdev/actions
+      - brython-code
+      - pyodide-code
+      - netpbm-graphic
+      - migrate-tdev
+      - text-message
+      - webserial
   - src: src/theme/AnnouncementBar/
     dst: src/theme/AnnouncementBar/
 watchedElements:

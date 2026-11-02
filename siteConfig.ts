@@ -1,6 +1,13 @@
 // This file is never changed by teaching-dev.
 // Use it to override or extend your app configuration.
 
+import logger from '@docusaurus/logger';
+import { PluginConfig, PluginOptions } from '@docusaurus/types';
+import { type DirectusConfig } from '@ict/directus';
+import linkMappingPlugin from '@ict/link-mapping';
+import iCode from '@tdev-models/documents/iCode';
+import dynamicRouter from './src/plugins/plugin-dynamic-routes';
+import detailsPlugin from './src/plugins/remark-details/plugin';
 import {
     commentPluginConfig,
     detailsPluginConfig,
@@ -9,9 +16,7 @@ import {
 } from './src/siteConfig/markdownPluginConfigs';
 import { devModeAccessLocalFS, taskStateOverview } from './src/siteConfig/navbarItems';
 import { SiteConfigProvider } from './src/siteConfig/siteConfig';
-import detailsPlugin from './src/plugins/remark-details/plugin';
-import { PluginConfig, PluginOptions } from '@docusaurus/types';
-import logger from '@docusaurus/logger';
+
 const GIT_COMMIT_SHA = process.env.GITHUB_SHA || Math.random().toString(36).substring(7);
 const ADMONITION_CONFIG = {
     admonitions: {
@@ -19,10 +24,15 @@ const ADMONITION_CONFIG = {
         extendDefaults: true
     }
 };
-import dynamicRouter from './src/plugins/plugin-dynamic-routes';
-import { type DirectusConfig } from '@ict/directus';
-import linkMappingPlugin from '@ict/link-mapping';
-
+// TODO: remove once we got rid of 'script' code type and replaced it with 'brython_code'.
+declare module '@tdev-api/document' {
+    export interface TypeDataMapping {
+        ['script']: { code: string };
+    }
+    export interface TypeModelMapping {
+        ['script']: iCode<'script'>;
+    }
+}
 declare module './src/siteConfig/siteConfig' {
     export interface TdevConfig {
         directus: DirectusConfig;
