@@ -38,6 +38,9 @@ verschlechtern. Frühere Berichte ziehst du nicht bei.
 
 1. **Umfang feststellen.** Zu prüfen sind die genannten Seiten inklusive eingebetteter Partials
    (z.B. FAQ-Partials aus `docs/03-support/01-faq/questions/`) und referenzierter Bilder.
+   - **Nicht eingebundene Bilder:** Liegen in den Bildordnern dieser Seiten und Partials Bilder,
+     die nirgends eingebunden sind (im Quelltext nach dem Dateinamen suchen; `*.excalidraw` ausgenommen,
+     übrig gebliebene `*.reference.*` dagegen melden), meldest du jedes als Befund (Typ `Stil`, Schwere `Feinschliff`).
 2. **Als Critical User lesen.**
    - Den Quelltext lesen. Das ist Pflicht.
    - Wenn der Dev-Server läuft (`http://localhost:3000`) und du einen Browser hast, zusätzlich die
@@ -136,7 +139,8 @@ können (dabei `#` weglassen):
 ```
 
 - Jede Zeile ist **für sich verständlich**, auch ohne den Bericht drumherum.
-- `Typ`: `Kürze`, `Überfliegen`, `Verständlichkeit`, `Erfolgskontrolle`.
+- `Typ`: `Kürze`, `Überfliegen`, `Verständlichkeit`, `Erfolgskontrolle`, für nicht eingebundene
+  Bilder `Stil`.
 - `|` in Zellen als `\|`, Zeilenumbrüche als `<br/>`.
 
 ### 3. Konflikte mit dem Hausstil

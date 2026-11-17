@@ -64,7 +64,12 @@ Eine URL der alten Website entspricht einem Pfad im Repo:
   relevant, meldest du das im Bericht, damit die Maintainer die Screenshots prüfen. Ein möglicher
   Folgeauftrag ist dann, die Varianten zu einer zusammenzufassen (z.B. nur "Android").
 - **Zielort nie raten.** Die alte und die neue Struktur stimmen nicht überein. Der Maintainer gibt
-  den Zielort vor (vorbereitete Seite mit `## CLAUDE`-Abschnitt oder Beschreibung im Chat).
+  den Zielort vor. In der Regel stellt er dafür **leere Seiten als "Container"** bereit (nur
+  Frontmatter mit `page_id`) und nennt im Chat, welche Legacy-Seite hinein soll. `## CLAUDE`-Blöcke
+  werden bei Migrationen normalerweise nicht verwendet. Die vorhandene `page_id` bleibt bestehen.
+- **Sidebar prüfen.** `sidebars.ts` enthält für noch nicht migrierte Seiten teilweise Links auf
+  ict-v1. Wird eine solche Seite migriert, wird der Legacy-Link durch die neue Seite ersetzt, ohne
+  dass ein Eintrag doppelt erscheint. Der Dev-Server meldet Duplikate in seinem Log.
 
 ## Ablauf
 
@@ -137,9 +142,14 @@ Alle Screenshots sollen langfristig neu aufgenommen werden (ohne eingebranntes M
 gilt pro referenziertem Legacy-Bild:
 
 1. Neuen Namen in kebab-case festlegen (siehe `write-content`).
-2. **Referenz:** Original unverändert als `images/<name>.reference.<ext>` ablegen.
-3. **Clean-Variante:** Markup entfernen und als `images/<name>.<ext>` ablegen. Diese Datei wird auf
-   der Seite verwendet.
+2. **Referenz:** Original unverändert als `images/<name>.reference.<ext>` ablegen. Es dient als
+   Vorlage für das Markup und bleibt liegen, bis der Maintainer das Löschen verlangt.
+3. **Clean-Variante:** Markup entfernen und als `images/<name>.<ext>` ablegen (gleiche Endung wie die
+   Referenz). Diese Datei wird auf der Seite verwendet.
+
+Bilder **ohne Markup** werden nur umbenannt und als `images/<name>.<ext>` abgelegt, ohne Referenz.
+Bilder, die nach dem Überführen redundant sind (z.B. drei Screenshots für einen Schritt) oder zu
+weggelassenem Inhalt gehören, werden nicht übernommen und im Bericht genannt.
 
 Zum Entfernen gibt es [`scripts/remove-markup.py`](scripts/remove-markup.py). Es erkennt farbige
 Markierungen (Standard rot) und füllt sie per Inpainting. Optional schneidet es das Bild zu, z.B. um
@@ -179,8 +189,16 @@ python3 -m venv "$TMP/venv"
 
 Das temporäre Verzeichnis wird pro Migration einmal angelegt und am Ende gelöscht (siehe unten).
 
-Jedes Resultat selbst ansehen. Auf ruhigen Flächen verschwindet das Markup sauber, wo es über
-UI-Elemente oder Text läuft, bleiben Schmierspuren. Solche Bilder merkst du dir für `--flag`.
+Vor dem Bereinigen jedes Original ansehen:
+
+- **UI-Elemente in Markup-Farbe** (z.B. roter Warntext wie "Wird nicht vertraut") mit
+  `--keep x,y,b,h` schützen, sonst werden sie mitentfernt.
+- **Transparente oder mitfotografierte Ränder** (Bildbetrachter, Fensterleisten) mit `--crop`
+  entfernen. Transparente Ränder würden sonst schwarz.
+
+Danach jedes Resultat ansehen (z.B. mehrere Bilder mit `magick … +append` nebeneinander). Auf
+ruhigen Flächen verschwindet das Markup sauber, wo es über UI-Elemente oder Text läuft, bleiben
+Schmierspuren. Solche Bilder merkst du dir für `--flag`.
 
 ### Bilder annehmen oder zurückweisen
 
@@ -202,7 +220,11 @@ UI-Elemente oder Text läuft, bleiben Schmierspuren. Solche Bilder merkst du dir
    - `<name>.reference.<ext>` löschen (jetzt identisch).
    - Eine Zeile in `content-backlog.md` eintragen: Typ `Stil`, Schwere `Feinschliff`, Vorschlag
      "Screenshot ohne Markup neu aufnehmen".
-4. **Aufräumen:** `rm -rf "$TMP"` (auch nach Fehlern). Damit verschwindet auch die Vergleichsseite.
+4. **Referenzdateien angenommener Bilder bleiben liegen.** Sie dienen dem Maintainer als Vorlage, um
+   das Markup mit Excalidraw zu übernehmen. Gelöscht werden sie erst, wenn der Maintainer es
+   ausdrücklich verlangt.
+5. **Aufräumen:** `rm -rf "$TMP"` (auch nach Fehlern). Damit verschwindet auch die Vergleichsseite.
+   Das Aufräumen ist selbstverständlich und wird nicht berichtet.
 
 ### Ohne Skript
 

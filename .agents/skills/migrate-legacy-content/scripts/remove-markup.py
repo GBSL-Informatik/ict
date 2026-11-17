@@ -5,7 +5,10 @@ die Stellen per Inpainting (OpenCV). Optional wird das Bild vorher zugeschnitten
 
 Aufruf:
     python remove-markup.py <eingabe> <ausgabe> [--color red|orange|yellow|green|blue|magenta]
-                            [--crop x,y,breite,hoehe] [--grow 2] [--mask <maske.png>]
+                            [--crop x,y,breite,hoehe] [--keep x,y,breite,hoehe ...] [--grow 2]
+                            [--mask <maske.png>]
+
+`--keep` schützt Bereiche (Koordinaten nach dem Zuschneiden), z.B. roten UI-Text, der kein Markup ist.
 
 Benötigt: opencv-python-headless, numpy
 """
@@ -33,6 +36,7 @@ def main() -> int:
     p.add_argument('dst')
     p.add_argument('--color', action='append', choices=HUE_RANGES.keys())
     p.add_argument('--crop', help='x,y,breite,hoehe in Pixeln (vor dem Entfernen angewendet)')
+    p.add_argument('--keep', action='append', default=[], help='x,y,breite,hoehe: Bereich nicht verändern')
     p.add_argument('--grow', type=int, default=2, help='Masken-Vergrösserung in Iterationen')
     p.add_argument('--min-sat', type=int, default=120)
     p.add_argument('--min-val', type=int, default=90)
@@ -55,6 +59,9 @@ def main() -> int:
             mask |= cv2.inRange(hsv, (lo, a.min_sat, a.min_val), (hi, 255, 255))
     if a.grow > 0:
         mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=a.grow)
+    for region in a.keep:
+        x, y, w, h = (int(v) for v in region.split(','))
+        mask[y : y + h, x : x + w] = 0
 
     out = cv2.inpaint(img, mask, 5, cv2.INPAINT_TELEA)
     if not cv2.imwrite(a.dst, out):

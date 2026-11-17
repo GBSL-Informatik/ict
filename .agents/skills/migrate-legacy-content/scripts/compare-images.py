@@ -12,11 +12,20 @@ Benötigt nur die Python-Standardbibliothek.
 """
 
 import argparse
+import base64
 import html
+import mimetypes
 import sys
 from pathlib import Path
 
 IMAGE_EXT = {'.png', '.jpg', '.jpeg', '.webp', '.gif'}
+
+
+def data_uri(path: Path) -> str:
+    # Bilder werden eingebettet, damit die Seite in jedem Viewer funktioniert (file://-Verweise
+    # werden von manchen Umgebungen blockiert).
+    mime = mimetypes.guess_type(path.name)[0] or 'image/png'
+    return f'data:{mime};base64,{base64.b64encode(path.read_bytes()).decode()}'
 
 
 def find_pairs(folders):
@@ -51,13 +60,13 @@ def main() -> int:
     for i, (stem, ref, clean) in enumerate(pairs, 1):
         flagged = stem in a.flag
         clean_html = (
-            f'<img src="{clean.as_uri()}" alt="">' if clean else '<p class="missing">fehlt</p>'
+            f'<img src="{data_uri(clean)}" alt="">' if clean else '<p class="missing">fehlt</p>'
         )
         rows.append(
             f'''<section class="{'flag' if flagged else ''}">
   <h2>{i}. {html.escape(stem)}{' &mdash; <span>Spuren sichtbar</span>' if flagged else ''}</h2>
   <div class="pair">
-    <figure><figcaption>Original (mit Markup)</figcaption><img src="{ref.as_uri()}" alt=""></figure>
+    <figure><figcaption>Original (mit Markup)</figcaption><img src="{data_uri(ref)}" alt=""></figure>
     <figure><figcaption>Bereinigt</figcaption>{clean_html}</figure>
   </div>
   <p class="path">{html.escape(str(clean or ref.parent))}</p>

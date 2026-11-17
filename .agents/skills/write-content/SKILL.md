@@ -37,7 +37,7 @@ Werkzeuge voraus.
   korrigierst du sie nicht, sondern meldest sie mit Pfad und Zeile.
 - **Deutsch (CH):** `ss`, nie `ß`. **Anführungszeichen: ASCII `"`**, keine `«»`, `„“` oder `“”`.
 - **`## CLAUDE`-Abschnitte bleiben stehen.** Der Maintainer entfernt sie, wenn die Seite fertig
-  ist. Erinnere im Bericht daran.
+  ist.
 - **Frische UUIDs, immer** (`uuidgen | tr A-Z a-z`, unter Windows
   `node -e "console.log(crypto.randomUUID())"`): `page_id` jeder neuen Seite und jede `id`
   interaktiver Dokumente. Nie IDs kopieren, denn sie identifizieren gespeicherte Daten der
@@ -98,11 +98,12 @@ sidebar_custom_props:
     icon: mdiWifi
 ---
 
-import FaqBeispiel from '@site/docs/03-support/01-faq/questions/_beispiel.mdx';
+import FaqProblem from '@site/docs/03-support/01-faq/questions/_problem.mdx';
+import FaqFrage from '@site/docs/03-support/01-faq/questions/_frage.mdx';
 
 # Titel
 
-Ein bis zwei Sätze: Worum geht es, was ist am Ende erreicht?
+Ein Satz zum Ziel ("Mit dieser Anleitung verbinden Sie …"). Keine Zusammenfassung der Schritte.
 
 ## Anleitung
 
@@ -112,10 +113,18 @@ Ein bis zwei Sätze: Worum geht es, was ist am Ende erreicht?
     2. Zweiter Schritt.
 </Steps>
 
+## Problemlösungen
+
+<FaqProblem />
+
 ## Häufige Fragen
 
-<FaqBeispiel />
+<FaqFrage />
 ```
+
+- **Eingebettete FAQs aufteilen:** Troubleshooting ("Es klappt nicht, was tun?") unter
+  `## Problemlösungen`, Zusatzinformationen ("Muss ich …?", "Ist … gefährdet?") danach unter
+  `## Häufige Fragen`. Abschnitte ohne Inhalt weglassen.
 
 - Pfad: `docs/<NN-bereich>/<NN-thema>/index.mdx`. Die Zahlenpräfixe bestimmen die Reihenfolge.
   Bilder in `images/` neben der Seite.
@@ -170,6 +179,8 @@ Ein bis zwei Sätze: Worum geht es, was ist am Ende erreicht?
   wie auf bestehenden Seiten) **und** auf der FAQ-Seite `docs/03-support/01-faq/index.mdx` unter
   einer passenden Überschrift eingebunden. Gibt es keine passende, darfst du eine neue `##`-Überschrift
   anlegen.
+- **Keine Admonitions (`:::warning` usw.) in `<Solution>`**, sie werden dort nicht sauber
+  gerendert. Wichtiges stattdessen fett hervorheben (z.B. `**Achtung:** …`).
 - Bestehende FAQs zuerst prüfen und wiederverwenden statt duplizieren. Bei Bedarf den Maintainer fragen, ob
   eine bestehende FAQ ergänzt oder angepasst werden darf.
 
@@ -199,6 +210,16 @@ Ein bis zwei Sätze: Worum geht es, was ist am Ende erreicht?
   `macos-private-wlan-adresse.png`.
 - Grösse mit `![--width=400px](images/x.png)`. Eine Bildunterschrift kommt in den Alt-Text, wenn sie
   nötig ist und eine sinnvolle Zusatzinformation liefert.
+- **Kleine UI-Ausschnitte** (Buttons, Menüeinträge) kompakt und gleich hoch nebeneinander, ohne Cards:
+
+  ```md
+  :::flex
+  ::br{.noFlex}
+  ![--height=40px --width=auto](images/button-a.png)
+  ::br{.noFlex}
+  ![--height=40px --width=auto](images/button-b.png)
+  :::
+  ```
 - **Screenshots enthalten kein eingebranntes Markup.** Markierungen (Rahmen, Pfeile) ergänzen die
   Maintainer im eingebauten Excalidraw-Editor (Dev-Server, lokaler Dateizugriff). Dabei entsteht
   `<bild>.excalidraw` neben dem Bild. Diese Dateien bearbeitest du nicht von Hand.
@@ -240,6 +261,10 @@ die, die er dir gibt. Dabei gelten weiterhin alle Regeln dieses Skills.
   existiert in `i18n/de/code.json`.
 - Bei Code-Änderungen (Komponenten): `yarn typecheck` und `yarn prettier --check website`.
   `.md`/`.mdx` sind von Prettier ausgenommen, CI prüft `format:check`.
+- **Dev-Server neu starten** nach neuen Seiten oder Änderungen an `siteConfig.ts`/`sidebars.ts`: Ein
+  laufender Server löst Links auf Seiten, die nach seinem Start angelegt wurden, nicht auf (sie
+  zeigen auf den Dateipfad) und übernimmt `siteConfig.ts` nicht. Den Server des Maintainers nicht
+  selbst neu starten, sondern ihn darum bitten, bevor solche Fehler gesucht werden.
 - Rendering: Läuft der Dev-Server des Maintainers (`yarn start`, Port 3000) und hast du einen
   Browser, die Seite dort ansehen. Sonst im Bericht festhalten, dass das Rendering nicht geprüft ist.
 
@@ -253,3 +278,7 @@ Kurz, auf Deutsch:
    `docs/link-mappings.yaml` und `i18n/de/code.json`
 4. **Funde:** Du-Form, abweichende Tab-Werte, Fehler ausserhalb des Auftrags
 5. **Nicht geprüft:** z.B. Rendering
+
+Nur berichten, was der Maintainer wissen oder entscheiden muss. Selbstverständliches (z.B. dass
+temporäre Dateien gelöscht wurden) gehört nicht in den Bericht. Keine Hinweise zum Commit (keine `git add`-Befehle, keine Commit-Vorschläge). Das Committen ist
+Sache des Maintainers.
