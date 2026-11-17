@@ -4,10 +4,6 @@ details.solution {
     --ifm-alert-border-color: var(--ifm-color-success-dark);
 }
 
-// TODO: Remove this class as soon as we internalized legacy content
-.hidden-item {
-    display: none;
-}
 .badge.badge--primary {
     &:hover {
         color: var(--ifm-color-gray-100);
