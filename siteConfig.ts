@@ -181,6 +181,10 @@ const getSiteConfig: SiteConfigProvider = () => {
                         {
                             from: '/support/it-hilfe/',
                             to: '/support/faq/'
+                        },
+                        {
+                            from: '/schulkonto/austritt/',
+                            to: '/support/austritt/'
                         }
                     ]
                 }
