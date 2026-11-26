@@ -132,8 +132,8 @@ Ein Satz zum Ziel ("Mit dieser Anleitung verbinden Sie …"). Keine Zusammenfass
   Inhalt innerhalb von JSX-Tags wird eingerückt (siehe bestehende Seiten).
 - Sidebar-Icons: Material Design Icons in camelCase (`mdiShieldLockOutline`).
 - Die Version `onboarding` (`versioned_docs/version-onboarding/`) wird beim Build aus `docs/`
-  erzeugt (`onboarding-sidebar.yml`). **Nie `versioned_docs/` bearbeiten.**
-  `onboarding-sidebar.yml`, Weiterleitungen in `siteConfig.ts` und neue Bereiche nur auf Anweisung.
+  erzeugt (`material.config.yaml`). **Nie `versioned_docs/` bearbeiten.**
+  `material.config.yaml`, Weiterleitungen in `siteConfig.ts` und neue Bereiche nur auf Anweisung.
 
 ### Betriebssysteme
 

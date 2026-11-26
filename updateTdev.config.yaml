@@ -41,9 +41,6 @@ trackedElements:
     dst: packages/tdev/page-read-check
   - src: updateSync/
     dst: updateSync
-    ignore:
-      - sync-onboarding.ts
-      - clean-onboarding.ts
   - src: tsconfig.tdev.json
     dst: tsconfig.json
   - src: tsconfig.package.json
