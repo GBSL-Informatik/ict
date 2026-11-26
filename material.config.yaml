@@ -1,0 +1,12 @@
+onboarding:
+    - material: 04-accounts
+      as: 01-accounts
+      ignore:
+          - 02-mfa/01-wechsel-smartphone
+          - 04-ausweisfoto
+    - material: 04-accounts/04-ausweisfoto
+      as: 02-ausweisfoto
+    - material: 05-tips/01-updates
+      as: 03-updates
+    - material: 02-software-communication
+      as: 04-software-communication

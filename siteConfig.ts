@@ -2,10 +2,11 @@
 // Use it to override or extend your app configuration.
 
 import logger from '@docusaurus/logger';
-import { PluginConfig, PluginOptions } from '@docusaurus/types';
+import { PluginConfig } from '@docusaurus/types';
 import { type DirectusConfig } from '@ict/directus';
 import linkMappingPlugin from '@ict/link-mapping';
 import iCode from '@tdev-models/documents/iCode';
+import type { Pluggable } from 'unified';
 import dynamicRouter from './src/plugins/plugin-dynamic-routes';
 import detailsPlugin from './src/plugins/remark-details/plugin';
 import {
@@ -46,8 +47,10 @@ const getSiteConfig: SiteConfigProvider = () => {
         url: 'https://ict.gbsl.website',
         baseUrl: '/',
         favicon: 'img/favicon.ico',
-        organizationName: 'GBSL-Informatik',
-        projectName: 'ict',
+        gitHub: {
+            orgName: 'GBSL-Informatik',
+            projectName: 'ict'
+        },
         blog: false,
         onBrokenLinks: 'warn',
         locales: ['de'],
@@ -111,7 +114,7 @@ const getSiteConfig: SiteConfigProvider = () => {
                                 <img style="height: 2em" src="/img/by-nc-sa.eu.svg" alt="CC-BY-NC-SA">
                             </div>
                         </a>
-                        <a class="badge badge--primary" href="https://github.com/GBSL-Informatik/ict-v2/commits/${GIT_COMMIT_SHA}">
+                        <a class="badge badge--primary" href="https://github.com/GBSL-Informatik/ict/commits/${GIT_COMMIT_SHA}">
                                 ᚶ ${GIT_COMMIT_SHA.substring(0, 7)}
                         </a>
                         `
@@ -164,11 +167,14 @@ const getSiteConfig: SiteConfigProvider = () => {
                     }
                 }
             ]
-        ] as unknown as PluginOptions[],
+        ] as Pluggable[],
+        showEditThisPage: 'always',
+        showEditThisPageOptions: ['github', 'github-dev', 'cms'],
+        editThisPageCmsUrl: 'https://teaching-dev.gbsl.website/cms',
         remarkPlugins: [
             [linkMappingPlugin, { mappingFilePath: './docs/link-mappings.yaml' }],
             ...recommendedRemarkPlugins.filter((p) => p !== commentPluginConfig)
-        ] as unknown as PluginOptions[],
+        ] as Pluggable[],
         apiDocumentProviders: [
             require.resolve('@tdev/page-read-check/register'),
             require.resolve('@ict/directus/register')
