@@ -17,6 +17,8 @@ trackedElements:
       - components/documents/SelfCheck
   - src: src/theme/Root.tsx
     dst: src/theme/Root.tsx
+  - src: src/theme/EditThisPage/
+    dst: src/theme/EditThisPage/
   - src: src/theme/Root.helpers.ts
     dst: src/theme/Root.helpers.ts
   - src: src/theme/Admonition/

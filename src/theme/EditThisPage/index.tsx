@@ -1,0 +1,108 @@
+import isInternalUrl from '@docusaurus/isInternalUrl';
+import Link from '@docusaurus/Link';
+import { useLocation } from '@docusaurus/router';
+import { ThemeClassNames } from '@docusaurus/theme-common';
+import siteConfig from '@generated/docusaurus.config';
+import { mdiGithub, mdiInfinity, mdiMicrosoftVisualStudioCode } from '@mdi/js';
+import Icon from '@mdi/react';
+import customFields from '@tdev-components/utils/customFields';
+import { useStore } from '@tdev-hooks/useStore';
+import type { EditThisPageOption } from '@tdev/siteConfig/siteConfig';
+import type { Props } from '@theme/EditThisPage';
+import clsx from 'clsx';
+import { observer } from 'mobx-react-lite';
+import { type ReactNode } from 'react';
+import styles from './styles.module.scss';
+const { organizationName, projectName } = siteConfig;
+const { showEditThisPage, showEditThisPageOptions, editThisPageCmsUrl, editThisPageCmsNewTab } = customFields;
+const DisplayBadgeFor = new Set<EditThisPageOption>(
+    showEditThisPageOptions.length === 0 ? ['github', 'github-dev'] : showEditThisPageOptions
+);
+const GH_EDIT_URL = `https://github.com/${organizationName}/${projectName}/edit/main`;
+const GH_DEV_EDIT_URL = `https://github.dev/${organizationName}/${projectName}/blob/main`;
+const CMS_BASE_URL = editThisPageCmsUrl.replace(/\/+$/, '');
+const CMS_EDIT_URL = `${CMS_BASE_URL}/${organizationName}/${projectName}`;
+// the login state of this site is irrelevant for a cms hosted on another website
+const IS_CMS_ON_THIS_SITE = isInternalUrl(CMS_BASE_URL);
+// without a target, Docusaurus opens external urls in a new tab and internal ones in the same tab
+const CMS_LINK_TARGET = editThisPageCmsNewTab ? '_blank' : undefined;
+
+const EditThisPage = observer(({ editUrl }: Props): ReactNode => {
+    const userStore = useStore('userStore');
+    const location = useLocation();
+    const search = new URLSearchParams(location.search);
+    if (!editUrl || search.has('edit')) {
+        return;
+    }
+    const isLoggedIn = !!userStore.current;
+    const isCmsLoginRequired = IS_CMS_ON_THIS_SITE && !isLoggedIn;
+    switch (showEditThisPage) {
+        case 'always':
+            break;
+        case 'never':
+            return null;
+        case 'loggedIn':
+            if (!isLoggedIn) {
+                return null;
+            }
+            break;
+        case 'teachers':
+            if (!userStore.current?.hasElevatedAccess) {
+                return null;
+            }
+            break;
+        case 'admins':
+            if (!userStore.current?.isAdmin) {
+                return null;
+            }
+            break;
+        default:
+            console.warn(`Unknown value for showEditThisPage: ${showEditThisPage}`);
+            return null;
+    }
+    return (
+        <div className={clsx(styles.editThisPage)}>
+            {DisplayBadgeFor.has('github') && (
+                <Link
+                    to={`${GH_EDIT_URL}${editUrl}`}
+                    className={clsx(ThemeClassNames.common.editThisPage, styles.edit)}
+                    title="Auf GitHub bearbeiten."
+                >
+                    <Icon path={mdiGithub} size={0.7} />
+                    Github
+                </Link>
+            )}
+            {DisplayBadgeFor.has('github-dev') && (
+                <Link
+                    to={`${GH_DEV_EDIT_URL}${editUrl}`}
+                    className={clsx(ThemeClassNames.common.editThisPage, styles.edit)}
+                    title="Auf GitHub.dev mit Web-VSCode bearbeiten."
+                >
+                    <Icon path={mdiMicrosoftVisualStudioCode} size={0.7} />
+                    .dev
+                </Link>
+            )}
+            {DisplayBadgeFor.has('cms') && (
+                <Link
+                    to={`${CMS_EDIT_URL}${editUrl}`}
+                    target={CMS_LINK_TARGET}
+                    className={clsx(
+                        ThemeClassNames.common.editThisPage,
+                        styles.edit,
+                        isCmsLoginRequired && styles.noUser
+                    )}
+                    title={
+                        isCmsLoginRequired
+                            ? 'Im tdev-CMS bearbeiten (Vorschau, Anmeldung erforderlich).'
+                            : 'Im tdev-CMS bearbeiten (Vorschau).'
+                    }
+                >
+                    <Icon path={mdiInfinity} size={0.7} className={clsx(styles.cms)} />
+                    cms
+                </Link>
+            )}
+        </div>
+    );
+});
+
+export default EditThisPage;
