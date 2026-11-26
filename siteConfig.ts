@@ -2,7 +2,8 @@
 // Use it to override or extend your app configuration.
 
 import logger from '@docusaurus/logger';
-import { PluginConfig, PluginOptions } from '@docusaurus/types';
+import { PluginConfig } from '@docusaurus/types';
+import type { Pluggable } from 'unified';
 import { type DirectusConfig } from '@ict/directus';
 import linkMappingPlugin from '@ict/link-mapping';
 import iCode from '@tdev-models/documents/iCode';
@@ -164,11 +165,11 @@ const getSiteConfig: SiteConfigProvider = () => {
                     }
                 }
             ]
-        ] as unknown as PluginOptions[],
+        ] as Pluggable[],
         remarkPlugins: [
             [linkMappingPlugin, { mappingFilePath: './docs/link-mappings.yaml' }],
             ...recommendedRemarkPlugins.filter((p) => p !== commentPluginConfig)
-        ] as unknown as PluginOptions[],
+        ] as Pluggable[],
         apiDocumentProviders: [
             require.resolve('@tdev/page-read-check/register'),
             require.resolve('@ict/directus/register')

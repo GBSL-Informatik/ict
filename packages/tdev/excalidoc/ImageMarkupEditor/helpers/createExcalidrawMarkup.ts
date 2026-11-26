@@ -1,7 +1,6 @@
 import type { ExcalidrawElement } from '@excalidraw/excalidraw/element/types';
 import type { BinaryFileData, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/types';
 import fileToDataUrl from '@tdev-components/utils/localFS/fileToDataUrl';
-import getImageDimensions from '@tdev-components/utils/localFS/getImageDimensions';
 import {
     CustomData,
     EXCALIDRAW_BACKGROUND_FILE,
@@ -16,11 +15,9 @@ import {
 } from './constants';
 import { getBoundingRect } from './getBoundingRect';
 import { withoutMetaElements } from './getElementsFromScene';
+import getImageDimensions from './getImageDimensions';
 
-export const createExcalidrawMarkup = async (
-    imgFileHandle: FileSystemFileHandle
-): Promise<ExcalidrawInitialDataState> => {
-    const file = await imgFileHandle.getFile();
+export const createExcalidrawMarkup = async (file: File): Promise<ExcalidrawInitialDataState> => {
     const binData = await fileToDataUrl(file);
     const dimensions = await getImageDimensions(file, EXCALIDRAW_MAX_WIDTH);
     return {

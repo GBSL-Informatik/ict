@@ -9,18 +9,22 @@ import type { LeafDirective } from 'mdast-util-directive';
 import path from 'path';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
+import type { Pluggable } from 'unified';
 import { getAnswerDocumentType } from '../components/Answer/helper.answer';
 import codeAsAttributePlugin from '../plugins/remark-code-as-attribute/plugin';
 import defboxPlugin from '../plugins/remark-code-defbox/plugin';
 import commentPlugin from '../plugins/remark-comments/plugin';
 import deflistPlugin from '../plugins/remark-deflist/plugin';
 import detailsPlugin from '../plugins/remark-details/plugin';
-import enumerateAnswersPlugin from '../plugins/remark-enumerate-components/plugin';
+import enumerateAnswersPlugin, {
+    type PluginOptions as EnumerateAnswersPluginOptions
+} from '../plugins/remark-enumerate-components/plugin';
 import fileTreesPlugin from '../plugins/remark-file-trees/plugin';
 import flexCardsPlugin from '../plugins/remark-flex-cards/plugin';
 import imagePlugin, { CaptionVisitor } from '../plugins/remark-images/plugin';
 import kbdPlugin from '../plugins/remark-kbd/plugin';
 import linkAnnotationPlugin from '../plugins/remark-link-annotation/plugin';
+import { MDI_PLUGIN_OPTIONS } from '../plugins/remark-mdi/options';
 import mdiPlugin from '../plugins/remark-mdi/plugin';
 import mediaPlugin from '../plugins/remark-media/plugin';
 import pagePlugin from '../plugins/remark-page/plugin';
@@ -34,7 +38,7 @@ export const flexCardsPluginConfig = [
             return node.type === 'leafDirective' && (node as LeafDirective).name === 'video';
         }
     }
-];
+] satisfies Pluggable;
 
 export const deflistPluginConfig = [
     deflistPlugin,
@@ -43,7 +47,7 @@ export const deflistPluginConfig = [
             dl: 'Dl'
         }
     }
-];
+] satisfies Pluggable;
 
 export const codeAsAttributePluginConfig = [
     codeAsAttributePlugin,
@@ -87,7 +91,7 @@ export const codeAsAttributePluginConfig = [
             }
         ]
     }
-];
+] satisfies Pluggable;
 
 export const defaultImageDevSrcTransformer = () => {
     const fsMap = new Map<string, boolean>();
@@ -142,7 +146,7 @@ export const imagePluginConfig = [
                 })
         ] satisfies CaptionVisitor[]
     } satisfies Parameters<typeof imagePlugin>[1]
-];
+] satisfies Pluggable;
 
 export const detailsPluginConfig = detailsPlugin;
 
@@ -150,22 +154,9 @@ export const fileTreesPluginConfig = fileTreesPlugin;
 
 export const defboxPluginConfig = defboxPlugin;
 
-export const strongPluginConfig = [strongPlugin, { className: 'boxed' }];
+export const strongPluginConfig = [strongPlugin, { className: 'boxed' }] satisfies Pluggable;
 
-export const mdiPluginConfig = [
-    mdiPlugin,
-    {
-        colorMapping: {
-            green: 'var(--ifm-color-success)',
-            red: 'var(--ifm-color-danger)',
-            orange: 'var(--ifm-color-warning)',
-            yellow: '#edcb5a',
-            blue: '#3578e5',
-            cyan: '#01f0bc'
-        },
-        defaultSize: '1.25em'
-    }
-];
+export const mdiPluginConfig = [mdiPlugin, MDI_PLUGIN_OPTIONS] satisfies Pluggable;
 
 export const mediaPluginConfig = mediaPlugin;
 
@@ -173,16 +164,18 @@ export const kbdPluginConfig = kbdPlugin;
 
 export const remarkMathPluginConfig = remarkMath;
 
+export const enumerateAnswersPluginOptions = {
+    componentsToEnumerate: ['Answer', 'TaskState', 'ProgressState']
+} satisfies EnumerateAnswersPluginOptions;
+
 export const enumerateAnswersPluginConfig = [
     enumerateAnswersPlugin,
-    {
-        componentsToEnumerate: ['Answer', 'TaskState', 'SelfCheckTaskState', 'ProgressState']
-    }
-];
+    enumerateAnswersPluginOptions
+] satisfies Pluggable;
 
 export const pdfPluginConfig = pdfPlugin;
 
-export const pagePluginConfig = [pagePlugin, {}];
+export const pagePluginConfig = [pagePlugin, {}] satisfies Pluggable;
 
 export const PageIndexPluginDefaultOptions: PageIndexPluginOptions = {
     components: [
@@ -269,7 +262,7 @@ export const PageIndexPluginDefaultOptions: PageIndexPluginOptions = {
         }
     }
 };
-export const pageIndexPluginConfig = [pageIndexPlugin, PageIndexPluginDefaultOptions];
+export const pageIndexPluginConfig = [pageIndexPlugin, PageIndexPluginDefaultOptions] satisfies Pluggable;
 
 export const graphvizPluginConfig = graphvizPlugin;
 
@@ -280,7 +273,7 @@ export const commentPluginConfig = [
         ignoreJsxFlowElements: ['summary', 'dt', 'ChoiceAnswer.Options'],
         ignoreCodeBlocksWithMeta: /live_py/
     }
-];
+] satisfies Pluggable;
 
 export const linkAnnotationPluginConfig = [
     linkAnnotationPlugin,
@@ -288,7 +281,7 @@ export const linkAnnotationPluginConfig = [
         prefix: '👉',
         postfix: null
     }
-];
+] satisfies Pluggable;
 
 export const transformAssessablePluginConfig = [
     transformAssessableComponentsPlugin,
@@ -304,11 +297,11 @@ export const transformAssessablePluginConfig = [
             ['TrueFalseAnswer']: {}
         }
     }
-];
+] satisfies Pluggable;
 
 export const rehypeKatexPluginConfig = rehypeKatex;
 
-export const recommendedBeforeDefaultRemarkPlugins = [
+export const recommendedBeforeDefaultRemarkPlugins: Pluggable[] = [
     fileTreesPluginConfig,
     graphvizPluginConfig,
     deflistPluginConfig,
@@ -318,7 +311,7 @@ export const recommendedBeforeDefaultRemarkPlugins = [
     defboxPluginConfig
 ];
 
-export const recommendedRemarkPlugins = [
+export const recommendedRemarkPlugins: Pluggable[] = [
     strongPluginConfig,
     mdiPluginConfig,
     mediaPluginConfig,
@@ -334,4 +327,4 @@ export const recommendedRemarkPlugins = [
     codeAsAttributePluginConfig
 ];
 
-export const recommendedRehypePlugins = [rehypeKatexPluginConfig];
+export const recommendedRehypePlugins: Pluggable[] = [rehypeKatexPluginConfig];

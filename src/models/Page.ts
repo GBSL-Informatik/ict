@@ -24,6 +24,11 @@ export default class Page {
 
     @observableRef accessor _primaryViewedStudentGroupName: string | undefined = undefined;
     @observableRef accessor _viewedStudentGroup: StudentGroup | undefined = undefined;
+    /**
+     * Set when the user deselects the primary group: shows all users instead of
+     * falling back to the default group of the current path.
+     */
+    @observable accessor isStudentGroupFilterCleared = false;
     documentRootConfigs: ObservableMap<string, PageConfig>;
 
     dynamicValues = observable.map<string, string>();
@@ -165,14 +170,18 @@ export default class Page {
     @action
     setPrimaryViewedStudentGroupName(name?: string) {
         this._primaryViewedStudentGroupName = name;
+        this.isStudentGroupFilterCleared = false;
     }
 
     get hasCustomViewedPrimaryStudentGroup() {
-        return !!this._primaryViewedStudentGroupName;
+        return !!this._primaryViewedStudentGroupName || this.isStudentGroupFilterCleared;
     }
 
     @computed
     get primaryViewedStudentGroup() {
+        if (this.isStudentGroupFilterCleared) {
+            return undefined;
+        }
         return this._primaryViewedStudentGroupName
             ? this.store.root.studentGroupStore.findByName(this._primaryViewedStudentGroupName)
             : this.store.root.studentGroupStore.findByName(this.primaryViewedStudentGroupName);
@@ -183,14 +192,20 @@ export default class Page {
         const isCurrent = group && this.primaryViewedStudentGroup?.id === group.id;
         const isInFocus = group && this._viewedStudentGroup?.parentIds.includes(group.id);
         if (isCurrent || isInFocus) {
-            this.setPrimaryViewedStudentGroupName(undefined);
-            this._viewedStudentGroup = undefined;
+            this.clearStudentGroupFilter();
             return;
         }
         this.setPrimaryViewedStudentGroupName(group?.name);
         if (group) {
             this._viewedStudentGroup = undefined;
         }
+    }
+
+    @action
+    clearStudentGroupFilter() {
+        this.setPrimaryViewedStudentGroupName(undefined);
+        this._viewedStudentGroup = undefined;
+        this.isStudentGroupFilterCleared = true;
     }
 
     /**
@@ -208,15 +223,15 @@ export default class Page {
         return this.store.loadAllDocuments(this);
     }
 
-    get TaskableDocuments() {
-        return this.store.root.componentStore.taskableDocuments;
+    get taskableTypes() {
+        return this.store.root.documentStore.taskableTypes;
     }
 
     @computed
     get taskableDocumentRootIds() {
         return [...this.documentRootConfigs.keys()].filter((id) => {
             const config = this.documentRootConfigs.get(id)!;
-            return this.TaskableDocuments.has(config.type);
+            return this.taskableTypes.has(config.type);
         });
     }
 
@@ -231,7 +246,7 @@ export default class Page {
                 return this.store.root.documentStore
                     .findByDocumentRoot(rid)
                     .filter(
-                        (doc) => doc.authorId === uid && this.TaskableDocuments.has(doc.type)
+                        (doc) => doc.authorId === uid && this.taskableTypes.has(doc.type)
                     ) as iTaskableDocument[];
             })
             .filter((doc) => !doc.hideFromOverview);
@@ -325,7 +340,7 @@ export default class Page {
                         .findByDocumentRoot(rid)
                         .filter(
                             (doc) =>
-                                this.TaskableDocuments.has(doc.type) &&
+                                this.taskableTypes.has(doc.type) &&
                                 !(doc as iTaskableDocument).hideFromOverview
                         ) as iTaskableDocument[];
                 })
